@@ -1,3 +1,4 @@
+import math
 from dataclasses import dataclass
 
 
@@ -45,8 +46,15 @@ class Build:
     def x1(self) -> float:
         return 1+self.weapon_damage_pct+self.weapon_type_dmg_pct
 
-    def x6(self, critical: bool = False, headshot: bool = False) -> float:
+    def x6(self,
+           critical: bool = False,
+           headshot: bool = False,
+           *,
+           normalized: bool = False) -> float:
         x = 1
+        if normalized:
+            x += self.critical_hit_chance * self.critical_hit_damage
+            return x
         if critical:
             x += self.critical_hit_damage
         if headshot:
@@ -99,10 +107,22 @@ class Build:
         return dmg
 
     def summary(self) -> str:
-        s = '\n'.join((
-            f'x1 (1 + wDmg    + wTypeDmg + wDmgTalent) : {self.x1():.2f}',
-            f'x6 (1 + CritDmg + HSDmg)                 : {self.x6():.2f}',
-            f'x7 (1 + DtA     + DtH)                   : {self.x7():.2f}',
-            f'x8 (1 + DtooC)                           : {self.x8():.2f}',
-        ))
+        x = {
+            '1': self.x1(),
+            '6': self.x6(normalized=True),
+            '7': self.x7(),
+            '8': self.x8(),
+        }
+        docs = {k: v for k, v in zip(x.keys(), [
+            '1 + wDmg    + wTypeDmg + wDmgTalent',
+            '1 + CritDmg + HSDmg                ',
+            '1 + DtA     + DtH                  ',
+            '1 + DtooC                          ',
+        ])}
+        prod_x = math.prod(x.values())
+        dydx = {k: prod_x/v for k, v in x.items()}
+        s = '\n'.join([
+            f'x{k} ({docs[k]}) : {x[k]:.2f} | dydx={dydx[k]:.2f}'
+            for k in ('1', '6', '7', '8')
+        ])
         return s
