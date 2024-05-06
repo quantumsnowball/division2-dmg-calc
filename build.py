@@ -45,7 +45,7 @@ class Build:
     def x1(self) -> float:
         return 1+self.weapon_damage_pct+self.weapon_type_dmg_pct
 
-    def x6(self, critical: bool, headshot: bool) -> float:
+    def x6(self, critical: bool = False, headshot: bool = False) -> float:
         x = 1
         if critical:
             x += self.critical_hit_damage
@@ -53,7 +53,7 @@ class Build:
             x += self.headshot_damage
         return x
 
-    def x7(self, dtoArmor: bool, dtoHealth: bool) -> float:
+    def x7(self, dtoArmor: bool = False, dtoHealth: bool = False) -> float:
         x = 1
         if dtoArmor:
             x += self.damage_to_armor
@@ -61,7 +61,7 @@ class Build:
             x += self.damage_to_health
         return x
 
-    def x8(self, dtooC: bool) -> float:
+    def x8(self, dtooC: bool = False) -> float:
         x = 1
         if dtooC:
             x += self.damage_to_target_out_of_cover
@@ -97,3 +97,12 @@ class Build:
 
         # result
         return dmg
+
+    def summary(self) -> str:
+        s = '\n'.join((
+            f'x1 (1 + wDmg    + wTypeDmg + wDmgTalent) : {self.x1():.2f}',
+            f'x6 (1 + CritDmg + HSDmg)                 : {self.x6():.2f}',
+            f'x7 (1 + DtA     + DtH)                   : {self.x7():.2f}',
+            f'x8 (1 + DtooC)                           : {self.x8():.2f}',
+        ))
+        return s

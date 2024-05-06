@@ -23,6 +23,7 @@ def main():
                                 headshot=True,
                                 dtoHealth=True)=:,.2f
     }')
+    print(legendary1.summary())
 
 
 if __name__ == '__main__':
