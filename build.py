@@ -36,6 +36,20 @@ class Build:
         # result
         return pct
 
+    #
+    # multipliers
+    #
+    def x1(self) -> float:
+        return 1+self.weapon_damage_pct+self.weapon_type_dmg_pct
+
+    def x6(self, critical: bool, headshot: bool) -> float:
+        x = 1
+        if critical:
+            x += self.critical_hit_damage
+        if headshot:
+            x += self.headshot_damage
+        return x
+
     def total_damage(self,
                      *,
                      critical=False,
@@ -53,16 +67,11 @@ class Build:
         x8|    *(1+Damage out of Cover)
         '''
         # base
-        dmg = self.base_damage
-        # 1
-        dmg *= 1+self.weapon_damage_pct+self.weapon_type_dmg_pct
-        # 6
-        x6 = 1
-        if critical:
-            x6 += self.critical_hit_damage
-        if headshot:
-            x6 += self.headshot_damage
-        dmg *= x6
+        dmg = (
+            self.base_damage
+            * self.x1()
+            * self.x6(critical, headshot)
+        )
 
         # result
         return dmg
