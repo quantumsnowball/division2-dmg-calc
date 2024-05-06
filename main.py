@@ -8,12 +8,14 @@ legendary1 = Build(
     weapon_damage_bonus_pct=0.15,
     specialization_bonus_pct=0.15,
     expertise_level=17,
+    critical_hit_chance=0.52,
+    critical_hit_damage=1.37,
+    headshot_damage=0.95,
 )
 
 
 def main():
-    print(legendary1)
-    print(f'{legendary1.total_damage=:,.2f}')
+    print(f'{legendary1.total_damage(critical=True, headshot=True)=:,.2f}')
 
 
 if __name__ == '__main__':

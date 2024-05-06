@@ -10,6 +10,9 @@ class Build:
     weapon_damage_bonus_pct: float
     specialization_bonus_pct: float
     expertise_level: int
+    critical_hit_chance: float
+    critical_hit_damage: float
+    headshot_damage: float
 
     @property
     def weapon_damage_pct(self) -> float:
@@ -33,22 +36,33 @@ class Build:
         # result
         return pct
 
-    @property
-    def total_damage(self) -> float:
+    def total_damage(self,
+                     *,
+                     critical=False,
+                     headshot=False) -> float:
         '''
         Total Damage = 
         Base weapon Damage 
-            *(1+Weapon Damage+Weapon Type Damage+Weapon Damage Talents)
-            *(1+Total Weapon Damage Talents) [Vigilance]
-            *(1+Amplfied Talent 1)
-            *(1+Amplfied Talent 2)
-            *(1+Amplfied Talent 3)
-            *(1+Critical Hit Damage+Headshot Damage)
-            *(1+Damage to Armor+Damage to Health)
-            *(1+Damage out of Cover)
+        1|    *(1+Weapon Damage+Weapon Type Damage+Weapon Damage Talents)
+        2|    *(1+Total Weapon Damage Talents) [Vigilance]
+        3|    *(1+Amplfied Talent 1)
+        4|    *(1+Amplfied Talent 2)
+        5|    *(1+Amplfied Talent 3)
+        6|    *(1+Critical Hit Damage+Headshot Damage)
+        7|    *(1+Damage to Armor+Damage to Health)
+        8|    *(1+Damage out of Cover)
         '''
+        # base
         dmg = self.base_damage
+        # 1
         dmg *= 1+self.weapon_damage_pct+self.weapon_type_dmg_pct
+        # 6
+        x6 = 1
+        if critical:
+            x6 += self.critical_hit_damage
+        if headshot:
+            x6 += self.headshot_damage
+        dmg *= x6
 
         # result
         return dmg
