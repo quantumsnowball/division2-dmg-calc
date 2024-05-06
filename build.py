@@ -13,6 +13,9 @@ class Build:
     critical_hit_chance: float
     critical_hit_damage: float
     headshot_damage: float
+    damage_to_armor: float
+    damage_to_health: float
+    damage_to_target_out_of_cover: float
 
     @property
     def weapon_damage_pct(self) -> float:
@@ -50,13 +53,30 @@ class Build:
             x += self.headshot_damage
         return x
 
+    def x7(self, dtoArmor: bool, dtoHealth: bool) -> float:
+        x = 1
+        if dtoArmor:
+            x += self.damage_to_armor
+        if dtoHealth:
+            x += self.damage_to_health
+        return x
+
+    def x8(self, dtooC: bool) -> float:
+        x = 1
+        if dtooC:
+            x += self.damage_to_target_out_of_cover
+        return x
+
     def total_damage(self,
                      *,
                      critical=False,
-                     headshot=False) -> float:
+                     headshot=False,
+                     dtoArmor=False,
+                     dtoHealth=False,
+                     dtooC=False) -> float:
         '''
-        Total Damage = 
-        Base weapon Damage 
+        Total Damage =
+        Base weapon Damage
         x1|    *(1+Weapon Damage+Weapon Type Damage+Weapon Damage Talents)
         x2|    *(1+Total Weapon Damage Talents) [Vigilance]
         x3|    *(1+Amplfied Talent 1)
@@ -71,6 +91,8 @@ class Build:
             self.base_damage
             * self.x1()
             * self.x6(critical, headshot)
+            * self.x7(dtoArmor, dtoHealth)
+            * self.x8(dtooC)
         )
 
         # result
