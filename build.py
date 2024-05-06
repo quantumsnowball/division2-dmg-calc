@@ -43,14 +43,14 @@ class Build:
         '''
         Total Damage = 
         Base weapon Damage 
-        1|    *(1+Weapon Damage+Weapon Type Damage+Weapon Damage Talents)
-        2|    *(1+Total Weapon Damage Talents) [Vigilance]
-        3|    *(1+Amplfied Talent 1)
-        4|    *(1+Amplfied Talent 2)
-        5|    *(1+Amplfied Talent 3)
-        6|    *(1+Critical Hit Damage+Headshot Damage)
-        7|    *(1+Damage to Armor+Damage to Health)
-        8|    *(1+Damage out of Cover)
+        x1|    *(1+Weapon Damage+Weapon Type Damage+Weapon Damage Talents)
+        x2|    *(1+Total Weapon Damage Talents) [Vigilance]
+        x3|    *(1+Amplfied Talent 1)
+        x4|    *(1+Amplfied Talent 2)
+        x5|    *(1+Amplfied Talent 3)
+        x6|    *(1+Critical Hit Damage+Headshot Damage)
+        x7|    *(1+Damage to Armor+Damage to Health)
+        x8|    *(1+Damage out of Cover)
         '''
         # base
         dmg = self.base_damage

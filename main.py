@@ -15,7 +15,10 @@ legendary1 = Build(
 
 
 def main():
-    print(f'{legendary1.total_damage(critical=True, headshot=True)=:,.2f}')
+    print(f'{
+        legendary1.total_damage(critical=True,
+                                headshot=True)=:,.2f
+    }')
 
 
 if __name__ == '__main__':
