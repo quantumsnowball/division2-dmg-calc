@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
 
 from gear import Gear
-from gear.attribute import CoreAttribute, RedCore
+from gear.attribute import (CoreAttribute, CriticalHitDamage, MinorAttribute,
+                            RedCore)
 
 
 @dataclass(kw_only=True)
 class Striker(Gear):
     name: str = 'Striker'
     core: CoreAttribute = field(default_factory=RedCore)
+    minor: MinorAttribute = field(default_factory=CriticalHitDamage)

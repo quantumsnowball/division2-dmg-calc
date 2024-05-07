@@ -1,7 +1,6 @@
 from build import Build
 from build.specialization import Gunner
-from gear import Gear
-from gear.attribute import BlueCore
+from gear.Lengmo import Lengmo
 from gear.Striker import Striker
 from weapon.StElmosEngine import StElmosEngine
 
@@ -14,7 +13,7 @@ def main():
         # weapons
         weapon=StElmosEngine(expertise_level=17),
         # gears
-        mask=Gear(name='Lengmo', core=BlueCore()),
+        mask=Lengmo(),
         backpack=Striker(),
         chest=Striker(),
         gloves=Striker(),
@@ -22,7 +21,7 @@ def main():
         kneepads=Striker(),
     )
 
-    print(build.summary())
+    print(build.critical_hit_damage_pct)
 
 
 if __name__ == '__main__':

@@ -51,6 +51,18 @@ class Build:
         # result
         return pct
 
+    @property
+    def critical_hit_damage_pct(self) -> float:
+        # base CHD
+        pct = 0.25
+        # weapon
+        # gear
+        for gear in self.gears:
+            pct += gear.critical_hit_damage_pct
+
+        # result
+        return pct
+
     def x1(self) -> float:
         return 1+self.weapon_damage_pct+self.weapon_type_dmg_pct
 
