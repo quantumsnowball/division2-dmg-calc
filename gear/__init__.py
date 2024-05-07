@@ -1,11 +1,13 @@
 from dataclasses import dataclass
 from typing import Literal
 
+Core = Literal['red', 'blue', 'yellow']
+
 
 @dataclass
 class Gear:
     name: str
-    core: Literal['red', 'blue', 'yellow']
+    core: Core
 
     @property
     def weapon_damage_pct(self) -> float:
