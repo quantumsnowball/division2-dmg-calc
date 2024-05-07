@@ -99,7 +99,20 @@ class Build:
     def x1(self) -> float:
         return 1+self.weapon_damage_pct+self.weapon_type_dmg_pct
 
-    def total_damage(self):
+    def x6(self, critical: bool, headshot: bool) -> float:
+        x = 1
+        if critical:
+            x += self.critical_hit_damage_pct
+        if headshot:
+            x += self.headshot_damage_pct
+
+        # result
+        return x
+
+    def total_damage(self,
+                     *,
+                     critical: bool,
+                     headshot: bool):
         '''
         Total Damage =
         Base weapon Damage
@@ -116,10 +129,11 @@ class Build:
         dmg = (
             self.weapon.base_damage
             * self.x1()
+            * self.x6(critical, headshot)
         )
 
         # result
         return dmg
 
     def summary(self) -> str:
-        return f'{self.total_damage()=:.2f}'
+        return f'{self.total_damage(critical=True, headshot=True)=:.2f}'
