@@ -194,7 +194,7 @@ class Build:
         # result
         return dmg
 
-    def summary(self) -> pd.DataFrame:
+    def dmg_matrix(self) -> pd.DataFrame:
         # columns
         x6_columns = {'Normal': (False, False), 'Critical': (True, False),
                       'Headshot': (False, True), 'CritHead': (True, True)}

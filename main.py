@@ -28,8 +28,8 @@ def main():
     )
 
     pprint(build)
-    print(f'{build.total_damage(basic=True)=:.2f}')
-    print(build.summary().astype(int))
+    print(f'{build.total_damage(basic=True)=:.0f}')
+    print(build.dmg_matrix().astype(int))
 
 
 if __name__ == '__main__':
