@@ -42,3 +42,16 @@ class Gear:
 
         # result
         return pct
+
+    @property
+    def headshot_damage_pct(self) -> float:
+        pct = 0
+        # attribute
+        if isinstance(self.attr1, attr.HeadshotDamage):
+            pct += self.attr1.pct
+        # mods
+        if isinstance(self.mod, mods.HeadshotDamage):
+            pct += self.mod.pct
+
+        # result
+        return pct

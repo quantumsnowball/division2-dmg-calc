@@ -42,3 +42,11 @@ class CriticalHitDamage(MinorAttribute):
 
 
 CHD = CriticalHitDamage
+
+
+@dataclass
+class HeadshotDamage(MinorAttribute):
+    pct: float = 0.10
+
+
+HS = HeadshotDamage

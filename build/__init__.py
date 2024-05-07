@@ -81,6 +81,21 @@ class Build:
         # result
         return pct
 
+    @property
+    def headshot_damage_pct(self) -> float:
+        # base HS
+        pct = 0.55
+        # weapon
+        pct += self.weapon.headshot_damage_pct
+        # gear
+        for gear in self.gears:
+            pct += gear.headshot_damage_pct
+        # keener's watch
+        pct += self.watch.headshot_damage_pct
+
+        # result
+        return pct
+
     def x1(self) -> float:
         return 1+self.weapon_damage_pct+self.weapon_type_dmg_pct
 
