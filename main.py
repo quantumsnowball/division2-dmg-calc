@@ -6,7 +6,7 @@ from weapon import Weapon
 def main():
     Legendary1 = Build(
         name='Legendary1',
-        weapon=Weapon("St Elmo's Engine", base_damage=44191),
+        weapon=Weapon("St Elmo's Engine", base_damage=44191, expertise_level=17),
         mask=Gear(name='Lengmo'),
         backpack=Gear(name='Striker'),
         chest=Gear(name='Striker'),

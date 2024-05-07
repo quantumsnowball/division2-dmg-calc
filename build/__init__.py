@@ -31,7 +31,7 @@ class Build:
         # keener's watch
         # TODO
         # expertise level
-        # TODO
+        pct += self.weapon.expertise_level * 0.01
 
         # result
         return pct
