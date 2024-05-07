@@ -5,6 +5,8 @@ from build.watch import Watch
 from gear import Gear
 from weapon import Weapon
 
+import pandas as pd
+
 
 @dataclass
 class Build:
@@ -135,5 +137,18 @@ class Build:
         # result
         return dmg
 
-    def summary(self) -> str:
-        return f'{self.total_damage(critical=True, headshot=True)=:.2f}'
+    def summary(self) -> pd.DataFrame:
+        # columns
+        x6_columns = {'Normal': (0, 0), 'Critical': (1, 0), 'Headshot': (0, 1), 'CriticalHeadshot': (1, 1)}
+        x7_columns = {'Health': 0, 'Armor': 1}
+        columns = pd.MultiIndex.from_product([x7_columns.keys(), x6_columns.keys()])
+        # index
+        index = pd.MultiIndex.from_product([['Basic'], ['Base']])
+        # data
+        data = [[self.total_damage(critical=crit, headshot=hs)
+                 for arm in x7_columns.values()
+                 for crit, hs in x6_columns.values()]]
+        df = pd.DataFrame(data, index=index, columns=columns)
+
+        # result
+        return df

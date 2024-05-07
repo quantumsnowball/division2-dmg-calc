@@ -29,9 +29,6 @@ def main():
 
     pprint(build)
     print(build.summary())
-    print(f'{build.critical_hit_chance_pct=:.4f}')
-    print(f'{build.critical_hit_damage_pct=:.4f}')
-    print(f'{build.headshot_damage_pct=:.4f}')
 
 
 if __name__ == '__main__':
