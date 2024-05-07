@@ -23,7 +23,7 @@ def main():
     )
 
     print(build.summary())
-    print(build.critical_hit_damage_pct)
+    print(f'{build.critical_hit_damage_pct=:.4f}')
 
 
 if __name__ == '__main__':

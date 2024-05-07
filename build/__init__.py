@@ -60,6 +60,8 @@ class Build:
         # gear
         for gear in self.gears:
             pct += gear.critical_hit_damage_pct
+        # keener's watch
+        pct += self.watch.critical_hit_damage_pct
 
         # result
         return pct
