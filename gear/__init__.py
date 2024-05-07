@@ -9,7 +9,11 @@ class Gear:
     name: str
     core: attrs.CoreAttribute
     attr1: attrs.MinorAttribute
+    attr2: attrs.MinorAttribute
     mod: mods.Mod = field(default_factory=mods.NoMod)
+
+    def __post_init__(self) -> None:
+        self.attrs = (self.core, self.attr1, self.attr2)
 
     @property
     def weapon_damage_pct(self) -> float:
@@ -21,8 +25,9 @@ class Gear:
     def critical_hit_chance_pct(self) -> float:
         pct = 0
         # attribute
-        if isinstance(self.attr1, attrs.CriticalHitChance):
-            pct += self.attr1.pct
+        for attr in self.attrs:
+            if isinstance(attr, attrs.CriticalHitChance):
+                pct += attr.pct
         # mods
         if isinstance(self.mod, mods.CriticalHitChance):
             pct += self.mod.pct
@@ -34,8 +39,9 @@ class Gear:
     def critical_hit_damage_pct(self) -> float:
         pct = 0
         # attribute
-        if isinstance(self.attr1, attrs.CriticalHitDamage):
-            pct += self.attr1.pct
+        for attr in self.attrs:
+            if isinstance(attr, attrs.CriticalHitDamage):
+                pct += attr.pct
         # mods
         if isinstance(self.mod, mods.CriticalHitDamage):
             pct += self.mod.pct
@@ -60,8 +66,9 @@ class Gear:
     def damage_to_health_pct(self) -> float:
         pct = 0
         # attribute
-        if isinstance(self.attr1, attrs.DamageToHealth):
-            pct += self.attr1.pct
+        for attr in self.attrs:
+            if isinstance(attr, attrs.DamageToHealth):
+                pct += attr.pct
 
         # result
         return pct

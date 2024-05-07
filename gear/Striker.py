@@ -9,3 +9,4 @@ class Striker(Gear):
     name: str = 'Striker'
     core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
     attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
+    attr2: attrs.MinorAttribute = field(default_factory=attrs.NoAttr)

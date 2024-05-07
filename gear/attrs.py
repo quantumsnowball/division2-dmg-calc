@@ -55,3 +55,17 @@ HS = HeadshotDamage
 @dataclass
 class DamageToHealth(MinorAttribute):
     pct: float = 0.10
+
+
+@dataclass
+class DamageToTargetOutOfCover(MinorAttribute):
+    pct: float = 0.08
+
+
+@dataclass
+class ExplosiveResistence(MinorAttribute):
+    pct: float = 0.10
+
+
+class NoAttr(MinorAttribute):
+    pass

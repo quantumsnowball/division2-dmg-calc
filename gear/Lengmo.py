@@ -8,4 +8,5 @@ from gear import Gear
 class Lengmo(Gear):
     name: str = 'Lengmo'
     core: attrs.CoreAttribute = field(default_factory=attrs.BlueCore)
-    attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitChance)
+    attr1: attrs.MinorAttribute = field(default_factory=attrs.ExplosiveResistence)
+    attr2: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitChance)

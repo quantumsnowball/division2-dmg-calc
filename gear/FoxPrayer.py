@@ -8,4 +8,5 @@ from gear import Gear
 class FoxPrayer(Gear):
     name: str = 'Fox Prayer'
     core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
-    attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
+    attr1: attrs.MinorAttribute = field(default_factory=attrs.DamageToTargetOutOfCover)
+    attr2: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
