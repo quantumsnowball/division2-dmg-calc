@@ -102,7 +102,9 @@ class Build:
     def damage_to_armor_pct(self) -> float:
         pct = 0
         # weapon
+        # TODO
         # gear
+        # TODO
 
         # result
         return pct
@@ -123,6 +125,7 @@ class Build:
     def damage_to_target_out_of_cover_pct(self) -> float:
         pct = 0
         # weapon
+        # TODO
         # gear
         for gear in self.gears:
             pct += gear.damage_to_target_out_of_cover_pct

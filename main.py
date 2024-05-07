@@ -1,5 +1,7 @@
 from pprint import pprint
 
+from tabulate import tabulate
+
 import gear.attrs as gearattrs
 import gear.mods as gearmods
 from build import Build
@@ -28,9 +30,7 @@ def main():
     )
 
     pprint(build)
-    # print(f'{build.total_damage(basic=True)=:.0f}')
-    # print(build.dmg_stats().apply(lambda x: f'{x:.2%}'))
-    print(build.dmg_stats())
+    print(tabulate(build.dmg_stats(), headers='keys', tablefmt='fancy_grid'))
     print(build.dmg_matrix().astype(int))
 
 
