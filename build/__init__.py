@@ -194,6 +194,21 @@ class Build:
         # result
         return dmg
 
+    def dmg_stats(self) -> pd.DataFrame:
+        # data
+        data = {
+            'WeaponDamage': f'{self.total_damage(basic=True):,.0f}',
+            'CriticalHitChance': f'{self.critical_hit_chance_pct:.1%}',
+            'CriticalHitDamage': f'{self.critical_hit_damage_pct:.1%}',
+            'HeadshotDamage': f'{self.headshot_damage_pct:.1%}',
+            'ArmorDamage': f'{self.damage_to_armor_pct:.1%}',
+            'HealthDamage': f'{self.damage_to_health_pct:.1%}',
+        }
+        df = pd.DataFrame(data, index=['%'])
+
+        # result
+        return df
+
     def dmg_matrix(self) -> pd.DataFrame:
         # columns
         x6_columns = {'Normal': (False, False), 'Critical': (True, False),

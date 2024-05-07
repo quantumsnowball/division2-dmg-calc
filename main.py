@@ -28,7 +28,9 @@ def main():
     )
 
     pprint(build)
-    print(f'{build.total_damage(basic=True)=:.0f}')
+    # print(f'{build.total_damage(basic=True)=:.0f}')
+    # print(build.dmg_stats().apply(lambda x: f'{x:.2%}'))
+    print(build.dmg_stats())
     print(build.dmg_matrix().astype(int))
 
 
