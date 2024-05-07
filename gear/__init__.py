@@ -18,6 +18,19 @@ class Gear:
         return 0.0
 
     @property
+    def critical_hit_chance_pct(self) -> float:
+        pct = 0
+        # attribute
+        if isinstance(self.attr1, attr.CriticalHitChance):
+            pct += self.attr1.pct
+        # mods
+        if isinstance(self.mod, mods.CriticalHitChance):
+            pct += self.mod.pct
+
+        # result
+        return pct
+
+    @property
     def critical_hit_damage_pct(self) -> float:
         pct = 0
         # attribute

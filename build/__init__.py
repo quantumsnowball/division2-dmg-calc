@@ -52,6 +52,21 @@ class Build:
         return pct
 
     @property
+    def critical_hit_chance_pct(self) -> float:
+        # base CHC
+        pct = 0.0
+        # weapon
+        pct += self.weapon.critical_hit_chance_pct
+        # gear
+        for gear in self.gears:
+            pct += gear.critical_hit_chance_pct
+        # keener's watch
+        pct += self.watch.critical_hit_chance_pct
+
+        # result
+        return pct
+
+    @property
     def critical_hit_damage_pct(self) -> float:
         # base CHD
         pct = 0.25

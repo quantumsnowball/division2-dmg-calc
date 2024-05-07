@@ -13,7 +13,7 @@ class Watch:
 
     @property
     def critical_hit_chance_pct(self) -> float:
-        return self.critical_hit_chance_pct * 0.002
+        return self.critical_hit_chance_score * 0.002
 
     @property
     def critical_hit_damage_pct(self) -> float:
