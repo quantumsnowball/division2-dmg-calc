@@ -46,7 +46,7 @@ class Build:
         # weapon attributes
         pct += self.weapon.weapon_type_damage_pct
         # specialization bonus
-        pct += self.specialization.weapon_type_damage_pct
+        pct += self.specialization.weapon_type_damage_pct(self.weapon.type)
 
         # result
         return pct

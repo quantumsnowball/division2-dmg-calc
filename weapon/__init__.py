@@ -1,9 +1,13 @@
 from dataclasses import dataclass
+from typing import Literal
+
+WeaponType = Literal['AR', 'SMG', 'LMG', 'Rifle', 'MMR', 'Shotgun']
 
 
 @dataclass
 class Weapon:
     name: str
+    type: WeaponType
     base_damage: int
     expertise_level: int
     weapon_type_damage_bonus: float
