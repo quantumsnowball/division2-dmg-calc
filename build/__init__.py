@@ -180,11 +180,15 @@ class Build:
         x7_columns = {'Health': False, 'Armor': True}
         columns = pd.MultiIndex.from_product([x7_columns.keys(), x6_columns.keys()])
         # index
-        index = pd.MultiIndex.from_product([['Basic'], ['Base']])
+        scenario_index = {'Basic': False}
+        talent_index = {'Base': False}
+        index = pd.MultiIndex.from_product([scenario_index.keys(), talent_index.keys()])
         # data
         data = [[self.total_damage(critical=crit, headshot=hs, armor=arm)
                  for arm in x7_columns.values()
-                 for crit, hs in x6_columns.values()]]
+                 for crit, hs in x6_columns.values()]
+                for _ in scenario_index.values()
+                for _ in talent_index.values()]
         df = pd.DataFrame(data, index=index, columns=columns)
 
         # result
