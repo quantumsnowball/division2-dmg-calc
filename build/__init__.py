@@ -165,9 +165,10 @@ class Build:
 
     def total_damage(self,
                      *,
-                     critical: bool,
-                     headshot: bool,
-                     armor: bool):
+                     critical: bool = False,
+                     headshot: bool = False,
+                     armor: bool = False,
+                     basic: bool = False):
         '''
         Total Damage =
         Base weapon Damage
@@ -183,6 +184,9 @@ class Build:
         # base
         dmg = self.weapon.base_damage
         dmg *= self.x1()
+        if basic:
+            # result - basic weapon damage
+            return dmg
         dmg *= self.x6(critical, headshot)
         dmg *= self.x7(armor)
         dmg *= self.x8()

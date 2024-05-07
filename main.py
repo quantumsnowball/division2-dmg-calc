@@ -16,7 +16,7 @@ def main():
         # specialization
         specialization=Gunner(),
         # weapons
-        weapon=StElmosEngine(expertise_level=17),
+        weapon=StElmosEngine(expertise_level=15),
         # gears
         mask=Striker(attr1=gearattrs.CHC(0.06),
                      mod=gearmods.CHD(0.12)),
@@ -28,6 +28,7 @@ def main():
     )
 
     pprint(build)
+    print(f'{build.total_damage(basic=True)=:.2f}')
     print(build.summary().astype(int))
 
 
