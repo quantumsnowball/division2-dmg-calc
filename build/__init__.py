@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from gear import Gear
 from weapon import Weapon
 
 
@@ -7,3 +8,69 @@ from weapon import Weapon
 class Build:
     name: str
     weapon: Weapon
+    mask: Gear
+    backpack: Gear
+    chest: Gear
+    gloves: Gear
+    holster: Gear
+    kneepads: Gear
+
+    def __post_init__(self) -> None:
+        self.gears = [
+            self.mask, self.backpack,
+            self.chest, self.gloves,
+            self.holster, self.kneepads
+        ]
+
+    @property
+    def weapon_damage_pct(self) -> float:
+        pct = 0
+        # gear core attributes
+        for gear in self.gears:
+            pct += gear.weapon_damage_bonus
+        # keener's watch
+        # TODO
+        # expertise level
+        # TODO
+
+        # result
+        return pct
+
+    @property
+    def weapon_type_dmg_pct(self) -> float:
+        pct = 0
+        # weapon attributes
+        # TODO
+        # specialization bonus
+        # TODO
+
+        # result
+        return pct
+
+    def x1(self) -> float:
+        return 1+self.weapon_damage_pct+self.weapon_type_dmg_pct
+
+    def total_damage(self):
+        '''
+        Total Damage =
+        Base weapon Damage
+        x1|    *(1+Weapon Damage+Weapon Type Damage+Weapon Damage Talents)
+        x2|    *(1+Total Weapon Damage Talents) [Vigilance]
+        x3|    *(1+Amplfied Talent 1)
+        x4|    *(1+Amplfied Talent 2)
+        x5|    *(1+Amplfied Talent 3)
+        x6|    *(1+Critical Hit Damage+Headshot Damage)
+        x7|    *(1+Damage to Armor+Damage to Health)
+        x8|    *(1+Damage out of Cover)
+        '''
+        # base
+        dmg = (
+            self.weapon.base_damage
+            * self.x1()
+        )
+
+        # result
+        return dmg
+
+    def summary(self) -> str:
+        return f'{self.total_damage()=:.2f}'
