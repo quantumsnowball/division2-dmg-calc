@@ -1,12 +1,11 @@
 from dataclasses import dataclass, field
 
+import gear.attrs as attrs
 from gear import Gear
-from gear.attribute import (BlueCore, CoreAttribute, CriticalHitChance,
-                            MinorAttribute)
 
 
 @dataclass(kw_only=True)
 class Lengmo(Gear):
     name: str = 'Lengmo'
-    core: CoreAttribute = field(default_factory=BlueCore)
-    attr1: MinorAttribute = field(default_factory=CriticalHitChance)
+    core: attrs.CoreAttribute = field(default_factory=attrs.BlueCore)
+    attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitChance)

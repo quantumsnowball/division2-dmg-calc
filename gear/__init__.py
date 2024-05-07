@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-import gear.attribute as attrs
+import gear.attrs as attrs
 import gear.mods as mods
 
 

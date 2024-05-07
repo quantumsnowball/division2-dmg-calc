@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Literal
 
-import weapon.attribute as attrs
+import weapon.attrs as attrs
 import weapon.mods as mods
 
 WeaponType = Literal['AR', 'SMG', 'LMG', 'Rifle', 'MMR', 'Shotgun']
