@@ -1,15 +1,11 @@
 from dataclasses import dataclass
 
-
-class Attribute:
-    pass
-
-
-class CoreAttribute(Attribute):
-    pass
+#
+# Core Attributes
+#
 
 
-class MinorAttribute(Attribute):
+class CoreAttribute:
     pass
 
 
@@ -28,46 +24,62 @@ class SkillCore(CoreAttribute):
     tier: int = 1
 
 
+#
+# Minor Attributes
+#
+
+class MinorAttribute:
+    pass
+
+
+# offensive
+class OffensiveMinorAttribute(MinorAttribute):
+    pass
+
+
 @dataclass
-class CriticalHitChance(MinorAttribute):
+class CriticalHitChance(OffensiveMinorAttribute):
     pct: float = 0.06
 
 
-CHC = CriticalHitChance
-
-
 @dataclass
-class CriticalHitDamage(MinorAttribute):
+class CriticalHitDamage(OffensiveMinorAttribute):
     pct: float = 0.12
 
 
-CHD = CriticalHitDamage
-
-
 @dataclass
-class HeadshotDamage(MinorAttribute):
+class HeadshotDamage(OffensiveMinorAttribute):
     pct: float = 0.10
 
 
+CHC = CriticalHitChance
+CHD = CriticalHitDamage
 HS = HeadshotDamage
 
 
 @dataclass
-class DamageToHealth(MinorAttribute):
+class DamageToHealth(OffensiveMinorAttribute):
     pct: float = 0.10
 
 
 @dataclass
-class DamageToTargetOutOfCover(MinorAttribute):
+class DamageToTargetOutOfCover(OffensiveMinorAttribute):
     pct: float = 0.08
 
 
+# defensive
+class DefensiveMinorAttribute(MinorAttribute):
+    pass
+
+
 @dataclass
-class ExplosiveResistence(MinorAttribute):
+class ExplosiveResistence(DefensiveMinorAttribute):
     pct: float = 0.10
 
 
+#
 # Empty
+#
 class NoAttr(MinorAttribute):
     def __repr__(self) -> str:
         return 'N/A'

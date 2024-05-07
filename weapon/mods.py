@@ -10,15 +10,9 @@ class CriticalHitChance(Mod):
     pct: float
 
 
-CHC = CriticalHitChance
-
-
 @dataclass
 class CriticalHitDamage(Mod):
     pct: float
-
-
-CHD = CriticalHitDamage
 
 
 @dataclass
@@ -26,9 +20,15 @@ class HeadshotDamage(Mod):
     pct: float
 
 
+CHC = CriticalHitChance
+CHD = CriticalHitDamage
 HS = HeadshotDamage
 
 
+#
+# Empty
+#
 @dataclass
 class NoMod(Mod):
-    pct: float = 0
+    def __repr__(self) -> str:
+        return 'N/A'
