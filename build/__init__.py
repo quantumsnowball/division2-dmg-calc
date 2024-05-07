@@ -29,11 +29,11 @@ class Build:
         pct = 0
         # gear core attributes
         for gear in self.gears:
-            pct += gear.weapon_damage_bonus
+            pct += gear.weapon_damage_pct
         # keener's watch
-        pct += self.watch.weapon_damage_bonus_pct
+        pct += self.watch.weapon_damage_pct
         # expertise level
-        pct += self.weapon.weapon_damage_bonus_pct
+        pct += self.weapon.weapon_damage_pct
 
         # result
         return pct

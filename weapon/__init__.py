@@ -8,5 +8,5 @@ class Weapon:
     expertise_level: int
 
     @property
-    def weapon_damage_bonus_pct(self) -> float:
+    def weapon_damage_pct(self) -> float:
         return self.expertise_level * 0.01
