@@ -86,3 +86,14 @@ class Weapon:
 
         # result
         return pct
+
+    @property
+    def damage_to_target_out_of_cover_pct(self) -> float:
+        pct = 0
+        # attr
+        for attr in self.attrs:
+            if isinstance(attr, attrs.DamageToTargetOutOfCover):
+                pct += attr.pct
+
+        # result
+        return pct

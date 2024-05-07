@@ -125,7 +125,7 @@ class Build:
     def damage_to_target_out_of_cover_pct(self) -> float:
         pct = 0
         # weapon
-        # TODO
+        pct += self.weapon.damage_to_target_out_of_cover_pct
         # gear
         for gear in self.gears:
             pct += gear.damage_to_target_out_of_cover_pct
