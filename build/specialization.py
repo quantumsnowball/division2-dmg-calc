@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 from weapon import WeaponType
 
 
-@dataclass
+@dataclass(kw_only=True)
 class Specialization:
     name: str
     weapon_type_damage_scores: dict[WeaponType, int] = field(
@@ -14,3 +14,8 @@ class Specialization:
 
     def weapon_type_damage_pct(self, type: WeaponType) -> float:
         return self.weapon_type_damage_scores.get(type, 0) * 0.05
+
+
+@dataclass(kw_only=True)
+class Gunner(Specialization):
+    name: str = 'Gunner'

@@ -1,5 +1,5 @@
 from build import Build, specialization
-from build.specialization import Specialization
+from build.specialization import Gunner, Specialization
 from gear import Gear
 from weapon import Weapon
 from weapon.StElmosEngine import StElmosEngine
@@ -8,7 +8,7 @@ from weapon.StElmosEngine import StElmosEngine
 def main():
     build = Build(
         name='Legendary1',
-        specialization=Specialization('Gunner'),
+        specialization=Gunner(),
         weapon=StElmosEngine(expertise_level=17),
         mask=Gear(name='Lengmo', core='blue'),
         backpack=Gear(name='Striker', core='red'),
