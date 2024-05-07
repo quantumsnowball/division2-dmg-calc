@@ -20,11 +20,11 @@ class Build:
     watch: Watch = field(default_factory=Watch)
 
     def __post_init__(self) -> None:
-        self.gears = [
+        self.gears = (
             self.mask, self.backpack,
             self.chest, self.gloves,
             self.holster, self.kneepads
-        ]
+        )
 
     @property
     def weapon_damage_pct(self) -> float:

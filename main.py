@@ -1,5 +1,6 @@
 from build import Build
 from build.specialization import Gunner
+from gear.FoxPrayer import FoxPrayer
 from gear.Lengmo import Lengmo
 from gear.Striker import Striker
 from weapon.StElmosEngine import StElmosEngine
@@ -18,7 +19,7 @@ def main():
         chest=Striker(),
         gloves=Striker(),
         holster=Striker(),
-        kneepads=Striker(),
+        kneepads=FoxPrayer(),
     )
 
     print(build.critical_hit_damage_pct)

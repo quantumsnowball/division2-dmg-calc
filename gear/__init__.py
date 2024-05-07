@@ -8,7 +8,7 @@ from gear.attribute import (CoreAttribute, CriticalHitDamage, MinorAttribute,
 class Gear:
     name: str
     core: CoreAttribute
-    minor: MinorAttribute
+    attr1: MinorAttribute
 
     @property
     def weapon_damage_pct(self) -> float:
@@ -18,6 +18,6 @@ class Gear:
 
     @property
     def critical_hit_damage_pct(self) -> float:
-        if isinstance(self.minor, CriticalHitDamage):
-            return self.minor.pct
+        if isinstance(self.attr1, CriticalHitDamage):
+            return self.attr1.pct
         return 0.0
