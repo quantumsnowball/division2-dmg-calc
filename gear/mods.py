@@ -31,4 +31,5 @@ HS = HeadshotDamage
 
 @dataclass
 class NoMod(Mod):
-    pass
+    def __repr__(self) -> str:
+        return 'N/A'

@@ -68,4 +68,5 @@ class ExplosiveResistence(MinorAttribute):
 
 
 class NoAttr(MinorAttribute):
-    pass
+    def __repr__(self) -> str:
+        return 'N/A'
