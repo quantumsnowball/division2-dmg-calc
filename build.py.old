@@ -102,6 +102,24 @@ class Build:
             * self.x7(dtoArmor, dtoHealth)
             * self.x8(dtooC)
         )
+        dmg = {
+            'normal': {
+                'health': (),
+                'armor': (),
+            },
+            'critical': {
+                'health': (),
+                'armor': (),
+            },
+            'head': {
+                'health': (),
+                'armor': (),
+            },
+            'critical_head': {
+                'health': (),
+                'armor': (),
+            },
+        }
 
         # result
         return dmg
