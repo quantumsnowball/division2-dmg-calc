@@ -22,6 +22,7 @@ def main():
         kneepads=FoxPrayer(),
     )
 
+    print(build.summary())
     print(build.critical_hit_damage_pct)
 
 

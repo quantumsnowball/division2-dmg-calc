@@ -9,4 +9,4 @@ from gear.attribute import (CoreAttribute, CriticalHitDamage, MinorAttribute,
 class Striker(Gear):
     name: str = 'Striker'
     core: CoreAttribute = field(default_factory=RedCore)
-    minor: MinorAttribute = field(default_factory=CriticalHitDamage)
+    attr1: MinorAttribute = field(default_factory=CriticalHitDamage)

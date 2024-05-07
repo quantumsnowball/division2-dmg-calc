@@ -9,4 +9,4 @@ from gear.attribute import (BlueCore, CoreAttribute, CriticalHitChance,
 class Lengmo(Gear):
     name: str = 'Lengmo'
     core: CoreAttribute = field(default_factory=BlueCore)
-    minor: MinorAttribute = field(default_factory=CriticalHitChance)
+    attr1: MinorAttribute = field(default_factory=CriticalHitChance)
