@@ -31,9 +31,9 @@ class Build:
         for gear in self.gears:
             pct += gear.weapon_damage_bonus
         # keener's watch
-        pct += self.watch.weapon_damage_score * 0.002
+        pct += self.watch.weapon_damage_bonus_pct
         # expertise level
-        pct += self.weapon.expertise_level * 0.01
+        pct += self.weapon.weapon_damage_bonus_pct
 
         # result
         return pct
