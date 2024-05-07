@@ -1,9 +1,8 @@
 from dataclasses import dataclass
 from typing import Literal
 
-from weapon.attribute import AssultRifleDamage, CoreAttribute, MinorAttribute
-from weapon.mods import (CriticalHitChance, CriticalHitDamage, HeadshotDamage,
-                         Mod)
+import weapon.attribute as attr
+import weapon.mods as mods
 
 WeaponType = Literal['AR', 'SMG', 'LMG', 'Rifle', 'MMR', 'Shotgun']
 
@@ -15,14 +14,14 @@ class Weapon:
     base_damage: int
     expertise_level: int
     # attribute
-    core1: CoreAttribute
-    core2: CoreAttribute
-    minor: MinorAttribute
+    core1: attr.CoreAttribute
+    core2: attr.CoreAttribute
+    minor: attr.MinorAttribute
     # mods
-    optics: Mod
-    magazine: Mod
-    muzzle: Mod
-    underbarrel: Mod
+    optics: mods.Mod
+    magazine: mods.Mod
+    muzzle: mods.Mod
+    underbarrel: mods.Mod
 
     def __post_init__(self) -> None:
         self.cores = (self.core1, self.core2)
@@ -37,7 +36,7 @@ class Weapon:
         pct = 0
         # cores
         for core in self.cores:
-            if self.type == 'AR' and isinstance(core, AssultRifleDamage):
+            if self.type == 'AR' and isinstance(core, attr.AssultRifleDamage):
                 pct += core.weapon_type_damage_pct
 
         # result
@@ -48,7 +47,7 @@ class Weapon:
         pct = 0
         # mods
         for mod in self.mods:
-            if isinstance(mod, CriticalHitChance):
+            if isinstance(mod, mods.CriticalHitChance):
                 pct += mod.pct
 
         # result
@@ -59,7 +58,7 @@ class Weapon:
         pct = 0
         # mods
         for mod in self.mods:
-            if isinstance(mod, CriticalHitDamage):
+            if isinstance(mod, mods.CriticalHitDamage):
                 pct += mod.pct
 
         # result
@@ -70,7 +69,7 @@ class Weapon:
         pct = 0
         # mods
         for mod in self.mods:
-            if isinstance(mod, HeadshotDamage):
+            if isinstance(mod, mods.HeadshotDamage):
                 pct += mod.pct
 
         # result
