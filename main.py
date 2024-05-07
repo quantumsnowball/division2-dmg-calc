@@ -8,8 +8,11 @@ from weapon.StElmosEngine import StElmosEngine
 def main():
     build = Build(
         name='Legendary1',
+        # specialization
         specialization=Gunner(),
+        # weapons
         weapon=StElmosEngine(expertise_level=17),
+        # gears
         mask=Gear(name='Lengmo', core='blue'),
         backpack=Striker(),
         chest=Striker(),
