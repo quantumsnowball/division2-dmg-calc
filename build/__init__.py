@@ -1,5 +1,6 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
+from build.watch import Watch
 from gear import Gear
 from weapon import Weapon
 
@@ -14,6 +15,7 @@ class Build:
     gloves: Gear
     holster: Gear
     kneepads: Gear
+    watch: Watch = field(default_factory=Watch)
 
     def __post_init__(self) -> None:
         self.gears = [
@@ -29,7 +31,7 @@ class Build:
         for gear in self.gears:
             pct += gear.weapon_damage_bonus
         # keener's watch
-        # TODO
+        pct += self.watch.weapon_damage_score * 0.002
         # expertise level
         pct += self.weapon.expertise_level * 0.01
 
