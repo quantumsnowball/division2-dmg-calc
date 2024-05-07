@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Literal
 
-import weapon.attribute as attr
+import weapon.attribute as attrs
 import weapon.mods as mods
 
 WeaponType = Literal['AR', 'SMG', 'LMG', 'Rifle', 'MMR', 'Shotgun']
@@ -14,9 +14,9 @@ class Weapon:
     base_damage: int
     expertise_level: int
     # attribute
-    core1: attr.CoreAttribute
-    core2: attr.CoreAttribute
-    minor: attr.MinorAttribute
+    core1: attrs.CoreAttribute
+    core2: attrs.CoreAttribute
+    minor: attrs.MinorAttribute
     # mods
     optics: mods.Mod
     magazine: mods.Mod
@@ -25,6 +25,7 @@ class Weapon:
 
     def __post_init__(self) -> None:
         self.cores = (self.core1, self.core2)
+        self.attrs = (*self.cores, self.minor)
         self.mods = (self.optics, self.magazine, self.muzzle, self.underbarrel)
 
     @property
@@ -36,7 +37,7 @@ class Weapon:
         pct = 0
         # cores
         for core in self.cores:
-            if self.type == 'AR' and isinstance(core, attr.AssultRifleDamage):
+            if self.type == 'AR' and isinstance(core, attrs.AssultRifleDamage):
                 pct += core.weapon_type_damage_pct
 
         # result
@@ -71,6 +72,17 @@ class Weapon:
         for mod in self.mods:
             if isinstance(mod, mods.HeadshotDamage):
                 pct += mod.pct
+
+        # result
+        return pct
+
+    @property
+    def damage_to_health_pct(self) -> float:
+        pct = 0
+        # attr
+        for attr in self.attrs:
+            if isinstance(attr, attrs.HealthDamage):
+                pct += attr.pct
 
         # result
         return pct

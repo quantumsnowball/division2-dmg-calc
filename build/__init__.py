@@ -98,6 +98,30 @@ class Build:
         # result
         return pct
 
+    @property
+    def damage_to_armor_pct(self) -> float:
+        pct = 0
+        # weapon
+        # gear
+
+        # result
+        return pct
+
+    @property
+    def damage_to_health_pct(self) -> float:
+        pct = 0
+        # weapon
+        pct += self.weapon.damage_to_health_pct
+        # gear
+        for gear in self.gears:
+            pct += gear.damage_to_health_pct
+
+        # result
+        return pct
+
+    #
+    # factors
+    #
     def x1(self) -> float:
         return 1+self.weapon_damage_pct+self.weapon_type_dmg_pct
 
@@ -111,10 +135,21 @@ class Build:
         # result
         return x
 
+    def x7(self, armor: bool) -> float:
+        x = 1
+        if armor:
+            x += self.damage_to_armor_pct
+        else:
+            x += self.damage_to_health_pct
+
+        # result
+        return x
+
     def total_damage(self,
                      *,
                      critical: bool,
-                     headshot: bool):
+                     headshot: bool,
+                     armor: bool):
         '''
         Total Damage =
         Base weapon Damage
@@ -132,6 +167,7 @@ class Build:
             self.weapon.base_damage
             * self.x1()
             * self.x6(critical, headshot)
+            * self.x7(armor)
         )
 
         # result
@@ -139,13 +175,14 @@ class Build:
 
     def summary(self) -> pd.DataFrame:
         # columns
-        x6_columns = {'Normal': (0, 0), 'Critical': (1, 0), 'Headshot': (0, 1), 'CriticalHeadshot': (1, 1)}
-        x7_columns = {'Health': 0, 'Armor': 1}
+        x6_columns = {'Normal': (False, False), 'Critical': (True, False),
+                      'Headshot': (False, True), 'CriticalHeadshot': (True, True)}
+        x7_columns = {'Health': False, 'Armor': True}
         columns = pd.MultiIndex.from_product([x7_columns.keys(), x6_columns.keys()])
         # index
         index = pd.MultiIndex.from_product([['Basic'], ['Base']])
         # data
-        data = [[self.total_damage(critical=crit, headshot=hs)
+        data = [[self.total_damage(critical=crit, headshot=hs, armor=arm)
                  for arm in x7_columns.values()
                  for crit, hs in x6_columns.values()]]
         df = pd.DataFrame(data, index=index, columns=columns)

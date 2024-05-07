@@ -20,9 +20,9 @@ class AssultRifleDamage(CoreAttribute):
 
 @dataclass
 class HealthDamage(CoreAttribute):
-    health_damage_pct: float = 0.21
+    pct: float = 0.21
 
 
 @dataclass
 class RateOfFire(MinorAttribute):
-    rate_of_fire_pct: float = 0.05
+    pct: float = 0.05

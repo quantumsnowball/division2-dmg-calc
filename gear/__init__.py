@@ -1,19 +1,19 @@
 from dataclasses import dataclass, field
 
-import gear.attribute as attr
+import gear.attribute as attrs
 import gear.mods as mods
 
 
 @dataclass(kw_only=True)
 class Gear:
     name: str
-    core: attr.CoreAttribute
-    attr1: attr.MinorAttribute
+    core: attrs.CoreAttribute
+    attr1: attrs.MinorAttribute
     mod: mods.Mod = field(default_factory=mods.NoMod)
 
     @property
     def weapon_damage_pct(self) -> float:
-        if isinstance(self.core, attr.RedCore):
+        if isinstance(self.core, attrs.RedCore):
             return self.core.weapon_damage_pct
         return 0.0
 
@@ -21,7 +21,7 @@ class Gear:
     def critical_hit_chance_pct(self) -> float:
         pct = 0
         # attribute
-        if isinstance(self.attr1, attr.CriticalHitChance):
+        if isinstance(self.attr1, attrs.CriticalHitChance):
             pct += self.attr1.pct
         # mods
         if isinstance(self.mod, mods.CriticalHitChance):
@@ -34,7 +34,7 @@ class Gear:
     def critical_hit_damage_pct(self) -> float:
         pct = 0
         # attribute
-        if isinstance(self.attr1, attr.CriticalHitDamage):
+        if isinstance(self.attr1, attrs.CriticalHitDamage):
             pct += self.attr1.pct
         # mods
         if isinstance(self.mod, mods.CriticalHitDamage):
@@ -47,11 +47,21 @@ class Gear:
     def headshot_damage_pct(self) -> float:
         pct = 0
         # attribute
-        if isinstance(self.attr1, attr.HeadshotDamage):
+        if isinstance(self.attr1, attrs.HeadshotDamage):
             pct += self.attr1.pct
         # mods
         if isinstance(self.mod, mods.HeadshotDamage):
             pct += self.mod.pct
+
+        # result
+        return pct
+
+    @property
+    def damage_to_health_pct(self) -> float:
+        pct = 0
+        # attribute
+        if isinstance(self.attr1, attrs.DamageToHealth):
+            pct += self.attr1.pct
 
         # result
         return pct

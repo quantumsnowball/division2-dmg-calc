@@ -50,3 +50,8 @@ class HeadshotDamage(MinorAttribute):
 
 
 HS = HeadshotDamage
+
+
+@dataclass
+class DamageToHealth(MinorAttribute):
+    pct: float = 0.10
