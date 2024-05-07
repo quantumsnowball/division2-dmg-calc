@@ -28,7 +28,7 @@ def main():
     )
 
     pprint(build)
-    print(build.summary())
+    print(build.summary().astype(int))
 
 
 if __name__ == '__main__':
