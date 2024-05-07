@@ -1,9 +1,10 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
-from gear import Core, Gear
+from gear import Gear
+from gear.attribute import CoreAttribute, RedCore
 
 
 @dataclass(kw_only=True)
 class Striker(Gear):
     name: str = 'Striker'
-    core: Core = 'red'
+    core: CoreAttribute = field(default_factory=RedCore)

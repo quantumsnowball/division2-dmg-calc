@@ -1,16 +1,15 @@
 from dataclasses import dataclass
-from typing import Literal
 
-Core = Literal['red', 'blue', 'yellow']
+from gear.attribute import CoreAttribute, RedCore
 
 
 @dataclass(kw_only=True)
 class Gear:
     name: str
-    core: Core
+    core: CoreAttribute
 
     @property
     def weapon_damage_pct(self) -> float:
-        if self.core == 'red':
-            return 0.15
-        return 0
+        if isinstance(self.core, RedCore):
+            return self.core.weapon_damage_pct
+        return 0.0
