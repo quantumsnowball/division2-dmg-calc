@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Literal
 
 from weapon.attribute import AssultRifleDamage, CoreAttribute, MinorAttribute
-from weapon.mods import Mod
+from weapon.mods import CriticalHitDamage, Mod
 
 WeaponType = Literal['AR', 'SMG', 'LMG', 'Rifle', 'MMR', 'Shotgun']
 
@@ -38,6 +38,17 @@ class Weapon:
         for core in self.cores:
             if self.type == 'AR' and isinstance(core, AssultRifleDamage):
                 pct += core.weapon_type_damage_pct
+
+        # result
+        return pct
+
+    @property
+    def critical_hit_damage_pct(self) -> float:
+        pct = 0
+        # mods
+        for mod in self.mods:
+            if isinstance(mod, CriticalHitDamage):
+                pct += mod.pct
 
         # result
         return pct

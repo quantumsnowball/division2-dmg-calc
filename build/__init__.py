@@ -56,6 +56,7 @@ class Build:
         # base CHD
         pct = 0.25
         # weapon
+        pct += self.weapon.critical_hit_damage_pct
         # gear
         for gear in self.gears:
             pct += gear.critical_hit_damage_pct
