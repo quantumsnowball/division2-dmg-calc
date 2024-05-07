@@ -1,4 +1,5 @@
-from build import Build
+from build import Build, specialization
+from build.specialization import Specialization
 from gear import Gear
 from weapon import Weapon
 
@@ -6,6 +7,7 @@ from weapon import Weapon
 def main():
     Legendary1 = Build(
         name='Legendary1',
+        specialization=Specialization('Gunner'),
         weapon=Weapon("St Elmo's Engine", base_damage=44191, expertise_level=17),
         mask=Gear(name='Lengmo'),
         backpack=Gear(name='Striker'),

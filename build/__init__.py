@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 
+from build.specialization import Specialization
 from build.watch import Watch
 from gear import Gear
 from weapon import Weapon
@@ -15,6 +16,7 @@ class Build:
     gloves: Gear
     holster: Gear
     kneepads: Gear
+    specialization: Specialization
     watch: Watch = field(default_factory=Watch)
 
     def __post_init__(self) -> None:
@@ -44,7 +46,7 @@ class Build:
         # weapon attributes
         # TODO
         # specialization bonus
-        # TODO
+        pct += self.specialization.weapon_type_damage_pct
 
         # result
         return pct
