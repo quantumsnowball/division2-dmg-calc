@@ -5,10 +5,10 @@ from weapon import Weapon
 
 
 def main():
-    Legendary1 = Build(
+    build = Build(
         name='Legendary1',
         specialization=Specialization('Gunner'),
-        weapon=Weapon("St Elmo's Engine", base_damage=44191, expertise_level=17),
+        weapon=Weapon("St Elmo's Engine", base_damage=44191, expertise_level=17, weapon_type_damage_bonus=0.15),
         mask=Gear(name='Lengmo'),
         backpack=Gear(name='Striker'),
         chest=Gear(name='Striker'),
@@ -17,7 +17,7 @@ def main():
         kneepads=Gear(name='Fox'),
     )
 
-    print(Legendary1.summary())
+    print(build.summary())
 
 
 if __name__ == '__main__':
