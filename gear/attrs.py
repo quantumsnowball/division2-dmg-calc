@@ -67,6 +67,7 @@ class ExplosiveResistence(MinorAttribute):
     pct: float = 0.10
 
 
+# Empty
 class NoAttr(MinorAttribute):
     def __repr__(self) -> str:
         return 'N/A'

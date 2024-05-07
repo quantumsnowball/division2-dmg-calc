@@ -29,7 +29,7 @@ class HeadshotDamage(Mod):
 HS = HeadshotDamage
 
 
-@dataclass
+# Empty
 class NoMod(Mod):
     def __repr__(self) -> str:
         return 'N/A'

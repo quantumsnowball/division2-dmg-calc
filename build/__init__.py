@@ -195,7 +195,7 @@ class Build:
     def summary(self) -> pd.DataFrame:
         # columns
         x6_columns = {'Normal': (False, False), 'Critical': (True, False),
-                      'Headshot': (False, True), 'CriticalHeadshot': (True, True)}
+                      'Headshot': (False, True), 'CritHead': (True, True)}
         x7_columns = {'Health': False, 'Armor': True}
         columns = pd.MultiIndex.from_product([x7_columns.keys(), x6_columns.keys()])
         # index
