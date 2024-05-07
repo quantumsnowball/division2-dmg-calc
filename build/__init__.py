@@ -119,6 +119,17 @@ class Build:
         # result
         return pct
 
+    @property
+    def damage_to_target_out_of_cover_pct(self) -> float:
+        pct = 0
+        # weapon
+        # gear
+        for gear in self.gears:
+            pct += gear.damage_to_target_out_of_cover_pct
+
+        # result
+        return pct
+
     #
     # factors
     #
@@ -141,6 +152,13 @@ class Build:
             x += self.damage_to_armor_pct
         else:
             x += self.damage_to_health_pct
+
+        # result
+        return x
+
+    def x8(self) -> float:
+        x = 1
+        x += self.damage_to_target_out_of_cover_pct
 
         # result
         return x
@@ -168,6 +186,7 @@ class Build:
             * self.x1()
             * self.x6(critical, headshot)
             * self.x7(armor)
+            * self.x8()
         )
 
         # result

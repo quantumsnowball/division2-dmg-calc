@@ -24,7 +24,7 @@ def main():
         chest=Lengmo(mod=gearmods.CHD(0.119)),
         gloves=Striker(),
         holster=Striker(),
-        kneepads=FoxPrayer(attr1=gearattrs.CHC(0.06)),
+        kneepads=FoxPrayer(attr2=gearattrs.CHC(0.06)),
     )
 
     pprint(build)
