@@ -4,7 +4,7 @@ from typing import Literal
 Core = Literal['red', 'blue', 'yellow']
 
 
-@dataclass
+@dataclass(kw_only=True)
 class Gear:
     name: str
     core: Core
