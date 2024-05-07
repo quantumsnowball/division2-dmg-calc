@@ -44,7 +44,7 @@ class Build:
     def weapon_type_dmg_pct(self) -> float:
         pct = 0
         # weapon attributes
-        # TODO
+        pct += self.weapon.weapon_type_damage_pct
         # specialization bonus
         pct += self.specialization.weapon_type_damage_pct
 
