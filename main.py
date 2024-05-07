@@ -9,12 +9,12 @@ def main():
         name='Legendary1',
         specialization=Specialization('Gunner'),
         weapon=Weapon("St Elmo's Engine", base_damage=44191, expertise_level=17, weapon_type_damage_bonus=0.15),
-        mask=Gear(name='Lengmo'),
-        backpack=Gear(name='Striker'),
-        chest=Gear(name='Striker'),
-        gloves=Gear(name='Striker'),
-        holster=Gear(name='Striker'),
-        kneepads=Gear(name='Fox'),
+        mask=Gear(name='Lengmo', core='blue'),
+        backpack=Gear(name='Striker', core='red'),
+        chest=Gear(name='Striker', core='red'),
+        gloves=Gear(name='Striker', core='red'),
+        holster=Gear(name='Striker', core='red'),
+        kneepads=Gear(name='Fox', core='red'),
     )
 
     print(build.summary())
