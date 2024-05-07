@@ -181,13 +181,11 @@ class Build:
         x8|    *(1+Damage out of Cover)
         '''
         # base
-        dmg = (
-            self.weapon.base_damage
-            * self.x1()
-            * self.x6(critical, headshot)
-            * self.x7(armor)
-            * self.x8()
-        )
+        dmg = self.weapon.base_damage
+        dmg *= self.x1()
+        dmg *= self.x6(critical, headshot)
+        dmg *= self.x7(armor)
+        dmg *= self.x8()
 
         # result
         return dmg
