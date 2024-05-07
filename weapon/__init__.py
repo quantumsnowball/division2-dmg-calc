@@ -4,7 +4,7 @@ from typing import Literal
 WeaponType = Literal['AR', 'SMG', 'LMG', 'Rifle', 'MMR', 'Shotgun']
 
 
-@dataclass
+@dataclass(kw_only=True)
 class Weapon:
     name: str
     type: WeaponType
