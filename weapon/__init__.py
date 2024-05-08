@@ -29,11 +29,11 @@ class Weapon:
         self.mods = (self.optics, self.magazine, self.muzzle, self.underbarrel)
 
     @property
-    def weapon_damage_pct(self) -> float:
+    def weapon_damage(self) -> float:
         return self.expertise_level * 0.01
 
     @property
-    def weapon_type_damage_pct(self) -> float:
+    def weapon_type_damage(self) -> float:
         pct = 0
         # cores
         for core in self.cores:
@@ -44,7 +44,7 @@ class Weapon:
         return pct
 
     @property
-    def critical_hit_chance_pct(self) -> float:
+    def critical_hit_chance(self) -> float:
         pct = 0
         # mods
         for mod in self.mods:
@@ -55,7 +55,7 @@ class Weapon:
         return pct
 
     @property
-    def critical_hit_damage_pct(self) -> float:
+    def critical_hit_damage(self) -> float:
         pct = 0
         # mods
         for mod in self.mods:
@@ -66,7 +66,7 @@ class Weapon:
         return pct
 
     @property
-    def headshot_damage_pct(self) -> float:
+    def headshot_damage(self) -> float:
         pct = 0
         # mods
         for mod in self.mods:
@@ -77,7 +77,7 @@ class Weapon:
         return pct
 
     @property
-    def damage_to_health_pct(self) -> float:
+    def damage_to_health(self) -> float:
         pct = 0
         # attr
         for attr in self.attrs:
@@ -88,7 +88,7 @@ class Weapon:
         return pct
 
     @property
-    def damage_to_target_out_of_cover_pct(self) -> float:
+    def damage_to_target_out_of_cover(self) -> float:
         pct = 0
         # attr
         for attr in self.attrs:
