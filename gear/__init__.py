@@ -85,31 +85,31 @@ class Gear:
         return pct
 
 
-@dataclass
+@dataclass(kw_only=True)
 class Mask(Gear):
     pass
 
 
-@dataclass
+@dataclass(kw_only=True)
 class Backpack(Gear):
     pass
 
 
-@dataclass
+@dataclass(kw_only=True)
 class Chest(Gear):
     pass
 
 
-@dataclass
+@dataclass(kw_only=True)
 class Gloves(Gear):
     pass
 
 
-@dataclass
+@dataclass(kw_only=True)
 class Holster(Gear):
     pass
 
 
-@dataclass
+@dataclass(kw_only=True)
 class Kneepads(Gear):
     pass
