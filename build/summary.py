@@ -14,7 +14,7 @@ class Summary:
     def stats(self) -> pd.DataFrame:
         # data
         data = {
-            'WeaponDamage': f'{self._damage.total_damage(basic=True):,.0f}',
+            'WeaponDamage': f'{self._damage.basic:,.0f}',
             'CriticalHitChance': f'{self._stats.critical_hit_chance_pct:.1%}',
             'CriticalHitDamage': f'{self._stats.critical_hit_damage_pct:.1%}',
             'HeadshotDamage': f'{self._stats.headshot_damage_pct:.1%}',

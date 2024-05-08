@@ -67,18 +67,24 @@ class Damage:
     def __post_init__(self) -> None:
         self._amplifiers = _Amplifiers(self._weapon, self._gears, self._stats)
 
+    @property
+    def basic(self) -> float:
+        # base
+        dmg = self._weapon.base_damage
+        # basic weapon damage
+        dmg *= self._amplifiers.x1()
+
+        # result
+        return dmg
+
     def total_damage(self,
                      *,
                      critical: bool = False,
                      headshot: bool = False,
-                     armor: bool = False,
-                     basic: bool = False):
+                     armor: bool = False):
         # base
         dmg = self._weapon.base_damage
         dmg *= self._amplifiers.x1()
-        if basic:
-            # result - basic weapon damage
-            return dmg
         dmg *= self._amplifiers.x6(critical, headshot)
         dmg *= self._amplifiers.x7(armor)
         dmg *= self._amplifiers.x8()
