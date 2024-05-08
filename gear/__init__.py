@@ -1,4 +1,6 @@
+from collections import namedtuple
 from dataclasses import dataclass, field
+from typing import NamedTuple
 
 import gear.attrs as attrs
 import gear.mods as mods
@@ -119,4 +121,10 @@ class Kneepads(Gear):
     pass
 
 
-Gears = tuple[Mask, Backpack, Chest, Gloves, Holster, Kneepads]
+class Gears(NamedTuple):
+    mask: Mask
+    backpack: Backpack
+    chest: Chest
+    gloves: Gloves
+    holster: Holster
+    kneepads: Kneepads

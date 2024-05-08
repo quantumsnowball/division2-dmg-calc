@@ -25,15 +25,20 @@ class Build:
     watch: Watch = field(default_factory=Watch)
 
     def __post_init__(self) -> None:
-        self.gears: Gears = (
+        # additional props
+        self.gears = Gears(
             self.mask, self.backpack,
             self.chest, self.gloves,
             self.holster, self.kneepads
         )
-        self.stats = Stats(self.weapon, self.gears, self.watch, self.specialization)
-        self.damage = Damage(self.weapon, self.gears, self.stats)
-        self.summary = Summary(self.stats, self.damage)
+        self.backpack_talent = None
+        self.chest_talent = None
+        self.gearset_talent = None
         # enable brandset bonus
         utils.enable_brandset_bonus(self.gears)
         # enable gearset bonus
         utils.enable_gearset_bonus(self.gears)
+        # helpers
+        self.stats = Stats(self.weapon, self.gears, self.watch, self.specialization)
+        self.damage = Damage(self.weapon, self.gears, self.stats)
+        self.summary = Summary(self.stats, self.damage)
