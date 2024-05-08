@@ -10,7 +10,6 @@ class Gear:
     core: attrs.CoreAttribute
     attr1: attrs.MinorAttribute
     attr2: attrs.MinorAttribute
-    mod: mods.Mod = field(default_factory=mods.NoMod)
 
     def __post_init__(self) -> None:
         self.attrs = (self.core, self.attr1, self.attr2)
@@ -29,8 +28,9 @@ class Gear:
             if isinstance(attr, attrs.CriticalHitChance):
                 pct += attr.pct
         # mods
-        if isinstance(self.mod, mods.CriticalHitChance):
-            pct += self.mod.pct
+        if isinstance(self, (Mask, Backpack, Chest)):
+            if isinstance(self.mod, mods.CriticalHitChance):
+                pct += self.mod.pct
 
         # result
         return pct
@@ -43,8 +43,9 @@ class Gear:
             if isinstance(attr, attrs.CriticalHitDamage):
                 pct += attr.pct
         # mods
-        if isinstance(self.mod, mods.CriticalHitDamage):
-            pct += self.mod.pct
+        if isinstance(self, (Mask, Backpack, Chest)):
+            if isinstance(self.mod, mods.CriticalHitDamage):
+                pct += self.mod.pct
 
         # result
         return pct
@@ -56,8 +57,9 @@ class Gear:
         if isinstance(self.attr1, attrs.HeadshotDamage):
             pct += self.attr1.pct
         # mods
-        if isinstance(self.mod, mods.HeadshotDamage):
-            pct += self.mod.pct
+        if isinstance(self, (Mask, Backpack, Chest)):
+            if isinstance(self.mod, mods.HeadshotDamage):
+                pct += self.mod.pct
 
         # result
         return pct
@@ -87,17 +89,17 @@ class Gear:
 
 @dataclass(kw_only=True)
 class Mask(Gear):
-    pass
+    mod: mods.Mod = field(default_factory=mods.NoMod)
 
 
 @dataclass(kw_only=True)
 class Backpack(Gear):
-    pass
+    mod: mods.Mod = field(default_factory=mods.NoMod)
 
 
 @dataclass(kw_only=True)
 class Chest(Gear):
-    pass
+    mod: mods.Mod = field(default_factory=mods.NoMod)
 
 
 @dataclass(kw_only=True)
