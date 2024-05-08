@@ -32,7 +32,7 @@ def main():
     pprint(build)
     print(tabulate(build.summary.stats(), headers='keys', tablefmt='fancy_grid'))
     print(build.summary.damage().astype(int))
-    print(f'{build.damage.basic=:.2f} {build.damage.average=:.2f}')
+    print(f'{build.damage.basic=:.2f} {build.damage.average=:.2f} {build.damage.max=:.2f}')
 
 
 if __name__ == '__main__':

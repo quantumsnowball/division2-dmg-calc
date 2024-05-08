@@ -48,6 +48,15 @@ class _Multiplier:
         # result
         return x
 
+    @property
+    def x6_max(self) -> float:
+        x = 1
+        # assuming critical headshot
+        x += self._stats.critical_hit_damage
+        x += self._stats.headshot_damage
+        # result
+        return x
+
     def x7(self, armor: bool) -> float:
         x = 1
         if armor:
@@ -62,6 +71,14 @@ class _Multiplier:
         # assuming equal chance for armor and health damage
         x = 1
         x += 0.5*self._stats.damage_to_armor + 0.5*self._stats.damage_to_health
+        # result
+        return x
+
+    @property
+    def x7_max(self) -> float:
+        x = 1
+        # assume whoever being the highest
+        x += max(self._stats.damage_to_armor, self._stats.damage_to_health)
         # result
         return x
 
@@ -93,10 +110,18 @@ class Damage:
 
     @property
     def average(self) -> float:
-        # x6: weight by critical hit chance
         dmg = self.basic
         dmg *= self._x.x6_mean
         dmg *= self._x.x7_mean
+        dmg *= self._x.x8
+        # result
+        return dmg
+
+    @property
+    def max(self) -> float:
+        dmg = self.basic
+        dmg *= self._x.x6_max
+        dmg *= self._x.x7_max
         dmg *= self._x.x8
         # result
         return dmg
