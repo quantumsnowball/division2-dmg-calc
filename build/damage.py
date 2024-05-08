@@ -89,6 +89,18 @@ class _Multiplier:
         # result
         return x
 
+    @property
+    def basic(self) -> dict[str, float]:
+        return {'x1': self.x1, 'x6': 1.0, 'x7': 1.0, 'x8': self.x8}
+
+    @property
+    def average(self) -> dict[str, float]:
+        return {'x1': self.x1, 'x6': self.x6_mean, 'x7': self.x7_mean, 'x8': self.x8}
+
+    @property
+    def max(self) -> dict[str, float]:
+        return {'x1': self.x1, 'x6': self.x6_max, 'x7': self.x7_max, 'x8': self.x8}
+
 
 @dataclass
 class Damage:
@@ -97,32 +109,32 @@ class Damage:
     _stats: Stats
 
     def __post_init__(self) -> None:
-        self._x = _Multiplier(self._weapon, self._gears, self._stats)
+        self.x = _Multiplier(self._weapon, self._gears, self._stats)
 
     @property
     def basic(self) -> float:
         # base
         dmg = self._weapon.base_damage
         # basic weapon damage
-        dmg *= self._x.x1
+        dmg *= self.x.x1
         # result
         return dmg
 
     @property
     def average(self) -> float:
         dmg = self.basic
-        dmg *= self._x.x6_mean
-        dmg *= self._x.x7_mean
-        dmg *= self._x.x8
+        dmg *= self.x.x6_mean
+        dmg *= self.x.x7_mean
+        dmg *= self.x.x8
         # result
         return dmg
 
     @property
     def max(self) -> float:
         dmg = self.basic
-        dmg *= self._x.x6_max
-        dmg *= self._x.x7_max
-        dmg *= self._x.x8
+        dmg *= self.x.x6_max
+        dmg *= self.x.x7_max
+        dmg *= self.x.x8
         # result
         return dmg
 
@@ -133,9 +145,9 @@ class Damage:
                      armor: bool = False):
         # base
         dmg = self._weapon.base_damage
-        dmg *= self._x.x1
-        dmg *= self._x.x6(critical, headshot)
-        dmg *= self._x.x7(armor)
-        dmg *= self._x.x8
+        dmg *= self.x.x1
+        dmg *= self.x.x6(critical, headshot)
+        dmg *= self.x.x7(armor)
+        dmg *= self.x.x8
         # result
         return dmg

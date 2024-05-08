@@ -33,6 +33,9 @@ def main():
     print(tabulate(build.summary.stats(), headers='keys', tablefmt='fancy_grid'))
     print(build.summary.damage().astype(int))
     print(f'{build.damage.basic=:.2f} {build.damage.average=:.2f} {build.damage.max=:.2f}')
+    pprint(build.damage.x.basic)
+    pprint(build.damage.x.average)
+    pprint(build.damage.x.max)
 
 
 if __name__ == '__main__':
