@@ -3,6 +3,7 @@ from dataclasses import dataclass, field
 import gear
 import gear.attrs as attrs
 import gear.gearsets.bonus as bonus
+import gear.talents as talents
 from gear.gearsets import BonusPool, Gearsets
 
 
@@ -24,6 +25,7 @@ class Mask(gear.Mask, StrikersBattlegear):
 class Backpack(gear.Backpack, StrikersBattlegear):
     core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
     attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
+    talent: talents.BackpackTalent = field(default_factory=talents.RiskManagement)
 
 
 @dataclass(kw_only=True)

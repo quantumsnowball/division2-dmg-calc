@@ -1,9 +1,9 @@
-from collections import namedtuple
 from dataclasses import dataclass, field
 from typing import NamedTuple
 
 import gear.attrs as attrs
 import gear.mods as mods
+import gear.talents as talents
 from gear.brandsets import Brandsets
 
 
@@ -99,11 +99,13 @@ class Mask(Gear):
 @dataclass(kw_only=True)
 class Backpack(Gear):
     mod: mods.Mod = field(default_factory=mods.NoMod)
+    talent: talents.BackpackTalent = field(default_factory=talents.NoTalent)
 
 
 @dataclass(kw_only=True)
 class Chest(Gear):
     mod: mods.Mod = field(default_factory=mods.NoMod)
+    talent: talents.ChestTalent = field(default_factory=talents.NoTalent)
 
 
 @dataclass(kw_only=True)
