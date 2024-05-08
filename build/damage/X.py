@@ -1,8 +1,13 @@
 from dataclasses import dataclass
+from typing import Literal
 
 from build.stats import Stats
 from gear import Gears
 from weapon import Weapon
+
+
+Name = Literal['x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8']
+X_Value = dict[Name, float]
 
 
 @dataclass
@@ -99,17 +104,17 @@ class X:
         return x
 
     @property
-    def basic(self) -> dict[str, float]:
+    def basic(self) -> X_Value:
         return {'x1': self.x1, 'x6': 1.0, 'x7': 1.0, 'x8': self.x8}
 
     @property
-    def min(self) -> dict[str, float]:
+    def min(self) -> X_Value:
         return {'x1': self.x1, 'x6': self.x6_min, 'x7': self.x7_min, 'x8': self.x8}
 
     @property
-    def average(self) -> dict[str, float]:
+    def average(self) -> X_Value:
         return {'x1': self.x1, 'x6': self.x6_mean, 'x7': self.x7_mean, 'x8': self.x8}
 
     @property
-    def max(self) -> dict[str, float]:
+    def max(self) -> X_Value:
         return {'x1': self.x1, 'x6': self.x6_max, 'x7': self.x7_max, 'x8': self.x8}
