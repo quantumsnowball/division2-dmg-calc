@@ -5,6 +5,7 @@ from build.specialization import Specialization
 from build.watch import Watch
 import gear.brandsets as brandsets
 import gear.gearsets as gearsets
+import gear.utils as utils
 from weapon import Weapon
 
 import pandas as pd
@@ -29,35 +30,10 @@ class Build:
             self.chest, self.gloves,
             self.holster, self.kneepads
         )
-        # enable brandset and gearset bonus
-        brandsets_pools: dict[str, brandsets.BonusPool] = {}
-        gearsets_pools: dict[str, gearsets.BonusPool] = {}
-        for gear in self.gears:
-            if isinstance(gear, brandsets.Brandsets):
-                brandsets_pools[gear.brandset] = gear.bonus_pool
-            elif isinstance(gear, gearsets.Gearsets):
-                gearsets_pools[gear.gearset] = gear.bonus_pool
-        brandsets_counter: dict[str, int] = {}
-        gearsets_counter: dict[str, int] = {}
-        for gear in self.gears:
-            if isinstance(gear, brandsets.Brandsets):
-                try:
-                    brandsets_counter[gear.brandset] += 1
-                except KeyError:
-                    brandsets_counter[gear.brandset] = 0
-                try:
-                    gear.brandset_bonus = brandsets_pools[gear.brandset][brandsets_counter[gear.brandset]]
-                except IndexError:
-                    pass
-            elif isinstance(gear, gearsets.Gearsets):
-                try:
-                    gearsets_counter[gear.gearset] += 1
-                except KeyError:
-                    gearsets_counter[gear.gearset] = 0
-                try:
-                    gear.gearset_bonus = gearsets_pools[gear.gearset][gearsets_counter[gear.gearset]]
-                except IndexError:
-                    pass
+        # enable brandset bonus
+        utils.enable_brandset_bonus(self.gears)
+        # enable gearset bonus
+        utils.enable_gearset_bonus(self.gears)
 
     @property
     def weapon_damage_pct(self) -> float:
