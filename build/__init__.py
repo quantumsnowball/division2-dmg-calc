@@ -11,7 +11,7 @@ import gear.utils as utils
 from weapon import Weapon
 
 
-@dataclass
+@dataclass(kw_only=True)
 class Build:
     name: str
     weapon: Weapon
