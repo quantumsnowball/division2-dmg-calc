@@ -34,6 +34,14 @@ class Summary:
                     max=self._damage.x.max)
         return pd.DataFrame(data).T
 
+    @property
+    def dydx(self) -> pd.DataFrame:
+        data = dict(basic=self._damage.dydx.basic,
+                    min=self._damage.dydx.min,
+                    average=self._damage.dydx.average,
+                    max=self._damage.dydx.max)
+        return pd.DataFrame(data).T
+
     def damage(self) -> pd.DataFrame:
         # columns
         x6_columns = {'Normal': (False, False), 'Critical': (True, False),
