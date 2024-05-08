@@ -2,10 +2,11 @@ from dataclasses import dataclass, field
 
 import gear
 import gear.attrs as attrs
+from gear.gearsets import Gearsets
 
 
 @dataclass(kw_only=True)
-class Mask(gear.Mask):
+class Mask(gear.Mask, Gearsets):
     name: str = 'Striker'
     core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
     attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
@@ -13,7 +14,7 @@ class Mask(gear.Mask):
 
 
 @dataclass(kw_only=True)
-class Backpack(gear.Backpack):
+class Backpack(gear.Backpack, Gearsets):
     name: str = 'Striker'
     core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
     attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
@@ -21,7 +22,7 @@ class Backpack(gear.Backpack):
 
 
 @dataclass(kw_only=True)
-class Chest(gear.Chest):
+class Chest(gear.Chest, Gearsets):
     name: str = 'Striker'
     core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
     attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
@@ -29,7 +30,7 @@ class Chest(gear.Chest):
 
 
 @dataclass(kw_only=True)
-class Gloves(gear.Gloves):
+class Gloves(gear.Gloves, Gearsets):
     name: str = 'Striker'
     core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
     attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
@@ -37,7 +38,7 @@ class Gloves(gear.Gloves):
 
 
 @dataclass(kw_only=True)
-class Holster(gear.Holster):
+class Holster(gear.Holster, Gearsets):
     name: str = 'Striker'
     core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
     attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
@@ -45,7 +46,7 @@ class Holster(gear.Holster):
 
 
 @dataclass(kw_only=True)
-class Kneepads(gear.Kneepads):
+class Kneepads(gear.Kneepads, Gearsets):
     name: str = 'Striker'
     core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
     attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
