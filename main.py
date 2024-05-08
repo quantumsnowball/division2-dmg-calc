@@ -3,9 +3,9 @@ from pprint import pprint
 from tabulate import tabulate
 
 import gear.attrs as gearattrs
-import gear.Lengmo as lengmo
+import gear.brandsets.Lengmo as lengmo
+import gear.brandsets.OverlordArmaments as overlord
 import gear.mods as gearmods
-import gear.OverlordArmaments as overlord
 import gear.Striker as striker
 from build import Build
 from build.specialization import Gunner
