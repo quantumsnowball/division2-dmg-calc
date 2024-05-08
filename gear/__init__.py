@@ -117,3 +117,6 @@ class Holster(Gear):
 @dataclass(kw_only=True)
 class Kneepads(Gear):
     pass
+
+
+Gears = tuple[Mask, Backpack, Chest, Gloves, Holster, Kneepads]

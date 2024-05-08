@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
 
+from build.stats import Stats
 import gear
 from build.specialization import Specialization
 from build.watch import Watch
-import gear.brandsets as brandsets
-import gear.gearsets as gearsets
 import gear.utils as utils
 from weapon import Weapon
 
@@ -30,128 +29,25 @@ class Build:
             self.chest, self.gloves,
             self.holster, self.kneepads
         )
+        self.stats = Stats(self.weapon, self.gears, self.watch, self.specialization)
         # enable brandset bonus
         utils.enable_brandset_bonus(self.gears)
         # enable gearset bonus
         utils.enable_gearset_bonus(self.gears)
 
-    @property
-    def weapon_damage_pct(self) -> float:
-        pct = 0
-        # gear core attributes
-        for gear in self.gears:
-            pct += gear.weapon_damage_pct
-        # keener's watch
-        pct += self.watch.weapon_damage_pct
-        # expertise level
-        pct += self.weapon.weapon_damage_pct
-
-        # result
-        return pct
-
-    @property
-    def weapon_type_dmg_pct(self) -> float:
-        pct = 0
-        # weapon attributes
-        pct += self.weapon.weapon_type_damage_pct
-        # specialization bonus
-        pct += self.specialization.weapon_type_damage_pct(self.weapon.type)
-
-        # result
-        return pct
-
-    @property
-    def critical_hit_chance_pct(self) -> float:
-        # base CHC
-        pct = 0.0
-        # weapon
-        pct += self.weapon.critical_hit_chance_pct
-        # gear
-        for gear in self.gears:
-            pct += gear.critical_hit_chance_pct
-        # keener's watch
-        pct += self.watch.critical_hit_chance_pct
-
-        # result
-        return pct
-
-    @property
-    def critical_hit_damage_pct(self) -> float:
-        # base CHD
-        pct = 0.25
-        # weapon
-        pct += self.weapon.critical_hit_damage_pct
-        # gear
-        for gear in self.gears:
-            pct += gear.critical_hit_damage_pct
-        # keener's watch
-        pct += self.watch.critical_hit_damage_pct
-
-        # result
-        return pct
-
-    @property
-    def headshot_damage_pct(self) -> float:
-        # base HS
-        pct = 0.55
-        # weapon
-        pct += self.weapon.headshot_damage_pct
-        # gear
-        for gear in self.gears:
-            pct += gear.headshot_damage_pct
-        # keener's watch
-        pct += self.watch.headshot_damage_pct
-
-        # result
-        return pct
-
-    @property
-    def damage_to_armor_pct(self) -> float:
-        pct = 0
-        # weapon
-        # TODO
-        # gear
-        # TODO
-
-        # result
-        return pct
-
-    @property
-    def damage_to_health_pct(self) -> float:
-        pct = 0
-        # weapon
-        pct += self.weapon.damage_to_health_pct
-        # gear
-        for gear in self.gears:
-            pct += gear.damage_to_health_pct
-
-        # result
-        return pct
-
-    @property
-    def damage_to_target_out_of_cover_pct(self) -> float:
-        pct = 0
-        # weapon
-        pct += self.weapon.damage_to_target_out_of_cover_pct
-        # gear
-        for gear in self.gears:
-            pct += gear.damage_to_target_out_of_cover_pct
-
-        # result
-        return pct
-
     #
     # factors
     #
+
     def x1(self) -> float:
-        return 1+self.weapon_damage_pct+self.weapon_type_dmg_pct
+        return 1+self.stats.weapon_damage_pct+self.stats.weapon_type_dmg_pct
 
     def x6(self, critical: bool, headshot: bool) -> float:
         x = 1
         if critical:
-            x += self.critical_hit_damage_pct
+            x += self.stats.critical_hit_damage_pct
         if headshot:
-            x += self.headshot_damage_pct
+            x += self.stats.headshot_damage_pct
 
         # result
         return x
@@ -159,16 +55,16 @@ class Build:
     def x7(self, armor: bool) -> float:
         x = 1
         if armor:
-            x += self.damage_to_armor_pct
+            x += self.stats.damage_to_armor_pct
         else:
-            x += self.damage_to_health_pct
+            x += self.stats.damage_to_health_pct
 
         # result
         return x
 
     def x8(self) -> float:
         x = 1
-        x += self.damage_to_target_out_of_cover_pct
+        x += self.stats.damage_to_target_out_of_cover_pct
 
         # result
         return x
@@ -208,11 +104,11 @@ class Build:
         # data
         data = {
             'WeaponDamage': f'{self.total_damage(basic=True):,.0f}',
-            'CriticalHitChance': f'{self.critical_hit_chance_pct:.1%}',
-            'CriticalHitDamage': f'{self.critical_hit_damage_pct:.1%}',
-            'HeadshotDamage': f'{self.headshot_damage_pct:.1%}',
-            'ArmorDamage': f'{self.damage_to_armor_pct:.1%}',
-            'HealthDamage': f'{self.damage_to_health_pct:.1%}',
+            'CriticalHitChance': f'{self.stats.critical_hit_chance_pct:.1%}',
+            'CriticalHitDamage': f'{self.stats.critical_hit_damage_pct:.1%}',
+            'HeadshotDamage': f'{self.stats.headshot_damage_pct:.1%}',
+            'ArmorDamage': f'{self.stats.damage_to_armor_pct:.1%}',
+            'HealthDamage': f'{self.stats.damage_to_health_pct:.1%}',
         }
         df = pd.DataFrame(data, index=['%'])
 
