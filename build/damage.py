@@ -6,7 +6,7 @@ from weapon import Weapon
 
 
 @dataclass
-class _Amplifiers:
+class _Multiplier:
     _weapon: Weapon
     _gears: Gears
     _stats: Stats
@@ -37,16 +37,14 @@ class _Amplifiers:
             x += self._stats.critical_hit_damage
         if headshot:
             x += self._stats.headshot_damage
-
         # result
         return x
 
     @property
     def x6_mean(self) -> float:
-        # weight by critical hit chance
         x = 1
+        # weight by critical hit chance
         x += self._stats.critical_hit_chance*self._stats.critical_hit_damage
-
         # result
         return x
 
@@ -56,7 +54,6 @@ class _Amplifiers:
             x += self._stats.damage_to_armor
         else:
             x += self._stats.damage_to_health
-
         # result
         return x
 
@@ -65,7 +62,6 @@ class _Amplifiers:
         # assuming equal chance for armor and health damage
         x = 1
         x += 0.5*self._stats.damage_to_armor + 0.5*self._stats.damage_to_health
-
         # result
         return x
 
@@ -73,7 +69,6 @@ class _Amplifiers:
     def x8(self) -> float:
         x = 1
         x += self._stats.damage_to_target_out_of_cover
-
         # result
         return x
 
@@ -85,15 +80,14 @@ class Damage:
     _stats: Stats
 
     def __post_init__(self) -> None:
-        self._amplifiers = _Amplifiers(self._weapon, self._gears, self._stats)
+        self._x = _Multiplier(self._weapon, self._gears, self._stats)
 
     @property
     def basic(self) -> float:
         # base
         dmg = self._weapon.base_damage
         # basic weapon damage
-        dmg *= self._amplifiers.x1
-
+        dmg *= self._x.x1
         # result
         return dmg
 
@@ -101,10 +95,9 @@ class Damage:
     def average(self) -> float:
         # x6: weight by critical hit chance
         dmg = self.basic
-        dmg *= self._amplifiers.x6_mean
-        dmg *= self._amplifiers.x7_mean
-        dmg *= self._amplifiers.x8
-
+        dmg *= self._x.x6_mean
+        dmg *= self._x.x7_mean
+        dmg *= self._x.x8
         # result
         return dmg
 
@@ -115,10 +108,9 @@ class Damage:
                      armor: bool = False):
         # base
         dmg = self._weapon.base_damage
-        dmg *= self._amplifiers.x1
-        dmg *= self._amplifiers.x6(critical, headshot)
-        dmg *= self._amplifiers.x7(armor)
-        dmg *= self._amplifiers.x8
-
+        dmg *= self._x.x1
+        dmg *= self._x.x6(critical, headshot)
+        dmg *= self._x.x7(armor)
+        dmg *= self._x.x8
         # result
         return dmg
