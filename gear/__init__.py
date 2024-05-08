@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 
 import gear.attrs as attrs
 import gear.mods as mods
+from gear.brandsets import Brandsets
 
 
 @dataclass(kw_only=True)
@@ -9,10 +10,11 @@ class Gear:
     name: str
     core: attrs.CoreAttribute
     attr1: attrs.MinorAttribute
-    attr2: attrs.MinorAttribute
 
     def __post_init__(self) -> None:
-        self.attrs = (self.core, self.attr1, self.attr2)
+        self.attrs = [self.core, self.attr1]
+        if isinstance(self, Brandsets):
+            self.attrs.append(self.attr2)
 
     @property
     def weapon_damage_pct(self) -> float:
@@ -54,8 +56,9 @@ class Gear:
     def headshot_damage_pct(self) -> float:
         pct = 0
         # attribute
-        if isinstance(self.attr1, attrs.HeadshotDamage):
-            pct += self.attr1.pct
+        for attr in self.attrs:
+            if isinstance(attr, attrs.HeadshotDamage):
+                pct += attr.pct
         # mods
         if isinstance(self, (Mask, Backpack, Chest)):
             if isinstance(self.mod, mods.HeadshotDamage):
