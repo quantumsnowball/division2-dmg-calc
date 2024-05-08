@@ -7,7 +7,6 @@ from gear.brandsets import Brandsets
 
 @dataclass(kw_only=True)
 class Gear:
-    name: str
     core: attrs.CoreAttribute
     attr1: attrs.MinorAttribute
 
