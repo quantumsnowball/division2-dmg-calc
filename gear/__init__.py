@@ -83,3 +83,33 @@ class Gear:
 
         # result
         return pct
+
+
+@dataclass
+class Mask(Gear):
+    pass
+
+
+@dataclass
+class Backpack(Gear):
+    pass
+
+
+@dataclass
+class Chest(Gear):
+    pass
+
+
+@dataclass
+class Gloves(Gear):
+    pass
+
+
+@dataclass
+class Holster(Gear):
+    pass
+
+
+@dataclass
+class Kneepads(Gear):
+    pass
