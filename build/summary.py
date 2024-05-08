@@ -26,6 +26,14 @@ class Summary:
         # result
         return df
 
+    @property
+    def x(self) -> pd.DataFrame:
+        data = dict(basic=self._damage.x.basic,
+                    min=self._damage.x.min,
+                    average=self._damage.x.average,
+                    max=self._damage.x.max)
+        return pd.DataFrame(data).T
+
     def damage(self) -> pd.DataFrame:
         # columns
         x6_columns = {'Normal': (False, False), 'Critical': (True, False),
