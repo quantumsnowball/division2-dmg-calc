@@ -15,11 +15,11 @@ class Summary:
         # data
         data = {
             'WeaponDamage': f'{self._damage.basic:,.0f}',
-            'CriticalHitChance': f'{self._stats.critical_hit_chance_pct:.1%}',
-            'CriticalHitDamage': f'{self._stats.critical_hit_damage_pct:.1%}',
-            'HeadshotDamage': f'{self._stats.headshot_damage_pct:.1%}',
-            'ArmorDamage': f'{self._stats.damage_to_armor_pct:.1%}',
-            'HealthDamage': f'{self._stats.damage_to_health_pct:.1%}',
+            'CriticalHitChance': f'{self._stats.critical_hit_chance:.1%}',
+            'CriticalHitDamage': f'{self._stats.critical_hit_damage:.1%}',
+            'HeadshotDamage': f'{self._stats.headshot_damage:.1%}',
+            'ArmorDamage': f'{self._stats.damage_to_armor:.1%}',
+            'HealthDamage': f'{self._stats.damage_to_health:.1%}',
         }
         df = pd.DataFrame(data, index=['%'])
 

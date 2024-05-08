@@ -13,7 +13,7 @@ class Stats:
     _specialization: Specialization
 
     @property
-    def weapon_damage_pct(self) -> float:
+    def weapon_damage(self) -> float:
         pct = 0
         # gear core attributes
         for gear in self._gears:
@@ -27,7 +27,7 @@ class Stats:
         return pct
 
     @property
-    def weapon_type_dmg_pct(self) -> float:
+    def weapon_type_damage(self) -> float:
         pct = 0
         # weapon attributes
         pct += self._weapon.weapon_type_damage_pct
@@ -38,7 +38,7 @@ class Stats:
         return pct
 
     @property
-    def critical_hit_chance_pct(self) -> float:
+    def critical_hit_chance(self) -> float:
         # base CHC
         pct = 0.0
         # weapon
@@ -53,7 +53,7 @@ class Stats:
         return pct
 
     @property
-    def critical_hit_damage_pct(self) -> float:
+    def critical_hit_damage(self) -> float:
         # base CHD
         pct = 0.25
         # weapon
@@ -68,7 +68,7 @@ class Stats:
         return pct
 
     @property
-    def headshot_damage_pct(self) -> float:
+    def headshot_damage(self) -> float:
         # base HS
         pct = 0.55
         # weapon
@@ -83,7 +83,7 @@ class Stats:
         return pct
 
     @property
-    def damage_to_armor_pct(self) -> float:
+    def damage_to_armor(self) -> float:
         pct = 0
         # weapon
         # TODO
@@ -94,7 +94,7 @@ class Stats:
         return pct
 
     @property
-    def damage_to_health_pct(self) -> float:
+    def damage_to_health(self) -> float:
         pct = 0
         # weapon
         pct += self._weapon.damage_to_health_pct
@@ -106,7 +106,7 @@ class Stats:
         return pct
 
     @property
-    def damage_to_target_out_of_cover_pct(self) -> float:
+    def damage_to_target_out_of_cover(self) -> float:
         pct = 0
         # weapon
         pct += self._weapon.damage_to_target_out_of_cover_pct

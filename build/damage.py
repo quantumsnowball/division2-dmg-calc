@@ -28,14 +28,14 @@ class _Amplifiers:
     '''
 
     def x1(self) -> float:
-        return 1+self._stats.weapon_damage_pct+self._stats.weapon_type_dmg_pct
+        return 1+self._stats.weapon_damage+self._stats.weapon_type_damage
 
     def x6(self, critical: bool, headshot: bool) -> float:
         x = 1
         if critical:
-            x += self._stats.critical_hit_damage_pct
+            x += self._stats.critical_hit_damage
         if headshot:
-            x += self._stats.headshot_damage_pct
+            x += self._stats.headshot_damage
 
         # result
         return x
@@ -43,16 +43,16 @@ class _Amplifiers:
     def x7(self, armor: bool) -> float:
         x = 1
         if armor:
-            x += self._stats.damage_to_armor_pct
+            x += self._stats.damage_to_armor
         else:
-            x += self._stats.damage_to_health_pct
+            x += self._stats.damage_to_health
 
         # result
         return x
 
     def x8(self) -> float:
         x = 1
-        x += self._stats.damage_to_target_out_of_cover_pct
+        x += self._stats.damage_to_target_out_of_cover
 
         # result
         return x
