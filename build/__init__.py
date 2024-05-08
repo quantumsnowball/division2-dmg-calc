@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 
 from build.damage import Damage
 from build.stats import Stats
+from build.summary import Summary
 import gear
 from build.specialization import Specialization
 from build.watch import Watch
@@ -30,6 +31,7 @@ class Build:
         )
         self.stats = Stats(self.weapon, self.gears, self.watch, self.specialization)
         self.damage = Damage(self.weapon, self.gears, self.stats)
+        self.summary = Summary(self.stats, self.damage)
         # enable brandset bonus
         utils.enable_brandset_bonus(self.gears)
         # enable gearset bonus
