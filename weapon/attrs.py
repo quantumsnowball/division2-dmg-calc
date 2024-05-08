@@ -10,7 +10,7 @@ class CoreAttribute:
 
 @dataclass
 class AssultRifleDamage(CoreAttribute):
-    weapon_type_damage_pct: float = 0.15
+    pct: float = 0.15
 
 
 @dataclass

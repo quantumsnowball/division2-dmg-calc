@@ -38,7 +38,7 @@ class Weapon:
         # cores
         for core in self.cores:
             if self.type == 'AR' and isinstance(core, attrs.AssultRifleDamage):
-                pct += core.weapon_type_damage_pct
+                pct += core.pct
 
         # result
         return pct
