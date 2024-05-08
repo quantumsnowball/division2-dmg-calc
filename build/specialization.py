@@ -12,7 +12,7 @@ class Specialization:
             'Rifle': 0, 'MMR': 0, 'Shotgun': 0,
         })
 
-    def weapon_type_damage_pct(self, type: WeaponType) -> float:
+    def weapon_type_damage(self, type: WeaponType) -> float:
         return self.weapon_type_damage_scores.get(type, 0) * 0.05
 
 

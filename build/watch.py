@@ -9,17 +9,17 @@ class Watch:
     headshot_damage_score: int = 50
 
     @property
-    def weapon_damage_pct(self) -> float:
+    def weapon_damage(self) -> float:
         return self.weapon_damage_score * 0.002
 
     @property
-    def critical_hit_chance_pct(self) -> float:
+    def critical_hit_chance(self) -> float:
         return self.critical_hit_chance_score * 0.002
 
     @property
-    def critical_hit_damage_pct(self) -> float:
+    def critical_hit_damage(self) -> float:
         return self.critical_hit_damage_score * 0.004
 
     @property
-    def headshot_damage_pct(self) -> float:
+    def headshot_damage(self) -> float:
         return self.headshot_damage_score * 0.004

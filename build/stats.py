@@ -19,7 +19,7 @@ class Stats:
         for gear in self._gears:
             pct += gear.weapon_damage
         # keener's watch
-        pct += self._watch.weapon_damage_pct
+        pct += self._watch.weapon_damage
         # expertise level
         pct += self._weapon.weapon_damage
 
@@ -32,7 +32,7 @@ class Stats:
         # weapon attributes
         pct += self._weapon.weapon_type_damage
         # specialization bonus
-        pct += self._specialization.weapon_type_damage_pct(self._weapon.type)
+        pct += self._specialization.weapon_type_damage(self._weapon.type)
 
         # result
         return pct
@@ -47,7 +47,7 @@ class Stats:
         for gear in self._gears:
             pct += gear.critical_hit_chance
         # keener's watch
-        pct += self._watch.critical_hit_chance_pct
+        pct += self._watch.critical_hit_chance
 
         # result
         return pct
@@ -62,7 +62,7 @@ class Stats:
         for gear in self._gears:
             pct += gear.critical_hit_damage
         # keener's watch
-        pct += self._watch.critical_hit_damage_pct
+        pct += self._watch.critical_hit_damage
 
         # result
         return pct
@@ -77,7 +77,7 @@ class Stats:
         for gear in self._gears:
             pct += gear.headshot_damage
         # keener's watch
-        pct += self._watch.headshot_damage_pct
+        pct += self._watch.headshot_damage
 
         # result
         return pct
