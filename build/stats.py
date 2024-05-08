@@ -17,7 +17,7 @@ class Stats:
         pct = 0
         # gear core attributes
         for gear in self._gears:
-            pct += gear.weapon_damage_pct
+            pct += gear.weapon_damage
         # keener's watch
         pct += self._watch.weapon_damage_pct
         # expertise level
@@ -45,7 +45,7 @@ class Stats:
         pct += self._weapon.critical_hit_chance
         # gear
         for gear in self._gears:
-            pct += gear.critical_hit_chance_pct
+            pct += gear.critical_hit_chance
         # keener's watch
         pct += self._watch.critical_hit_chance_pct
 
@@ -60,7 +60,7 @@ class Stats:
         pct += self._weapon.critical_hit_damage
         # gear
         for gear in self._gears:
-            pct += gear.critical_hit_damage_pct
+            pct += gear.critical_hit_damage
         # keener's watch
         pct += self._watch.critical_hit_damage_pct
 
@@ -75,7 +75,7 @@ class Stats:
         pct += self._weapon.headshot_damage
         # gear
         for gear in self._gears:
-            pct += gear.headshot_damage_pct
+            pct += gear.headshot_damage
         # keener's watch
         pct += self._watch.headshot_damage_pct
 
@@ -100,7 +100,7 @@ class Stats:
         pct += self._weapon.damage_to_health
         # gear
         for gear in self._gears:
-            pct += gear.damage_to_health_pct
+            pct += gear.damage_to_health
 
         # result
         return pct
@@ -112,7 +112,7 @@ class Stats:
         pct += self._weapon.damage_to_target_out_of_cover
         # gear
         for gear in self._gears:
-            pct += gear.damage_to_target_out_of_cover_pct
+            pct += gear.damage_to_target_out_of_cover
 
         # result
         return pct

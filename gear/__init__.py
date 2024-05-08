@@ -16,13 +16,13 @@ class Gear:
             self.attrs.append(self.attr2)
 
     @property
-    def weapon_damage_pct(self) -> float:
+    def weapon_damage(self) -> float:
         if isinstance(self.core, attrs.RedCore):
             return self.core.weapon_damage_pct
         return 0.0
 
     @property
-    def critical_hit_chance_pct(self) -> float:
+    def critical_hit_chance(self) -> float:
         pct = 0
         # attribute
         for attr in self.attrs:
@@ -37,7 +37,7 @@ class Gear:
         return pct
 
     @property
-    def critical_hit_damage_pct(self) -> float:
+    def critical_hit_damage(self) -> float:
         pct = 0
         # attribute
         for attr in self.attrs:
@@ -52,7 +52,7 @@ class Gear:
         return pct
 
     @property
-    def headshot_damage_pct(self) -> float:
+    def headshot_damage(self) -> float:
         pct = 0
         # attribute
         for attr in self.attrs:
@@ -67,7 +67,7 @@ class Gear:
         return pct
 
     @property
-    def damage_to_health_pct(self) -> float:
+    def damage_to_health(self) -> float:
         pct = 0
         # attribute
         for attr in self.attrs:
@@ -78,7 +78,7 @@ class Gear:
         return pct
 
     @property
-    def damage_to_target_out_of_cover_pct(self) -> float:
+    def damage_to_target_out_of_cover(self) -> float:
         pct = 0
         # attrs
         for attr in self.attrs:
