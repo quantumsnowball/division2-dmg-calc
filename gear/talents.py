@@ -22,7 +22,8 @@ class ChestTalent(Talent):
 
 @dataclass
 class Obliterate(ChestTalent):
-    pass
+    unit: float = 0.01
+    max_stack: int = 25
 
 #
 # Empty

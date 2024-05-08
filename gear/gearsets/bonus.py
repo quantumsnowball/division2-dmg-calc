@@ -25,7 +25,9 @@ class BonusTalent(Bonus, Talent):
 
 @dataclass
 class StrikersGamble(BonusTalent):
-    pass
+    unit: float = 0.65
+    max_stack: int = 100
+
 
 #
 # Empty
