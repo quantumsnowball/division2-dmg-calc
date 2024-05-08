@@ -1,20 +1,16 @@
 from dataclasses import dataclass
 
-import math
 from build.stats import Stats
 from gear import Gears
 from weapon import Weapon
 
 
 @dataclass
-class _X:
+class X:
     _weapon: Weapon
     _gears: Gears
     _stats: Stats
 
-    #
-    # factors
-    #
     '''
     Total Damage =
     Base weapon Damage
@@ -117,90 +113,3 @@ class _X:
     @property
     def max(self) -> dict[str, float]:
         return {'x1': self.x1, 'x6': self.x6_max, 'x7': self.x7_max, 'x8': self.x8}
-
-
-@dataclass
-class _Dydx:
-    _x: _X
-
-    def dydx(self, x: dict[str, float]) -> dict[str, float]:
-        prod_x = math.prod(x.values())
-        dydx = {k: prod_x/v for k, v in x.items()}
-        return dydx
-
-    @property
-    def basic(self) -> dict[str, float]:
-        return self.dydx(self._x.basic)
-
-    @property
-    def min(self) -> dict[str, float]:
-        return self.dydx(self._x.min)
-
-    @property
-    def average(self) -> dict[str, float]:
-        return self.dydx(self._x.average)
-
-    @property
-    def max(self) -> dict[str, float]:
-        return self.dydx(self._x.max)
-
-
-@dataclass
-class Damage:
-    _weapon: Weapon
-    _gears: Gears
-    _stats: Stats
-
-    def __post_init__(self) -> None:
-        self.x = _X(self._weapon, self._gears, self._stats)
-        self.dydx = _Dydx(self.x)
-
-    @property
-    def basic(self) -> float:
-        # base
-        dmg = self._weapon.base_damage
-        # basic weapon damage
-        dmg *= self.x.x1
-        # result
-        return dmg
-
-    @property
-    def min(self) -> float:
-        dmg = self.basic
-        dmg *= self.x.x6_min
-        dmg *= self.x.x7_min
-        dmg *= self.x.x8
-        # result
-        return dmg
-
-    @property
-    def average(self) -> float:
-        dmg = self.basic
-        dmg *= self.x.x6_mean
-        dmg *= self.x.x7_mean
-        dmg *= self.x.x8
-        # result
-        return dmg
-
-    @property
-    def max(self) -> float:
-        dmg = self.basic
-        dmg *= self.x.x6_max
-        dmg *= self.x.x7_max
-        dmg *= self.x.x8
-        # result
-        return dmg
-
-    def total_damage(self,
-                     *,
-                     critical: bool = False,
-                     headshot: bool = False,
-                     armor: bool = False):
-        # base
-        dmg = self._weapon.base_damage
-        dmg *= self.x.x1
-        dmg *= self.x.x6(critical, headshot)
-        dmg *= self.x.x7(armor)
-        dmg *= self.x.x8
-        # result
-        return dmg
