@@ -8,25 +8,25 @@ import pandas as pd
 
 @dataclass
 class Summary:
-    stats: Stats
-    damage: Damage
+    _stats: Stats
+    _damage: Damage
 
-    def dmg_stats(self) -> pd.DataFrame:
+    def stats(self) -> pd.DataFrame:
         # data
         data = {
-            'WeaponDamage': f'{self.damage.total_damage(basic=True):,.0f}',
-            'CriticalHitChance': f'{self.stats.critical_hit_chance_pct:.1%}',
-            'CriticalHitDamage': f'{self.stats.critical_hit_damage_pct:.1%}',
-            'HeadshotDamage': f'{self.stats.headshot_damage_pct:.1%}',
-            'ArmorDamage': f'{self.stats.damage_to_armor_pct:.1%}',
-            'HealthDamage': f'{self.stats.damage_to_health_pct:.1%}',
+            'WeaponDamage': f'{self._damage.total_damage(basic=True):,.0f}',
+            'CriticalHitChance': f'{self._stats.critical_hit_chance_pct:.1%}',
+            'CriticalHitDamage': f'{self._stats.critical_hit_damage_pct:.1%}',
+            'HeadshotDamage': f'{self._stats.headshot_damage_pct:.1%}',
+            'ArmorDamage': f'{self._stats.damage_to_armor_pct:.1%}',
+            'HealthDamage': f'{self._stats.damage_to_health_pct:.1%}',
         }
         df = pd.DataFrame(data, index=['%'])
 
         # result
         return df
 
-    def dmg_matrix(self) -> pd.DataFrame:
+    def damage(self) -> pd.DataFrame:
         # columns
         x6_columns = {'Normal': (False, False), 'Critical': (True, False),
                       'Headshot': (False, True), 'CritHead': (True, True)}
@@ -37,7 +37,7 @@ class Summary:
         talent_index = {'Base': False}
         index = pd.MultiIndex.from_product([scenario_index.keys(), talent_index.keys()])
         # data
-        data = [[self.damage.total_damage(critical=crit, headshot=hs, armor=arm)
+        data = [[self._damage.total_damage(critical=crit, headshot=hs, armor=arm)
                  for arm in x7_columns.values()
                  for crit, hs in x6_columns.values()]
                 for _ in scenario_index.values()

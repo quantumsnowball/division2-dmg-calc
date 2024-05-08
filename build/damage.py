@@ -7,22 +7,22 @@ from weapon import Weapon
 
 @dataclass
 class Damage:
-    weapon: Weapon
-    gears: Gears
-    stats: Stats
+    _weapon: Weapon
+    _gears: Gears
+    _stats: Stats
 
     #
     # factors
     #
     def x1(self) -> float:
-        return 1+self.stats.weapon_damage_pct+self.stats.weapon_type_dmg_pct
+        return 1+self._stats.weapon_damage_pct+self._stats.weapon_type_dmg_pct
 
     def x6(self, critical: bool, headshot: bool) -> float:
         x = 1
         if critical:
-            x += self.stats.critical_hit_damage_pct
+            x += self._stats.critical_hit_damage_pct
         if headshot:
-            x += self.stats.headshot_damage_pct
+            x += self._stats.headshot_damage_pct
 
         # result
         return x
@@ -30,16 +30,16 @@ class Damage:
     def x7(self, armor: bool) -> float:
         x = 1
         if armor:
-            x += self.stats.damage_to_armor_pct
+            x += self._stats.damage_to_armor_pct
         else:
-            x += self.stats.damage_to_health_pct
+            x += self._stats.damage_to_health_pct
 
         # result
         return x
 
     def x8(self) -> float:
         x = 1
-        x += self.stats.damage_to_target_out_of_cover_pct
+        x += self._stats.damage_to_target_out_of_cover_pct
 
         # result
         return x
@@ -63,7 +63,7 @@ class Damage:
         x8|    *(1+Damage out of Cover)
         '''
         # base
-        dmg = self.weapon.base_damage
+        dmg = self._weapon.base_damage
         dmg *= self.x1()
         if basic:
             # result - basic weapon damage

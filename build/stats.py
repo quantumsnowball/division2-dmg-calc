@@ -7,21 +7,21 @@ from weapon import Weapon
 
 @dataclass
 class Stats:
-    weapon: Weapon
-    gears: Gears
-    watch: Watch
-    specialization: Specialization
+    _weapon: Weapon
+    _gears: Gears
+    _watch: Watch
+    _specialization: Specialization
 
     @property
     def weapon_damage_pct(self) -> float:
         pct = 0
         # gear core attributes
-        for gear in self.gears:
+        for gear in self._gears:
             pct += gear.weapon_damage_pct
         # keener's watch
-        pct += self.watch.weapon_damage_pct
+        pct += self._watch.weapon_damage_pct
         # expertise level
-        pct += self.weapon.weapon_damage_pct
+        pct += self._weapon.weapon_damage_pct
 
         # result
         return pct
@@ -30,9 +30,9 @@ class Stats:
     def weapon_type_dmg_pct(self) -> float:
         pct = 0
         # weapon attributes
-        pct += self.weapon.weapon_type_damage_pct
+        pct += self._weapon.weapon_type_damage_pct
         # specialization bonus
-        pct += self.specialization.weapon_type_damage_pct(self.weapon.type)
+        pct += self._specialization.weapon_type_damage_pct(self._weapon.type)
 
         # result
         return pct
@@ -42,12 +42,12 @@ class Stats:
         # base CHC
         pct = 0.0
         # weapon
-        pct += self.weapon.critical_hit_chance_pct
+        pct += self._weapon.critical_hit_chance_pct
         # gear
-        for gear in self.gears:
+        for gear in self._gears:
             pct += gear.critical_hit_chance_pct
         # keener's watch
-        pct += self.watch.critical_hit_chance_pct
+        pct += self._watch.critical_hit_chance_pct
 
         # result
         return pct
@@ -57,12 +57,12 @@ class Stats:
         # base CHD
         pct = 0.25
         # weapon
-        pct += self.weapon.critical_hit_damage_pct
+        pct += self._weapon.critical_hit_damage_pct
         # gear
-        for gear in self.gears:
+        for gear in self._gears:
             pct += gear.critical_hit_damage_pct
         # keener's watch
-        pct += self.watch.critical_hit_damage_pct
+        pct += self._watch.critical_hit_damage_pct
 
         # result
         return pct
@@ -72,12 +72,12 @@ class Stats:
         # base HS
         pct = 0.55
         # weapon
-        pct += self.weapon.headshot_damage_pct
+        pct += self._weapon.headshot_damage_pct
         # gear
-        for gear in self.gears:
+        for gear in self._gears:
             pct += gear.headshot_damage_pct
         # keener's watch
-        pct += self.watch.headshot_damage_pct
+        pct += self._watch.headshot_damage_pct
 
         # result
         return pct
@@ -97,9 +97,9 @@ class Stats:
     def damage_to_health_pct(self) -> float:
         pct = 0
         # weapon
-        pct += self.weapon.damage_to_health_pct
+        pct += self._weapon.damage_to_health_pct
         # gear
-        for gear in self.gears:
+        for gear in self._gears:
             pct += gear.damage_to_health_pct
 
         # result
@@ -109,9 +109,9 @@ class Stats:
     def damage_to_target_out_of_cover_pct(self) -> float:
         pct = 0
         # weapon
-        pct += self.weapon.damage_to_target_out_of_cover_pct
+        pct += self._weapon.damage_to_target_out_of_cover_pct
         # gear
-        for gear in self.gears:
+        for gear in self._gears:
             pct += gear.damage_to_target_out_of_cover_pct
 
         # result

@@ -3,9 +3,10 @@ from dataclasses import dataclass, field
 from build.damage import Damage
 from build.stats import Stats
 from build.summary import Summary
-import gear
 from build.specialization import Specialization
 from build.watch import Watch
+from gear import Mask, Backpack, Chest, Gloves, Holster, Kneepads
+from gear import Gears
 import gear.utils as utils
 from weapon import Weapon
 
@@ -14,17 +15,17 @@ from weapon import Weapon
 class Build:
     name: str
     weapon: Weapon
-    mask: gear.Mask
-    backpack: gear.Backpack
-    chest: gear.Chest
-    gloves: gear.Gloves
-    holster: gear.Holster
-    kneepads: gear.Kneepads
+    mask: Mask
+    backpack: Backpack
+    chest: Chest
+    gloves: Gloves
+    holster: Holster
+    kneepads: Kneepads
     specialization: Specialization
     watch: Watch = field(default_factory=Watch)
 
     def __post_init__(self) -> None:
-        self.gears = (
+        self.gears: Gears = (
             self.mask, self.backpack,
             self.chest, self.gloves,
             self.holster, self.kneepads

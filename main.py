@@ -30,8 +30,8 @@ def main():
     )
 
     pprint(build)
-    print(tabulate(build.summary.dmg_stats(), headers='keys', tablefmt='fancy_grid'))
-    print(build.summary.dmg_matrix().astype(int))
+    print(tabulate(build.summary.stats(), headers='keys', tablefmt='fancy_grid'))
+    print(build.summary.damage().astype(int))
 
 
 if __name__ == '__main__':
