@@ -41,8 +41,12 @@ class _Multiplier:
         return x
 
     @property
+    def x6_min(self) -> float:
+        return 1.0
+
+    @property
     def x6_mean(self) -> float:
-        x = 1
+        x = 1.0
         # weight by critical hit chance
         x += self._stats.critical_hit_chance*self._stats.critical_hit_damage
         # result
@@ -50,7 +54,7 @@ class _Multiplier:
 
     @property
     def x6_max(self) -> float:
-        x = 1
+        x = 1.0
         # assuming critical headshot
         x += self._stats.critical_hit_damage
         x += self._stats.headshot_damage
@@ -58,7 +62,7 @@ class _Multiplier:
         return x
 
     def x7(self, armor: bool) -> float:
-        x = 1
+        x = 1.0
         if armor:
             x += self._stats.damage_to_armor
         else:
@@ -67,16 +71,24 @@ class _Multiplier:
         return x
 
     @property
+    def x7_min(self) -> float:
+        x = 1.0
+        # assume whoever being the lowest
+        x += min(self._stats.damage_to_armor, self._stats.damage_to_health)
+        # result
+        return x
+
+    @property
     def x7_mean(self) -> float:
         # assuming equal chance for armor and health damage
-        x = 1
+        x = 1.0
         x += 0.5*self._stats.damage_to_armor + 0.5*self._stats.damage_to_health
         # result
         return x
 
     @property
     def x7_max(self) -> float:
-        x = 1
+        x = 1.0
         # assume whoever being the highest
         x += max(self._stats.damage_to_armor, self._stats.damage_to_health)
         # result
@@ -84,7 +96,7 @@ class _Multiplier:
 
     @property
     def x8(self) -> float:
-        x = 1
+        x = 1.0
         x += self._stats.damage_to_target_out_of_cover
         # result
         return x
@@ -92,6 +104,10 @@ class _Multiplier:
     @property
     def basic(self) -> dict[str, float]:
         return {'x1': self.x1, 'x6': 1.0, 'x7': 1.0, 'x8': self.x8}
+
+    @property
+    def min(self) -> dict[str, float]:
+        return {'x1': self.x1, 'x6': self.x6_min, 'x7': self.x7_min, 'x8': self.x8}
 
     @property
     def average(self) -> dict[str, float]:
@@ -117,6 +133,15 @@ class Damage:
         dmg = self._weapon.base_damage
         # basic weapon damage
         dmg *= self.x.x1
+        # result
+        return dmg
+
+    @property
+    def min(self) -> float:
+        dmg = self.basic
+        dmg *= self.x.x6_min
+        dmg *= self.x.x7_min
+        dmg *= self.x.x8
         # result
         return dmg
 

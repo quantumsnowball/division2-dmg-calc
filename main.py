@@ -34,6 +34,7 @@ def main():
     print(build.summary.damage().astype(int))
     print(f'{build.damage.basic=:.2f} {build.damage.average=:.2f} {build.damage.max=:.2f}')
     pprint(build.damage.x.basic)
+    pprint(build.damage.x.min)
     pprint(build.damage.x.average)
     pprint(build.damage.x.max)
 
