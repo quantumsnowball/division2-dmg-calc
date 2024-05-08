@@ -12,7 +12,8 @@ class StrikersBattlegear(Gearsets):
     gearset: str = "Striker's Battlegear"
     bonus_pool: BonusPool = field(default=(bonus.NoBonus(),
                                            bonus.WeaponHandling(0.15),
-                                           bonus.RateOfFire(0.15)), repr=False)
+                                           bonus.RateOfFire(0.15),
+                                           bonus.StrikersGamble()), repr=False)
 
 
 @dataclass(kw_only=True)
