@@ -2,12 +2,16 @@ from dataclasses import dataclass, field
 
 import gear
 import gear.attrs as attrs
-from gear.gearsets import Gearsets
+import gear.gearsets.bonus as bonus
+from gear.gearsets import BonusPool, Gearsets
 
 
 @dataclass(kw_only=True)
 class StrikersBattlegear(Gearsets):
     gearset: str = "Striker's Battlegear"
+    bonus_pool: BonusPool = field(default=(bonus.NoBonus(),
+                                           bonus.WeaponHandling(0.15),
+                                           bonus.RateOfFire(0.15)), repr=False)
 
 
 @dataclass(kw_only=True)
