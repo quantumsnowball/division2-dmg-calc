@@ -3,6 +3,7 @@ from typing import Literal
 
 import weapon.attrs as attrs
 import weapon.mods as mods
+import weapon.talents as talents
 
 WeaponType = Literal['AR', 'SMG', 'LMG', 'Rifle', 'MMR', 'Shotgun']
 
@@ -22,6 +23,8 @@ class Weapon:
     magazine: mods.Mod
     muzzle: mods.Mod
     underbarrel: mods.Mod
+    # talent
+    talent: talents.Talent
 
     def __post_init__(self) -> None:
         self.cores = (self.core1, self.core2)
