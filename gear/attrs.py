@@ -11,7 +11,7 @@ class CoreAttribute:
 
 @dataclass
 class RedCore(CoreAttribute):
-    weapon_damage_pct: float = 0.15
+    damage: float = 0.15
 
 
 @dataclass

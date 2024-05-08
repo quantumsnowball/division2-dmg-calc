@@ -18,7 +18,7 @@ class Gear:
     @property
     def weapon_damage(self) -> float:
         if isinstance(self.core, attrs.RedCore):
-            return self.core.weapon_damage_pct
+            return self.core.damage
         return 0.0
 
     @property
