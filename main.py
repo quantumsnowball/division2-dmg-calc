@@ -5,8 +5,8 @@ from tabulate import tabulate
 import gear.attrs as gearattrs
 import gear.brandsets.Lengmo as lengmo
 import gear.brandsets.OverlordArmaments as overlord
+import gear.gearsets.StrikersBattlegear as striker
 import gear.mods as gearmods
-import gear.Striker as striker
 from build import Build
 from build.specialization import Gunner
 from weapon.StElmosEngine import StElmosEngine
