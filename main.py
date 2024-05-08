@@ -1,29 +1,42 @@
-from build import Build
+from pprint import pprint
 
-legendary1 = Build(
-    name='Legendary1',
-    base_damage=44191,
-    n_red_core=5,
-    watch_score=50,
-    weapon_damage_bonus_pct=0.15,
-    specialization_bonus_pct=0.15,
-    expertise_level=17,
-    critical_hit_chance=0.52,
-    critical_hit_damage=1.37,
-    headshot_damage=0.95,
-    damage_to_armor=0,
-    damage_to_health=0.21,
-    damage_to_target_out_of_cover=0,
-)
+from tabulate import tabulate
+
+import gear.attrs as gearattrs
+import gear.brandsets.Lengmo as lengmo
+import gear.brandsets.OverlordArmaments as overlord
+import gear.gearsets.StrikersBattlegear as striker
+import gear.mods as gearmods
+from build import Build
+from build.specialization import Gunner
+from weapon.StElmosEngine import StElmosEngine
 
 
 def main():
-    print(f'{
-        legendary1.total_damage(critical=True,
-                                headshot=True,
-                                dtoHealth=True)=:,.2f
-    }')
-    print(legendary1.summary())
+    build = Build(
+        name='Legendary1',
+        # specialization
+        specialization=Gunner(),
+        # weapons
+        weapon=StElmosEngine(expertise_level=15),
+        # gears
+        mask=striker.Mask(attr1=gearattrs.CHC(0.06),
+                          mod=gearmods.CHD(0.12)),
+        backpack=striker.Backpack(mod=gearmods.CHD(0.12)),
+        chest=lengmo.Chest(mod=gearmods.CHD(0.119)),
+        gloves=striker.Gloves(),
+        holster=striker.Holster(),
+        kneepads=overlord.FoxsPrayer(attr2=gearattrs.CHC(0.06)),
+    )
+
+    pprint(build)
+    print(tabulate(build.summary.stats(), headers='keys', tablefmt='fancy_grid'))
+    print(build.summary.damage().astype(int))
+    print(f'{build.damage.basic=:.2f} {build.damage.average=:.2f} {build.damage.max=:.2f}')
+    print('\nx:')
+    print(build.summary.x.round(2))
+    print('\ndydx:')
+    print(build.summary.dydx.round(2))
 
 
 if __name__ == '__main__':
