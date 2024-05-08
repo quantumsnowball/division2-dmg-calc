@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
 
+import gear
 from build.specialization import Specialization
 from build.watch import Watch
-from gear import Gear
 from weapon import Weapon
 
 import pandas as pd
@@ -12,12 +12,12 @@ import pandas as pd
 class Build:
     name: str
     weapon: Weapon
-    mask: Gear
-    backpack: Gear
-    chest: Gear
-    gloves: Gear
-    holster: Gear
-    kneepads: Gear
+    mask: gear.Mask
+    backpack: gear.Backpack
+    chest: gear.Chest
+    gloves: gear.Gloves
+    holster: gear.Holster
+    kneepads: gear.Kneepads
     specialization: Specialization
     watch: Watch = field(default_factory=Watch)
 
