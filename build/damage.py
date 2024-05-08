@@ -1,12 +1,13 @@
 from dataclasses import dataclass
 
+import math
 from build.stats import Stats
 from gear import Gears
 from weapon import Weapon
 
 
 @dataclass
-class _Multiplier:
+class _X:
     _weapon: Weapon
     _gears: Gears
     _stats: Stats
@@ -119,13 +120,40 @@ class _Multiplier:
 
 
 @dataclass
+class _Dydx:
+    _x: _X
+
+    def dydx(self, x: dict[str, float]) -> dict[str, float]:
+        prod_x = math.prod(x.values())
+        dydx = {k: prod_x/v for k, v in x.items()}
+        return dydx
+
+    @property
+    def basic(self) -> dict[str, float]:
+        return self.dydx(self._x.basic)
+
+    @property
+    def min(self) -> dict[str, float]:
+        return self.dydx(self._x.min)
+
+    @property
+    def average(self) -> dict[str, float]:
+        return self.dydx(self._x.average)
+
+    @property
+    def max(self) -> dict[str, float]:
+        return self.dydx(self._x.max)
+
+
+@dataclass
 class Damage:
     _weapon: Weapon
     _gears: Gears
     _stats: Stats
 
     def __post_init__(self) -> None:
-        self.x = _Multiplier(self._weapon, self._gears, self._stats)
+        self.x = _X(self._weapon, self._gears, self._stats)
+        self.dydx = _Dydx(self.x)
 
     @property
     def basic(self) -> float:
