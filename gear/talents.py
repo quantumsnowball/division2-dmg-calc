@@ -1,4 +1,7 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
+
+from gear.gearsets import Gearsets
+from gear.gearsets.bonus import StrikersGamble
 
 
 class Talent:
@@ -13,6 +16,11 @@ class BackpackTalent(Talent):
 @dataclass
 class RiskManagement(BackpackTalent):
     unit: float = 0.01
+
+    def update(self, target: Gearsets) -> None:
+        if isinstance(target.gearset_bonus, StrikersGamble):
+            target.gearset_bonus = replace(target.gearset_bonus,
+                                           unit=self.unit)
 
 
 @dataclass

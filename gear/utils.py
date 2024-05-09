@@ -60,5 +60,4 @@ def enable_gearset_bonus(gears: Gears) -> None:
         for gear in gears:
             if (isinstance(gear, StrikersBattlegear) and
                     isinstance(gear.gearset_bonus, StrikersGamble)):
-                gear.gearset_bonus = replace(gear.gearset_bonus,
-                                             unit=gears.backpack.talent.unit)
+                gears.backpack.talent.update(gear)
