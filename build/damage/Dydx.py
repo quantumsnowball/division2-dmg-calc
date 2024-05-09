@@ -15,6 +15,9 @@ class Dydx:
         dydx: X_Derivatives = {k: prod_x/v for k, v in x.items()}
         return dydx
 
+    #
+    # use cases
+    #
     @property
     def basic(self) -> X_Derivatives:
         return self.dydx(self._x.basic)

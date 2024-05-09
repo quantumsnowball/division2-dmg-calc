@@ -3,6 +3,7 @@ from typing import Literal
 
 import weapon.attrs as attrs
 import weapon.mods as mods
+import weapon.talents as talents
 
 WeaponType = Literal['AR', 'SMG', 'LMG', 'Rifle', 'MMR', 'Shotgun']
 
@@ -22,6 +23,8 @@ class Weapon:
     magazine: mods.Mod
     muzzle: mods.Mod
     underbarrel: mods.Mod
+    # talent
+    talent: talents.Talent
 
     def __post_init__(self) -> None:
         self.cores = (self.core1, self.core2)
@@ -39,7 +42,6 @@ class Weapon:
         for core in self.cores:
             if self.type == 'AR' and isinstance(core, attrs.AssultRifleDamage):
                 pct += core.pct
-
         # result
         return pct
 
@@ -50,7 +52,6 @@ class Weapon:
         for mod in self.mods:
             if isinstance(mod, mods.CriticalHitChance):
                 pct += mod.pct
-
         # result
         return pct
 
@@ -61,7 +62,6 @@ class Weapon:
         for mod in self.mods:
             if isinstance(mod, mods.CriticalHitDamage):
                 pct += mod.pct
-
         # result
         return pct
 
@@ -72,7 +72,6 @@ class Weapon:
         for mod in self.mods:
             if isinstance(mod, mods.HeadshotDamage):
                 pct += mod.pct
-
         # result
         return pct
 
@@ -83,7 +82,6 @@ class Weapon:
         for attr in self.attrs:
             if isinstance(attr, attrs.HealthDamage):
                 pct += attr.pct
-
         # result
         return pct
 
@@ -94,6 +92,5 @@ class Weapon:
         for attr in self.attrs:
             if isinstance(attr, attrs.DamageToTargetOutOfCover):
                 pct += attr.pct
-
         # result
         return pct

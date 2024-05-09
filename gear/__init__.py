@@ -1,9 +1,11 @@
-from collections import namedtuple
+from __future__ import annotations
+
 from dataclasses import dataclass, field
 from typing import NamedTuple
 
 import gear.attrs as attrs
 import gear.mods as mods
+import gear.talents as talents
 from gear.brandsets import Brandsets
 
 
@@ -11,6 +13,8 @@ from gear.brandsets import Brandsets
 class Gear:
     core: attrs.CoreAttribute
     attr1: attrs.MinorAttribute
+    # refer to other gears
+    _gears: Gears = field(init=False, repr=False)
 
     def __post_init__(self) -> None:
         self.attrs = [self.core, self.attr1]
@@ -26,6 +30,8 @@ class Gear:
     @property
     def critical_hit_chance(self) -> float:
         pct = 0
+        # bonus
+        # TODO
         # attribute
         for attr in self.attrs:
             if isinstance(attr, attrs.CriticalHitChance):
@@ -34,13 +40,14 @@ class Gear:
         if isinstance(self, (Mask, Backpack, Chest)):
             if isinstance(self.mod, mods.CriticalHitChance):
                 pct += self.mod.pct
-
         # result
         return pct
 
     @property
     def critical_hit_damage(self) -> float:
         pct = 0
+        # bonus
+        # TODO
         # attribute
         for attr in self.attrs:
             if isinstance(attr, attrs.CriticalHitDamage):
@@ -49,13 +56,14 @@ class Gear:
         if isinstance(self, (Mask, Backpack, Chest)):
             if isinstance(self.mod, mods.CriticalHitDamage):
                 pct += self.mod.pct
-
         # result
         return pct
 
     @property
     def headshot_damage(self) -> float:
         pct = 0
+        # bonus
+        # TODO
         # attribute
         for attr in self.attrs:
             if isinstance(attr, attrs.HeadshotDamage):
@@ -64,18 +72,18 @@ class Gear:
         if isinstance(self, (Mask, Backpack, Chest)):
             if isinstance(self.mod, mods.HeadshotDamage):
                 pct += self.mod.pct
-
         # result
         return pct
 
     @property
     def damage_to_health(self) -> float:
         pct = 0
+        # bonus
+        # TODO
         # attribute
         for attr in self.attrs:
             if isinstance(attr, attrs.DamageToHealth):
                 pct += attr.pct
-
         # result
         return pct
 
@@ -86,7 +94,6 @@ class Gear:
         for attr in self.attrs:
             if isinstance(attr, attrs.DamageToTargetOutOfCover):
                 pct += attr.pct
-
         # result
         return pct
 
@@ -99,11 +106,13 @@ class Mask(Gear):
 @dataclass(kw_only=True)
 class Backpack(Gear):
     mod: mods.Mod = field(default_factory=mods.NoMod)
+    talent: talents.BackpackTalent = field(default_factory=talents.NoTalent)
 
 
 @dataclass(kw_only=True)
 class Chest(Gear):
     mod: mods.Mod = field(default_factory=mods.NoMod)
+    talent: talents.ChestTalent = field(default_factory=talents.NoTalent)
 
 
 @dataclass(kw_only=True)

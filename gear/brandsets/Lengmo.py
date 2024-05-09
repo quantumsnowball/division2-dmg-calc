@@ -3,6 +3,7 @@ from dataclasses import dataclass, field
 import gear
 import gear.attrs as attrs
 import gear.brandsets.bonus as bonus
+import gear.talents as talents
 from gear.brandsets import BonusPool, Brandsets
 
 
@@ -19,3 +20,4 @@ class Chest(gear.Chest, Lengmo):
     core: attrs.CoreAttribute = field(default_factory=attrs.BlueCore)
     attr1: attrs.MinorAttribute = field(default_factory=attrs.ExplosiveResistence)
     attr2: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitChance)
+    talent: talents.ChestTalent = field(default_factory=talents.Obliterate)

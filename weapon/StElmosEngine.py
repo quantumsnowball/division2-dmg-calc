@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 
 import weapon.attrs as attrs
 import weapon.mods as mods
+import weapon.talents as talents
 from weapon import Weapon, WeaponType
 
 
@@ -19,3 +20,4 @@ class StElmosEngine(Weapon):
     magazine: mods.Mod = field(default_factory=mods.NoMod)
     muzzle: mods.Mod = field(default_factory=lambda: mods.CriticalHitChance(0.20))
     underbarrel: mods.Mod = field(default_factory=mods.NoMod)
+    talent: talents.Talent = field(default_factory=talents.ActumEst)
