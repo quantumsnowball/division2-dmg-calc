@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import dataclass, field
 from typing import NamedTuple
 
@@ -11,6 +13,8 @@ from gear.brandsets import Brandsets
 class Gear:
     core: attrs.CoreAttribute
     attr1: attrs.MinorAttribute
+    # refer to other gears
+    _gears: Gears = field(init=False, repr=False)
 
     def __post_init__(self) -> None:
         self.attrs = [self.core, self.attr1]

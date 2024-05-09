@@ -31,6 +31,8 @@ class Build:
             self.chest, self.gloves,
             self.holster, self.kneepads
         )
+        for gear in self.gears:
+            gear._gears = self.gears
         # enable brandset bonus
         utils.enable_brandset_bonus(self.gears)
         # enable gearset bonus
