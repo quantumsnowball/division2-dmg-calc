@@ -10,9 +10,9 @@ setup(
     license='MIT',
     packages=['division2calc'],
     zip_safe=False,
-    # entry_points={
-    #     'console_scripts': [
-    #         'avdl=avdl.cli:avdl',
-    #     ]
-    # }
+    entry_points={
+        'console_scripts': [
+            'division2calc=division2calc:division2calc',
+        ]
+    }
 )
