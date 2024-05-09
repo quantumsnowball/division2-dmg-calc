@@ -51,13 +51,9 @@ def enable_gearset_bonus(gears: Gears) -> None:
                 counter[id] = 0
             try:
                 gear.gearset_bonus = pools[id][counter[id]]
+
+                # any gearsets self modification
+                if isinstance(gear.gearset_bonus, StrikersGamble):
+                    gear.gearset_bonus.upgrade_from(gears)
             except IndexError:
                 pass
-    # any modification for gearsets talent
-    # - Strikers Battlegear backpack: Risk Management
-    if (isinstance(gears.backpack, StrikersBattlegear) and
-            isinstance(gears.backpack.talent, talents.RiskManagement)):
-        for gear in gears:
-            if (isinstance(gear, StrikersBattlegear) and
-                    isinstance(gear.gearset_bonus, StrikersGamble)):
-                gears.backpack.talent.update(gear)
