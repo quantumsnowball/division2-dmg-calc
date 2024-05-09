@@ -7,11 +7,13 @@ from gear import Gear
 # helpers
 #
 def enable_brandset_bonus(gears: tuple[Gear, ...]) -> None:
+    # collect brandset bonus pools
     pools: dict[str, brandsets.BonusPool] = {}
     for gear in gears:
         if isinstance(gear, brandsets.Brandsets):
             id = gear.brandset
             pools[id] = gear.bonus_pool
+    # assign brandset bonus to corresponding gear
     counter: dict[str, int] = {}
     for gear in gears:
         if isinstance(gear, brandsets.Brandsets):
@@ -27,11 +29,13 @@ def enable_brandset_bonus(gears: tuple[Gear, ...]) -> None:
 
 
 def enable_gearset_bonus(gears: tuple[Gear, ...]) -> None:
+    # collect gearset bonus pools
     pools: dict[str, gearsets.BonusPool] = {}
     for gear in gears:
         if isinstance(gear, gearsets.Gearsets):
             id = gear.gearset
             pools[id] = gear.bonus_pool
+    # assign gearset bonus to corresponding gear
     counter: dict[str, int] = {}
     for gear in gears:
         if isinstance(gear, gearsets.Gearsets):
