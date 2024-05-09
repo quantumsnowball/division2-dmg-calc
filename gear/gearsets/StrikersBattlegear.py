@@ -17,7 +17,7 @@ class StrikersBattlegear(Gearsets):
                                            bonus.StrikersGamble()), repr=False)
 
     @override
-    def upgrade_from(self, gears: gear.Gears) -> None:
+    def upgrade_bonus_talent(self) -> None:
         # StrikersGamble bonus talent exists
         if not (
             isinstance(self, StrikersBattlegear) and
@@ -25,8 +25,8 @@ class StrikersBattlegear(Gearsets):
         ):
             return
         # RiskManagement exists in backpack
-        if isinstance(gears.backpack.talent, talents.RiskManagement):
-            self.gearset_bonus.unit = gears.backpack.talent.unit
+        if isinstance(self._gears.backpack.talent, talents.RiskManagement):
+            self.gearset_bonus.unit = self._gears.backpack.talent.unit
 
 
 @dataclass(kw_only=True)

@@ -1,10 +1,7 @@
 from dataclasses import dataclass, field
-from typing import TYPE_CHECKING
 
 import gear.gearsets.bonus as bonus
-
-if TYPE_CHECKING:
-    from gear import Gears
+from gear import Gear
 
 BonusPool = tuple[bonus.NoBonus,
                   bonus.Bonus,
@@ -13,10 +10,10 @@ BonusPool = tuple[bonus.NoBonus,
 
 
 @dataclass(kw_only=True)
-class Gearsets:
+class Gearsets(Gear):
     gearset: str
     bonus_pool: BonusPool
     gearset_bonus: bonus.Bonus = field(default_factory=bonus.NoBonus)
 
-    def upgrade_from(self, gears: 'Gears') -> None:
+    def upgrade_bonus_talent(self) -> None:
         pass

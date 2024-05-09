@@ -50,6 +50,6 @@ def enable_gearset_bonus(gears: Gears) -> None:
                 gear.gearset_bonus = pools[id][counter[id]]
 
                 # any gearsets self modification
-                gear.upgrade_from(gears)
+                gear.upgrade_bonus_talent()
             except IndexError:
                 pass
