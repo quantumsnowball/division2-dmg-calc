@@ -1,8 +1,5 @@
 from dataclasses import dataclass, replace
 
-from gear.gearsets import Gearsets
-from gear.gearsets.bonus import StrikersGamble
-
 
 class Talent:
     pass
