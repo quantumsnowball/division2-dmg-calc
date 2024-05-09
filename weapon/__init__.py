@@ -42,7 +42,6 @@ class Weapon:
         for core in self.cores:
             if self.type == 'AR' and isinstance(core, attrs.AssultRifleDamage):
                 pct += core.pct
-
         # result
         return pct
 
@@ -53,7 +52,6 @@ class Weapon:
         for mod in self.mods:
             if isinstance(mod, mods.CriticalHitChance):
                 pct += mod.pct
-
         # result
         return pct
 
@@ -64,7 +62,6 @@ class Weapon:
         for mod in self.mods:
             if isinstance(mod, mods.CriticalHitDamage):
                 pct += mod.pct
-
         # result
         return pct
 
@@ -75,7 +72,6 @@ class Weapon:
         for mod in self.mods:
             if isinstance(mod, mods.HeadshotDamage):
                 pct += mod.pct
-
         # result
         return pct
 
@@ -86,7 +82,6 @@ class Weapon:
         for attr in self.attrs:
             if isinstance(attr, attrs.HealthDamage):
                 pct += attr.pct
-
         # result
         return pct
 
@@ -97,6 +92,5 @@ class Weapon:
         for attr in self.attrs:
             if isinstance(attr, attrs.DamageToTargetOutOfCover):
                 pct += attr.pct
-
         # result
         return pct

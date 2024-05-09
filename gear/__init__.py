@@ -34,7 +34,6 @@ class Gear:
         if isinstance(self, (Mask, Backpack, Chest)):
             if isinstance(self.mod, mods.CriticalHitChance):
                 pct += self.mod.pct
-
         # result
         return pct
 
@@ -49,7 +48,6 @@ class Gear:
         if isinstance(self, (Mask, Backpack, Chest)):
             if isinstance(self.mod, mods.CriticalHitDamage):
                 pct += self.mod.pct
-
         # result
         return pct
 
@@ -64,7 +62,6 @@ class Gear:
         if isinstance(self, (Mask, Backpack, Chest)):
             if isinstance(self.mod, mods.HeadshotDamage):
                 pct += self.mod.pct
-
         # result
         return pct
 
@@ -75,7 +72,6 @@ class Gear:
         for attr in self.attrs:
             if isinstance(attr, attrs.DamageToHealth):
                 pct += attr.pct
-
         # result
         return pct
 
@@ -86,7 +82,6 @@ class Gear:
         for attr in self.attrs:
             if isinstance(attr, attrs.DamageToTargetOutOfCover):
                 pct += attr.pct
-
         # result
         return pct
 

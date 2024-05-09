@@ -32,10 +32,16 @@ class X:
     x8|    *(1+Damage out of Cover)
     '''
 
+    #
+    # x1
+    #
     @property
     def x1(self) -> float:
         return 1+self._stats.weapon_damage+self._stats.weapon_type_damage
 
+    #
+    # x2
+    #
     @property
     def x2(self) -> float:
         x = 1.0
@@ -74,6 +80,9 @@ class X:
     def x2_max(self) -> float:
         return self.x2
 
+    #
+    # x6
+    #
     def x6(self, critical: bool, headshot: bool) -> float:
         x = 1
         if critical:
@@ -104,6 +113,9 @@ class X:
         # result
         return x
 
+    #
+    # x7
+    #
     def x7(self, armor: bool) -> float:
         x = 1.0
         if armor:
@@ -137,6 +149,9 @@ class X:
         # result
         return x
 
+    #
+    # x8
+    #
     @property
     def x8(self) -> float:
         x = 1.0
@@ -144,6 +159,9 @@ class X:
         # result
         return x
 
+    #
+    # use cases
+    #
     @property
     def basic(self) -> X_Value:
         return {'x1': self.x1,
