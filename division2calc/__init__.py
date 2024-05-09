@@ -2,6 +2,7 @@ from pathlib import Path
 
 import click
 
+from division2calc.parser import parse_build_yaml
 from division2calc.parser.utils import BuildYAMLPathParamType
 
 
@@ -11,6 +12,6 @@ def division2calc() -> None:
 
 
 @division2calc.command()
-@click.argument('build-yaml', required=True, type=BuildYAMLPathParamType())
-def summary(build_yaml: Path) -> None:
-    print(type(build_yaml))
+@click.argument('file', required=True, type=BuildYAMLPathParamType())
+def summary(file: Path) -> None:
+    parse_build_yaml(file)

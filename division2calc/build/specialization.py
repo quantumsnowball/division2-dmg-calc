@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from weapon import WeaponType
+from division2calc.weapon import WeaponType
 
 
 @dataclass(kw_only=True)

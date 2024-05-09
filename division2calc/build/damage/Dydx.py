@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 import math
-from build.damage.X import X, Name, X_Value
+from division2calc.build.damage.X import X, Name, X_Value
 
 X_Derivatives = dict[Name, float]
 

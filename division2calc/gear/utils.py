@@ -1,8 +1,6 @@
-from dataclasses import replace
-
-import gear.brandsets as brandsets
-import gear.gearsets as gearsets
-from gear import Gears
+import division2calc.gear.brandsets as brandsets
+import division2calc.gear.gearsets as gearsets
+from division2calc.gear import Gears
 
 
 #
