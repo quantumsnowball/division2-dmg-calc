@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
 from typing import override
 
-import gear
-import gear.attrs as attrs
-import gear.gearsets.bonus as bonus
-import gear.talents as talents
-from gear.gearsets import BonusPool, Gearsets
+import division2calc.gear as gear
+import division2calc.gear.attrs as attrs
+import division2calc.gear.gearsets.bonus as bonus
+import division2calc.gear.talents as talents
+from division2calc.gear.gearsets import BonusPool, Gearsets
 
 
 @dataclass(kw_only=True)

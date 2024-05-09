@@ -1,14 +1,14 @@
 from dataclasses import dataclass, field
 
-from build.damage import Damage
-from build.stats import Stats
-from build.summary import Summary
-from build.specialization import Specialization
-from build.watch import Watch
-from gear import Mask, Backpack, Chest, Gloves, Holster, Kneepads
-from gear import Gears
-import gear.utils as utils
-from weapon import Weapon
+from division2calc.build.damage import Damage
+from division2calc.build.stats import Stats
+from division2calc.build.summary import Summary
+from division2calc.build.specialization import Specialization
+from division2calc.build.watch import Watch
+from division2calc.gear import Mask, Backpack, Chest, Gloves, Holster, Kneepads
+from division2calc.gear import Gears
+import division2calc.gear.utils as utils
+from division2calc.weapon import Weapon
 
 
 @dataclass(kw_only=True)

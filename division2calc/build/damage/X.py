@@ -1,12 +1,12 @@
 from dataclasses import dataclass
 from typing import Literal
 
-from build.stats import Stats
-from gear import Gears
-from weapon import Weapon
-import gear.talents as talents
-import gear.gearsets as gearsets
-import gear.gearsets.bonus as gearsets_bonus
+from division2calc.build.stats import Stats
+from division2calc.gear import Gears
+from division2calc.weapon import Weapon
+import division2calc.gear.talents as talents
+import division2calc.gear.gearsets as gearsets
+import division2calc.gear.gearsets.bonus as gearsets_bonus
 
 
 Name = Literal['x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8']

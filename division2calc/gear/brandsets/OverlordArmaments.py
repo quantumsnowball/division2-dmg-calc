@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
 
-import gear
-import gear.attrs as attrs
-import gear.brandsets.bonus as bonus
-from gear.brandsets import BonusPool, Brandsets
+import division2calc.gear as gear
+import division2calc.gear.attrs as attrs
+import division2calc.gear.brandsets.bonus as bonus
+from division2calc.gear.brandsets import BonusPool, Brandsets
 
 
 @dataclass(kw_only=True)

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from build.damage import Damage
-from build.stats import Stats
+from division2calc.build.damage import Damage
+from division2calc.build.stats import Stats
 
 import pandas as pd
 

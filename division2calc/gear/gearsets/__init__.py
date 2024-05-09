@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 
-import gear.gearsets.bonus as bonus
-from gear import Gear
+import division2calc.gear.gearsets.bonus as bonus
+from division2calc.gear import Gear
 
 BonusPool = tuple[bonus.NoBonus,
                   bonus.Bonus,

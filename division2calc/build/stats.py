@@ -1,8 +1,8 @@
 from dataclasses import dataclass
-from build.specialization import Specialization
-from build.watch import Watch
-from gear import Gears
-from weapon import Weapon
+from division2calc.build.specialization import Specialization
+from division2calc.build.watch import Watch
+from division2calc.gear import Gears
+from division2calc.weapon import Weapon
 
 
 @dataclass

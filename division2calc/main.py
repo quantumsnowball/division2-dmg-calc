@@ -2,14 +2,14 @@ from pprint import pprint
 
 from tabulate import tabulate
 
-import gear.attrs as gearattrs
-import gear.brandsets.Lengmo as lengmo
-import gear.brandsets.OverlordArmaments as overlord
-import gear.gearsets.StrikersBattlegear as striker
-import gear.mods as gearmods
-from build import Build
-from build.specialization import Gunner
-from weapon.StElmosEngine import StElmosEngine
+import division2calc.gear.attrs as gearattrs
+import division2calc.gear.brandsets.Lengmo as lengmo
+import division2calc.gear.brandsets.OverlordArmaments as overlord
+import division2calc.gear.gearsets.StrikersBattlegear as striker
+import division2calc.gear.mods as gearmods
+from division2calc.build import Build
+from division2calc.build.specialization import Gunner
+from division2calc.weapon.StElmosEngine import StElmosEngine
 
 
 def main():

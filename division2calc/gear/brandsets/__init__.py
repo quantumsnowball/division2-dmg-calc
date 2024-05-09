@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 
-import gear.attrs as attrs
-import gear.brandsets.bonus as bonus
+import division2calc.gear.attrs as attrs
+import division2calc.gear.brandsets.bonus as bonus
 
 BonusPool = tuple[bonus.Bonus,
                   bonus.Bonus,

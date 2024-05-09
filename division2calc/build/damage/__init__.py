@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 
-from build.stats import Stats
-from gear import Gears
-from weapon import Weapon
+from division2calc.build.stats import Stats
+from division2calc.gear import Gears
+from division2calc.weapon import Weapon
 
-from build.damage.X import X
-from build.damage.Dydx import Dydx
+from division2calc.build.damage.X import X
+from division2calc.build.damage.Dydx import Dydx
 
 
 @dataclass
