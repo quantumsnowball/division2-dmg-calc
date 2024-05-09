@@ -26,6 +26,8 @@ class Gear:
     @property
     def critical_hit_chance(self) -> float:
         pct = 0
+        # bonus
+        # TODO
         # attribute
         for attr in self.attrs:
             if isinstance(attr, attrs.CriticalHitChance):
@@ -40,6 +42,8 @@ class Gear:
     @property
     def critical_hit_damage(self) -> float:
         pct = 0
+        # bonus
+        # TODO
         # attribute
         for attr in self.attrs:
             if isinstance(attr, attrs.CriticalHitDamage):
@@ -54,6 +58,8 @@ class Gear:
     @property
     def headshot_damage(self) -> float:
         pct = 0
+        # bonus
+        # TODO
         # attribute
         for attr in self.attrs:
             if isinstance(attr, attrs.HeadshotDamage):
@@ -68,6 +74,8 @@ class Gear:
     @property
     def damage_to_health(self) -> float:
         pct = 0
+        # bonus
+        # TODO
         # attribute
         for attr in self.attrs:
             if isinstance(attr, attrs.DamageToHealth):
