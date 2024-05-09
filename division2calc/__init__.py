@@ -1,4 +1,6 @@
+from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
+from pprint import pprint
 
 import click
 
@@ -31,4 +33,10 @@ def division2calc() -> None:
 @division2calc.command()
 @click.argument('file', required=True, type=str)
 def summary(file: str) -> None:
-    print(Path(file))
+    spec = spec_from_file_location('build', Path(file))
+    if not spec or not spec.loader:
+        return
+    module = module_from_spec(spec)
+    spec.loader.exec_module(module)
+    build: Build = module.build
+    pprint(build.summary.dydx)
