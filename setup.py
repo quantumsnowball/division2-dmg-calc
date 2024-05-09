@@ -10,6 +10,11 @@ setup(
     license='MIT',
     packages=['division2calc'],
     zip_safe=False,
+    install_requires=[
+        'click',
+        'pandas',
+        'tabulate',
+    ],
     entry_points={
         'console_scripts': [
             'division2calc=division2calc:division2calc',
