@@ -2,9 +2,11 @@ from dataclasses import dataclass
 from typing import Literal
 
 from build.stats import Stats
-from gear import Gears, Chest
+from gear import Gears
 from weapon import Weapon
 import gear.talents as talents
+import gear.gearsets as gearsets
+import gear.gearsets.bonus as gearsets_bonus
 
 
 Name = Literal['x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8']
@@ -41,6 +43,11 @@ class X:
         # chest
         if isinstance(self._gears.chest.talent, talents.Obliterate):
             x += self._gears.chest.talent.max
+        # gearset
+        for gear in self._gears:
+            if isinstance(gear, gearsets.Gearsets):
+                if isinstance(gear.gearset_bonus, gearsets_bonus.StrikersGamble):
+                    x += gear.gearset_bonus.max
         # result
         return x
 
@@ -52,9 +59,14 @@ class X:
     def x2_mean(self) -> float:
         x = 1.0
         # backpack
-        # Obliterate
+        # chest
         if isinstance(self._gears.chest.talent, talents.Obliterate):
             x += self._gears.chest.talent.average
+        # gearset
+        for gear in self._gears:
+            if isinstance(gear, gearsets.Gearsets):
+                if isinstance(gear.gearset_bonus, gearsets_bonus.StrikersGamble):
+                    x += gear.gearset_bonus.average
         # result
         return x
 

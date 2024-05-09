@@ -25,9 +25,25 @@ class BonusTalent(Bonus, Talent):
 
 @dataclass
 class StrikersGamble(BonusTalent):
-    unit: float = 0.65
+    unit: float = 0.0065
     max_stack: int = 100
+    prob: float = 0.25
 
+    @property
+    def buff(self) -> float:
+        return self.unit*self.max_stack
+
+    @property
+    def min(self) -> float:
+        return 0
+
+    @property
+    def average(self) -> float:
+        return self.prob*self.buff
+
+    @property
+    def max(self) -> float:
+        return self.buff
 
 #
 # Empty
