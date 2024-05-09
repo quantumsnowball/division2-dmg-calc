@@ -24,6 +24,23 @@ class ChestTalent(Talent):
 class Obliterate(ChestTalent):
     unit: float = 0.01
     max_stack: int = 25
+    prob: float = 0.5
+
+    @property
+    def buff(self) -> float:
+        return self.unit*self.max_stack
+
+    @property
+    def min(self) -> float:
+        return 0
+
+    @property
+    def average(self) -> float:
+        return self.prob*self.buff
+
+    @property
+    def max(self) -> float:
+        return self.buff
 
 #
 # Empty

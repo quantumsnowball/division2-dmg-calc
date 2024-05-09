@@ -2,8 +2,9 @@ from dataclasses import dataclass
 from typing import Literal
 
 from build.stats import Stats
-from gear import Gears
+from gear import Gears, Chest
 from weapon import Weapon
+import gear.talents as talents
 
 
 Name = Literal['x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8']
@@ -32,6 +33,34 @@ class X:
     @property
     def x1(self) -> float:
         return 1+self._stats.weapon_damage+self._stats.weapon_type_damage
+
+    @property
+    def x2(self) -> float:
+        x = 1.0
+        # backpack
+        # chest
+        if isinstance(self._gears.chest.talent, talents.Obliterate):
+            x += self._gears.chest.talent.max
+        # result
+        return x
+
+    @property
+    def x2_min(self) -> float:
+        return 1.0
+
+    @property
+    def x2_mean(self) -> float:
+        x = 1.0
+        # backpack
+        # Obliterate
+        if isinstance(self._gears.chest.talent, talents.Obliterate):
+            x += self._gears.chest.talent.average
+        # result
+        return x
+
+    @property
+    def x2_max(self) -> float:
+        return self.x2
 
     def x6(self, critical: bool, headshot: bool) -> float:
         x = 1
@@ -105,16 +134,32 @@ class X:
 
     @property
     def basic(self) -> X_Value:
-        return {'x1': self.x1, 'x6': 1.0, 'x7': 1.0, 'x8': self.x8}
+        return {'x1': self.x1,
+                'x2': 1.0,
+                'x6': 1.0,
+                'x7': 1.0,
+                'x8': self.x8}
 
     @property
     def min(self) -> X_Value:
-        return {'x1': self.x1, 'x6': self.x6_min, 'x7': self.x7_min, 'x8': self.x8}
+        return {'x1': self.x1,
+                'x2': self.x2_min,
+                'x6': self.x6_min,
+                'x7': self.x7_min,
+                'x8': self.x8}
 
     @property
     def average(self) -> X_Value:
-        return {'x1': self.x1, 'x6': self.x6_mean, 'x7': self.x7_mean, 'x8': self.x8}
+        return {'x1': self.x1,
+                'x2': self.x2_mean,
+                'x6': self.x6_mean,
+                'x7': self.x7_mean,
+                'x8': self.x8}
 
     @property
     def max(self) -> X_Value:
-        return {'x1': self.x1, 'x6': self.x6_max, 'x7': self.x7_max, 'x8': self.x8}
+        return {'x1': self.x1,
+                'x2': self.x2_max,
+                'x6': self.x6_max,
+                'x7': self.x7_max,
+                'x8': self.x8}
