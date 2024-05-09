@@ -2,10 +2,7 @@ from dataclasses import replace
 
 import gear.brandsets as brandsets
 import gear.gearsets as gearsets
-import gear.talents as talents
 from gear import Gears
-from gear.gearsets.bonus import StrikersGamble
-from gear.gearsets.StrikersBattlegear import StrikersBattlegear
 
 
 #
@@ -53,7 +50,6 @@ def enable_gearset_bonus(gears: Gears) -> None:
                 gear.gearset_bonus = pools[id][counter[id]]
 
                 # any gearsets self modification
-                if isinstance(gear.gearset_bonus, StrikersGamble):
-                    gear.gearset_bonus.upgrade_from(gears)
+                gear.upgrade_from(gears)
             except IndexError:
                 pass

@@ -1,10 +1,4 @@
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
-
-import gear.talents as talents
-
-if TYPE_CHECKING:
-    from gear import Gears
 
 
 class Bonus:
@@ -51,9 +45,6 @@ class StrikersGamble(BonusTalent):
     def max(self) -> float:
         return self.buff
 
-    def upgrade_from(self, gears: 'Gears') -> None:
-        if isinstance(gears.backpack.talent, talents.RiskManagement):
-            self.unit = gears.backpack.talent.unit
 
 #
 # Empty

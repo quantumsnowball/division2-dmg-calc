@@ -17,11 +17,6 @@ class BackpackTalent(Talent):
 class RiskManagement(BackpackTalent):
     unit: float = 0.01
 
-    def update(self, target: Gearsets) -> None:
-        if isinstance(target.gearset_bonus, StrikersGamble):
-            target.gearset_bonus = replace(target.gearset_bonus,
-                                           unit=self.unit)
-
 
 @dataclass
 class ChestTalent(Talent):

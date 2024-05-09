@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from typing import override
 
 import gear
 import gear.attrs as attrs
@@ -14,6 +15,18 @@ class StrikersBattlegear(Gearsets):
                                            bonus.WeaponHandling(0.15),
                                            bonus.RateOfFire(0.15),
                                            bonus.StrikersGamble()), repr=False)
+
+    @override
+    def upgrade_from(self, gears: gear.Gears) -> None:
+        # StrikersGamble bonus talent exists
+        if not (
+            isinstance(self, StrikersBattlegear) and
+            isinstance(self.gearset_bonus, bonus.StrikersGamble)
+        ):
+            return
+        # RiskManagement exists in backpack
+        if isinstance(gears.backpack.talent, talents.RiskManagement):
+            self.gearset_bonus.unit = gears.backpack.talent.unit
 
 
 @dataclass(kw_only=True)
