@@ -1,12 +1,13 @@
 import gear.brandsets as brandsets
 import gear.gearsets as gearsets
-from gear import Gear
+import gear.talents as talents
+from gear import Gears
 
 
 #
 # helpers
 #
-def enable_brandset_bonus(gears: tuple[Gear, ...]) -> None:
+def enable_brandset_bonus(gears: Gears) -> None:
     # collect brandset bonus pools
     pools: dict[str, brandsets.BonusPool] = {}
     for gear in gears:
@@ -28,7 +29,7 @@ def enable_brandset_bonus(gears: tuple[Gear, ...]) -> None:
                 pass
 
 
-def enable_gearset_bonus(gears: tuple[Gear, ...]) -> None:
+def enable_gearset_bonus(gears: Gears) -> None:
     # collect gearset bonus pools
     pools: dict[str, gearsets.BonusPool] = {}
     for gear in gears:
