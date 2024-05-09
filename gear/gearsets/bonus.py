@@ -27,7 +27,7 @@ class BonusTalent(Bonus, Talent):
 class StrikersGamble(BonusTalent):
     unit: float = 0.0065
     max_stack: int = 100
-    prob: float = 0.25
+    prob: float = 0.40
 
     @property
     def buff(self) -> float:
