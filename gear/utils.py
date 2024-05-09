@@ -1,7 +1,11 @@
+from dataclasses import replace
+
 import gear.brandsets as brandsets
 import gear.gearsets as gearsets
 import gear.talents as talents
 from gear import Gears
+from gear.gearsets.bonus import StrikersGamble
+from gear.gearsets.StrikersBattlegear import StrikersBattlegear
 
 
 #
@@ -49,3 +53,12 @@ def enable_gearset_bonus(gears: Gears) -> None:
                 gear.gearset_bonus = pools[id][counter[id]]
             except IndexError:
                 pass
+    # any modification for gearsets talent
+    # - Strikers Battlegear backpack: Risk Management
+    if (isinstance(gears.backpack, StrikersBattlegear) and
+            isinstance(gears.backpack.talent, talents.RiskManagement)):
+        for gear in gears:
+            if (isinstance(gear, StrikersBattlegear) and
+                    isinstance(gear.gearset_bonus, StrikersGamble)):
+                gear.gearset_bonus = replace(gear.gearset_bonus,
+                                             unit=gears.backpack.talent.unit)

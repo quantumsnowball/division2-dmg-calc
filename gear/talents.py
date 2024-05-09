@@ -12,7 +12,7 @@ class BackpackTalent(Talent):
 
 @dataclass
 class RiskManagement(BackpackTalent):
-    pass
+    unit: float = 0.01
 
 
 @dataclass
