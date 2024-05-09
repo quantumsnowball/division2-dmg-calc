@@ -1,9 +1,9 @@
 name: Legendary1
 specialization:
   Gunner:
-# weapon:
-#   StElmosEngine:
-#     expertise_level: 15
+weapon:
+  StElmosEngine:
+    expertise_level: 15
 # mask:
 #   Striker:
 #     attr1: 

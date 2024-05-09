@@ -6,13 +6,15 @@ import yaml
 from pydantic import BaseModel, field_validator
 
 from division2calc.build.specialization import Gunner
+from division2calc.weapon.StElmosEngine import StElmosEngine
 
 
 class BuildData(BaseModel):
     name: str
     specialization: dict[str, Any]
+    weapon: dict[str, Any]
 
-    @field_validator('specialization')
+    @field_validator('specialization', 'weapon')
     def ensure1(cls, v: dict[str, Any]) -> dict[str, Any]:
         assert len(v) == 1
         return v
@@ -31,7 +33,6 @@ class BuildConfig:
     def __post_init__(self) -> None:
         with open(self._file) as f:
             loaded = yaml.safe_load(f)
-            print(loaded)
         # check the parsed dict here
         self.d = BuildData(**loaded)
 
@@ -49,8 +50,19 @@ class BuildConfig:
                 return None
 
     @property
+    def weapon(self) -> StElmosEngine | None:
+        type, kwargs = unpack(self.d.weapon)
+        match type:
+            case 'StElmosEngine':
+                return StElmosEngine(**kwargs)
+            case _:
+                return None
+
+    @property
     def dict(self) -> dict[str, Any]:
-        return dict(
+        d = {k: v for k, v in dict(
             name=self.name,
             specialization=self.specialization,
-        )
+            weapon=self.weapon,
+        ).items() if v is not None}
+        return d
