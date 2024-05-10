@@ -1,4 +1,3 @@
-from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
 from pprint import pprint
 
@@ -11,6 +10,7 @@ import division2calc.gear.gearsets.StrikersBattlegear as Striker
 import division2calc.gear.mods as gearmods
 from division2calc.build import Build
 from division2calc.build.specialization import Gunner
+from division2calc.utils import load_build_file
 from division2calc.weapon.StElmosEngine import StElmosEngine
 
 __all__ = [
@@ -33,10 +33,5 @@ def division2calc() -> None:
 @division2calc.command()
 @click.argument('file', required=True, type=str)
 def summary(file: str) -> None:
-    spec = spec_from_file_location('build', Path(file))
-    if not spec or not spec.loader:
-        return
-    module = module_from_spec(spec)
-    spec.loader.exec_module(module)
-    build: Build = module.build
+    build = load_build_file(Path(file))
     pprint(build.summary.dydx)
