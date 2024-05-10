@@ -1,7 +1,7 @@
 from dataclasses import fields, is_dataclass
 from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
-from typing import Any, Iterable, Sequence
+from typing import Any
 
 import yaml
 
@@ -59,22 +59,28 @@ def build_as_yaml(build: Build) -> str:
 
 
 def pformat_dataclass(dc: Any, level: int = 1, indent: int = 4) -> str:
-    CIRCULAR_FIELDS = ('_gears', )
-    SKIPPED_FIELDS = ('bonus_pool', )
+    SKIPPED_FIELDS = (
+        '_gears',
+        'bonus_pool',
+    )
+    SPACE = ' '
     s = type(dc).__name__
     fs = fields(dc)
     for f in fs:
         # ignore any known circular fields
-        if f.name in CIRCULAR_FIELDS or f.name in SKIPPED_FIELDS:
+        if f.name in SKIPPED_FIELDS:
             continue
-        if len(fs) > 1:
-            s += '\n'
-            s += ' ' * indent * level
-        else:
-            s += ' '
-        s += f'{f.name}: '
         # read field value
         val = getattr(dc, f.name)
+        # indent format
+        if len(fs) > 1:
+            field_name_text = f'{SPACE*indent*level}{f.name}'
+            if level <= 1:
+                s += '\n'
+            s += f'\n{field_name_text:35s} | '
+        else:
+            s += '('
+        # display format base on types
         if is_dataclass(val):
             val = pformat_dataclass(val, level+1, indent)
             s += val
@@ -89,4 +95,8 @@ def pformat_dataclass(dc: Any, level: int = 1, indent: int = 4) -> str:
             s += f"'{val}'"
         else:
             s += str(val)
+        # format
+        if len(fs) <= 1:
+            s += ')'
+
     return s
