@@ -1,5 +1,5 @@
 from pathlib import Path
-from pprint import pprint
+from pprint import pp, pprint
 
 import click
 import pandas as pd
@@ -35,7 +35,7 @@ def division2calc() -> None:
 @click.argument('file', required=True, type=click.Path())
 def summary(file: Path) -> None:
     build = load_build_file(file)
-    pprint(build)
+    pp(build)
 
 
 @division2calc.command()

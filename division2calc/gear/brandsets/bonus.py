@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 
+@dataclass
 class Bonus:
     pass
 
@@ -38,6 +39,7 @@ class LMGDamage(Bonus):
 #
 # Empty
 #
+@dataclass
 class NoBonus(Bonus):
     def __repr__(self) -> str:
         return 'N/A'
