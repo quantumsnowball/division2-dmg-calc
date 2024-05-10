@@ -60,10 +60,11 @@ def build_as_yaml(build: Build) -> str:
 
 def pformat_dataclass(dc: Any, level: int = 1, indent: int = 4) -> str:
     CIRCULAR_FIELDS = ('_gears', )
+    SKIPPED_FIELDS = ('bonus_pool', )
     s = type(dc).__name__
     for f in fields(dc):
         # ignore any known circular fields
-        if f.name in CIRCULAR_FIELDS:
+        if f.name in CIRCULAR_FIELDS or f.name in SKIPPED_FIELDS:
             continue
         s += '\n'
         s += ' ' * indent * level
