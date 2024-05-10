@@ -2,6 +2,7 @@ from pathlib import Path
 from pprint import pprint
 
 import click
+import pandas as pd
 
 import division2calc.gear.attrs as gearattrs
 import division2calc.gear.brandsets.Lengmo as Lengmo
@@ -35,3 +36,16 @@ def division2calc() -> None:
 def summary(file: Path) -> None:
     build = load_build_file(file)
     pprint(build.summary.dydx)
+
+
+@division2calc.command()
+@click.argument('file1', required=True, type=click.Path())
+@click.argument('file2', required=True, type=click.Path())
+@click.option('--dydx', is_flag=True, default=False, help='Enable dydx comparison')
+def compare(file1: Path, file2: Path, dydx: bool) -> None:
+    build1 = load_build_file(file1)
+    build2 = load_build_file(file2)
+    if dydx:
+        click.echo(f'Dydx: Build({build2.name}) net Build({build1.name})')
+        diff: pd.DataFrame = build2.summary.dydx - build1.summary.dydx
+        print(diff.round(4))
