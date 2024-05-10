@@ -56,3 +56,37 @@ def build_as_yaml(build: Build) -> str:
     dc_dict = dataclass_asdict(build)
     yaml_str = yaml.dump(dc_dict, sort_keys=False)
     return yaml_str
+
+
+def pformat_dataclass(dc: Any, level: int = 1, indent: int = 4) -> str:
+    CIRCULAR_FIELDS = ('_gears', )
+    s = type(dc).__name__
+    for f in fields(dc):
+        # ignore any known circular fields
+        if f.name in CIRCULAR_FIELDS:
+            continue
+        s += '\n'
+        s += ' ' * indent * level
+        s += f'{f.name}: '
+        # read field value
+        val = getattr(dc, f.name)
+        if is_dataclass(val):
+            val = pformat_dataclass(val, level+1, indent)
+            s += val
+        elif isinstance(val, (tuple, list)):
+            for v in val:
+                s += '\n'
+                s += ' ' * indent * (level+1)
+                s += '- '
+                val = pformat_dataclass(v, level+2, indent)
+                s += val
+
+            pass
+        elif isinstance(val, str):
+            s += f"'{val}'"
+        else:
+            s += str(val)
+
+    # s += ' ' * indent * (level-1) + ')'
+
+    return s

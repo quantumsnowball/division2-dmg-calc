@@ -13,7 +13,7 @@ import division2calc.gear.mods as gearmods
 from division2calc.build import Build
 from division2calc.build.specialization import Gunner
 from division2calc.utils import (build_as_yaml, dataclass_asdict,
-                                 load_build_file)
+                                 load_build_file, pformat_dataclass)
 from division2calc.weapon.StElmosEngine import StElmosEngine
 
 __all__ = [
@@ -37,8 +37,10 @@ def division2calc() -> None:
 @click.argument('file', required=True, type=click.Path())
 def summary(file: Path) -> None:
     build = load_build_file(file)
-    pprint.pp(dataclass_asdict(build))
-    print(build_as_yaml(build))
+    # pprint.pp(dataclass_asdict(build))
+    # print(build_as_yaml(build))
+    # pprint.pp(build)
+    print(pformat_dataclass(build))
 
 
 @division2calc.command()
