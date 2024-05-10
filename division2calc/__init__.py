@@ -1,5 +1,6 @@
+import pprint
+from dataclasses import asdict, fields
 from pathlib import Path
-from pprint import pp, pprint
 
 import click
 import pandas as pd
@@ -11,7 +12,7 @@ import division2calc.gear.gearsets.StrikersBattlegear as Striker
 import division2calc.gear.mods as gearmods
 from division2calc.build import Build
 from division2calc.build.specialization import Gunner
-from division2calc.utils import load_build_file
+from division2calc.utils import dataclass_asdict, load_build_file
 from division2calc.weapon.StElmosEngine import StElmosEngine
 
 __all__ = [
@@ -35,7 +36,7 @@ def division2calc() -> None:
 @click.argument('file', required=True, type=click.Path())
 def summary(file: Path) -> None:
     build = load_build_file(file)
-    pp(build)
+    pprint.pp(dataclass_asdict(build))
 
 
 @division2calc.command()
