@@ -1,7 +1,9 @@
-from dataclasses import fields
+from dataclasses import fields, is_dataclass
 from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterable, Sequence
+
+import yaml
 
 from division2calc.build import Build
 
@@ -48,3 +50,9 @@ def dataclass_asdict(dc: Any) -> dict[str, Any]:
     # result
     package = {type(dc).__name__: d}
     return package
+
+
+def build_as_yaml(build: Build) -> str:
+    dc_dict = dataclass_asdict(build)
+    yaml_str = yaml.dump(dc_dict, sort_keys=False)
+    return yaml_str
