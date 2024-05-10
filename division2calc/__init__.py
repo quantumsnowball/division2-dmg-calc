@@ -9,7 +9,7 @@ import division2calc.gear.brandsets.Lengmo as Lengmo
 import division2calc.gear.brandsets.OverlordArmaments as Overlord
 import division2calc.gear.gearsets.StrikersBattlegear as Striker
 import division2calc.gear.mods as gearmods
-from division2calc.build import Build, damage
+from division2calc.build import Build
 from division2calc.build.specialization import Gunner
 from division2calc.utils import load_build_file
 from division2calc.weapon.StElmosEngine import StElmosEngine
@@ -35,7 +35,7 @@ def division2calc() -> None:
 @click.argument('file', required=True, type=click.Path())
 def summary(file: Path) -> None:
     build = load_build_file(file)
-    pprint(build.summary.dydx)
+    pprint(build)
 
 
 @division2calc.command()
@@ -53,14 +53,17 @@ def compare(file1: Path,
     build2 = load_build_file(file2)
     all = not any((x, damage, dydx))
     if all or damage:
-        click.echo(f'\ndiff(damage): Build({build2.name}) net Build({build1.name})\n')
+        click.secho(f'\ndiff(damage): Build({build2.name}) net Build({build1.name})', fg='yellow')
         diff: pd.DataFrame = build2.summary.damage() - build1.summary.damage()
         print(diff.round(2))
+        click.secho(f'\ndiff%(damage): Build({build2.name}) net Build({build1.name})', fg='yellow')
+        diffpct: pd.DataFrame = (build2.summary.damage() / build1.summary.damage() - 1)*100
+        print(diffpct.round(4))
     if all or x:
-        click.echo(f'\ndiff(x): Build({build2.name}) net Build({build1.name})\n')
+        click.secho(f'\ndiff(x): Build({build2.name}) net Build({build1.name})', fg='yellow')
         diff: pd.DataFrame = build2.summary.x - build1.summary.x
         print(diff.round(4))
     if all or dydx:
-        click.echo(f'\ndiff(dydx): Build({build2.name}) net Build({build1.name})\n')
+        click.secho(f'\ndiff(dydx): Build({build2.name}) net Build({build1.name})', fg='yellow')
         diff: pd.DataFrame = build2.summary.dydx - build1.summary.dydx
         print(diff.round(4))
