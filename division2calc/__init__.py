@@ -41,11 +41,16 @@ def summary(file: Path) -> None:
 @division2calc.command()
 @click.argument('file1', required=True, type=click.Path())
 @click.argument('file2', required=True, type=click.Path())
+@click.option('--x', is_flag=True, default=False, help='Enable x comparison')
 @click.option('--dydx', is_flag=True, default=False, help='Enable dydx comparison')
-def compare(file1: Path, file2: Path, dydx: bool) -> None:
+def compare(file1: Path, file2: Path, x: bool, dydx: bool) -> None:
     build1 = load_build_file(file1)
     build2 = load_build_file(file2)
+    if x:
+        click.echo(f'\nx: Build({build2.name}) net Build({build1.name})\n')
+        diff: pd.DataFrame = build2.summary.x - build1.summary.x
+        print(diff.round(4))
     if dydx:
-        click.echo(f'Dydx: Build({build2.name}) net Build({build1.name})')
+        click.echo(f'\nDydx: Build({build2.name}) net Build({build1.name})\n')
         diff: pd.DataFrame = build2.summary.dydx - build1.summary.dydx
         print(diff.round(4))
