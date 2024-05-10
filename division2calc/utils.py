@@ -62,12 +62,16 @@ def pformat_dataclass(dc: Any, level: int = 1, indent: int = 4) -> str:
     CIRCULAR_FIELDS = ('_gears', )
     SKIPPED_FIELDS = ('bonus_pool', )
     s = type(dc).__name__
-    for f in fields(dc):
+    fs = fields(dc)
+    for f in fs:
         # ignore any known circular fields
         if f.name in CIRCULAR_FIELDS or f.name in SKIPPED_FIELDS:
             continue
-        s += '\n'
-        s += ' ' * indent * level
+        if len(fs) > 1:
+            s += '\n'
+            s += ' ' * indent * level
+        else:
+            s += ' '
         s += f'{f.name}: '
         # read field value
         val = getattr(dc, f.name)
@@ -81,13 +85,8 @@ def pformat_dataclass(dc: Any, level: int = 1, indent: int = 4) -> str:
                 s += '- '
                 val = pformat_dataclass(v, level+2, indent)
                 s += val
-
-            pass
         elif isinstance(val, str):
             s += f"'{val}'"
         else:
             s += str(val)
-
-    # s += ' ' * indent * (level-1) + ')'
-
     return s
