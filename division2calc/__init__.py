@@ -31,7 +31,7 @@ def division2calc() -> None:
 
 
 @division2calc.command()
-@click.argument('file', required=True, type=str)
-def summary(file: str) -> None:
-    build = load_build_file(Path(file))
+@click.argument('file', required=True, type=click.Path())
+def summary(file: Path) -> None:
+    build = load_build_file(file)
     pprint(build.summary.dydx)
