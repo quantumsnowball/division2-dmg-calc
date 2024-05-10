@@ -42,15 +42,24 @@ def summary(file: Path) -> None:
 @click.argument('file1', required=True, type=click.Path())
 @click.argument('file2', required=True, type=click.Path())
 @click.option('--x', is_flag=True, default=False, help='Enable x comparison')
+@click.option('--damage', is_flag=True, default=False, help='Enable damage comparison')
 @click.option('--dydx', is_flag=True, default=False, help='Enable dydx comparison')
-def compare(file1: Path, file2: Path, x: bool, dydx: bool) -> None:
+def compare(file1: Path,
+            file2: Path,
+            damage: bool,
+            x: bool,
+            dydx: bool) -> None:
     build1 = load_build_file(file1)
     build2 = load_build_file(file2)
+    if damage:
+        click.echo(f'\ndiff(damage): Build({build2.name}) net Build({build1.name})\n')
+        diff: pd.DataFrame = build2.summary.damage() - build1.summary.damage()
+        print(diff.round(4))
     if x:
-        click.echo(f'\nx: Build({build2.name}) net Build({build1.name})\n')
+        click.echo(f'\ndiff(x): Build({build2.name}) net Build({build1.name})\n')
         diff: pd.DataFrame = build2.summary.x - build1.summary.x
         print(diff.round(4))
     if dydx:
-        click.echo(f'\nDydx: Build({build2.name}) net Build({build1.name})\n')
+        click.echo(f'\ndiff(dydx): Build({build2.name}) net Build({build1.name})\n')
         diff: pd.DataFrame = build2.summary.dydx - build1.summary.dydx
         print(diff.round(4))
