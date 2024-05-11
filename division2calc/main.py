@@ -31,7 +31,7 @@ def main():
 
     pprint(build)
     print(tabulate(build.summary.stats(), headers='keys', tablefmt='fancy_grid'))
-    print(build.summary.damage().astype(int))
+    print(build.summary.damage.astype(int))
     print(f'{build.damage.basic=:.2f} {build.damage.average=:.2f} {build.damage.max=:.2f}')
     print('\nx:')
     print(build.summary.x.round(2))

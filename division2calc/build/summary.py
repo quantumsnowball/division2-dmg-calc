@@ -54,6 +54,7 @@ class Summary:
         df.columns.names = ('dydx',)
         return df
 
+    @property
     def damage(self) -> pd.DataFrame:
         # columns
         x6_columns = {'Normal': (False, False), 'Critical': (True, False),
