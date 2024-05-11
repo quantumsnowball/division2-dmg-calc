@@ -1,15 +1,15 @@
 from dataclasses import fields, is_dataclass
 from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
-from typing import Any
+from typing import Any, Sequence
 
 import yaml
 
 from division2calc.build import Build
 
 
-def load_build_file(file: Path,
-                    name: str = 'build') -> Build:
+def load_builds_file(file: Path,
+                     name: str = 'builds') -> Sequence[Build]:
     # spec
     spec = spec_from_file_location(name, Path(file))
     assert spec and spec.loader, f'Failed to load module: {file=} {name=}'
@@ -18,9 +18,9 @@ def load_build_file(file: Path,
     # load the module
     spec.loader.exec_module(module)
     # should be a build var
-    build: Build = module.build
+    builds: Sequence[Build] = module.builds
     # result
-    return build
+    return builds
 
 
 def dataclass_asdict(dc: Any) -> dict[str, Any]:
