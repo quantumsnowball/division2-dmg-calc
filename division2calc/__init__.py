@@ -61,18 +61,19 @@ def summary(file: Path,
 
 
 @division2calc.command()
-@click.argument('file1', required=True, type=click.Path())
-@click.argument('file2', required=True, type=click.Path())
+@click.argument('file', required=True, type=click.Path())
+@click.option('-i', '--indices', default=(0, 1,), type=click.Tuple([int, int]),
+              help='which two builds in the list to display, e.g. -i 0 1')
 @click.option('--x', is_flag=True, default=False, help='Enable x comparison')
 @click.option('--damage', is_flag=True, default=False, help='Enable damage comparison')
 @click.option('--dydx', is_flag=True, default=False, help='Enable dydx comparison')
-def compare(file1: Path,
-            file2: Path,
+def compare(file: Path,
+            indices: tuple[int, int],
             damage: bool,
             x: bool,
             dydx: bool) -> None:
-    build1 = load_build_file(file1)
-    build2 = load_build_file(file2)
+    builds = load_builds_file(file)
+    build1, build2 = tuple(builds[i] for i in indices)
     all = not any((x, damage, dydx))
     if all or damage:
         click.secho(f'\ndiff(damage): Build({build2.name}) net Build({build1.name})', fg='yellow')
