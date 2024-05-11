@@ -81,8 +81,32 @@ class X:
         return self.x2
 
     #
+    # x3
+    #
+    @property
+    def x3(self) -> float:
+        # TODO
+        return 1.0
+    #
+    # x4
+    #
+
+    @property
+    def x4(self) -> float:
+        # TODO
+        return 1.0
+    #
+    # x5
+    #
+
+    @property
+    def x5(self) -> float:
+        # TODO
+        return 1.0
+    #
     # x6
     #
+
     def x6(self, critical: bool, headshot: bool) -> float:
         x = 1
         if critical:
@@ -166,6 +190,9 @@ class X:
     def basic(self) -> X_Value:
         return {'x1': self.x1,
                 'x2': 1.0,
+                'x3': 1.0,
+                'x4': 1.0,
+                'x5': 1.0,
                 'x6': 1.0,
                 'x7': 1.0,
                 'x8': self.x8}
@@ -174,6 +201,9 @@ class X:
     def min(self) -> X_Value:
         return {'x1': self.x1,
                 'x2': self.x2_min,
+                'x3': self.x3,
+                'x4': self.x4,
+                'x5': self.x5,
                 'x6': self.x6_min,
                 'x7': self.x7_min,
                 'x8': self.x8}
@@ -182,6 +212,9 @@ class X:
     def average(self) -> X_Value:
         return {'x1': self.x1,
                 'x2': self.x2_mean,
+                'x3': self.x3,
+                'x4': self.x4,
+                'x5': self.x5,
                 'x6': self.x6_mean,
                 'x7': self.x7_mean,
                 'x8': self.x8}
@@ -190,6 +223,9 @@ class X:
     def max(self) -> X_Value:
         return {'x1': self.x1,
                 'x2': self.x2_max,
+                'x3': self.x3,
+                'x4': self.x4,
+                'x5': self.x5,
                 'x6': self.x6_max,
                 'x7': self.x7_max,
                 'x8': self.x8}
