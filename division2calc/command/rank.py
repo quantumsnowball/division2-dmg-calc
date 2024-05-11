@@ -2,11 +2,9 @@ from pathlib import Path
 from typing import get_args
 
 import click
-import pandas as pd
 
 from division2calc.build.common import Metric, Profile, SortBy, SortOrder
 from division2calc.command.utils import load_builds_metric
-from division2calc.utils import load_builds_file
 
 ClickMetric = click.Choice(get_args(Metric))
 ClickProfile = click.Choice(get_args(Profile))
