@@ -1,7 +1,6 @@
 import pprint
-from dataclasses import asdict, fields
 from pathlib import Path
-from typing import Literal
+from typing import Literal, get_args
 
 import click
 import pandas as pd
@@ -93,16 +92,26 @@ def compare(file: Path,
         print(diff.round(4))
 
 
+Metric = Literal['damage', 'x', 'dydx']
+Profile = Literal['basic', 'min', 'average', 'max']
+SortOrder = Literal['asc', 'desc']
+SortBy = tuple[str, SortOrder]
+ClickMetric = click.Choice(get_args(Metric))
+ClickProfile = click.Choice(get_args(Profile))
+ClickSortOrder = click.Choice(get_args(SortOrder))
+ClickSortBy = click.Tuple([str, ClickSortOrder])
+
+
 @division2calc.command()
 @click.argument('file', required=True, type=click.Path())
-@click.option('-m', '--metric', default='damage', type=click.Choice(['damage', 'x', 'dydx']))
-@click.option('-p', '--profile', default='basic', type=click.Choice(['basic', 'min', 'average', 'max']))
-@click.option('-by', '--sort-by', default=None, type=click.Tuple([str, click.Choice(['asc', 'desc'])]),
+@click.option('-m', '--metric', default='damage', type=ClickMetric)
+@click.option('-p', '--profile', default='basic', type=ClickProfile)
+@click.option('-by', '--sort-by', default=None, type=ClickSortBy,
               help='sort dataframe by field with order, e.g. -by x6 desc')
 def rank(file: Path,
-         metric: Literal['damage', 'x', 'dydx'],
-         profile: Literal['basic', 'min', 'average', 'max'],
-         sort_by: tuple[str, Literal['asc', 'desc']]) -> None:
+         metric: Metric,
+         profile: Profile,
+         sort_by: SortBy) -> None:
     builds = load_builds_file(file)
     data = {b.name: getattr(b.summary, metric).loc[profile]
             for b in builds}
