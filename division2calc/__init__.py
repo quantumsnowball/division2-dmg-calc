@@ -1,6 +1,7 @@
 import pprint
 from dataclasses import asdict, fields
 from pathlib import Path
+from typing import Literal
 
 import click
 import pandas as pd
@@ -93,5 +94,6 @@ def compare(file: Path,
 
 
 @division2calc.command()
-def rank() -> None:
-    pass
+@click.option('--metric', default='damage', type=click.Choice(['damage', 'x', 'dydx']))
+def rank(metric: Literal['damage', 'x', 'dydx']) -> None:
+    print(metric)
