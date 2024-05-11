@@ -44,12 +44,12 @@ class Damage:
     @property
     def average(self) -> float:
         dmg = self.basic
-        dmg *= self.x.x2_mean
+        dmg *= self.x.x2_average
         dmg *= self.x.x3
         dmg *= self.x.x4
         dmg *= self.x.x5
-        dmg *= self.x.x6_mean
-        dmg *= self.x.x7_mean
+        dmg *= self.x.x6_average
+        dmg *= self.x.x7_average
         dmg *= self.x.x8
         # result
         return dmg
@@ -77,10 +77,7 @@ class Damage:
         dmg = self.basic
         if profile == 'basic':
             return dmg
-        elif profile == 'average':
-            dmg *= self.x.x2_mean
-        else:
-            dmg *= getattr(self.x, f'x2_{profile}')
+        dmg *= getattr(self.x, f'x2_{profile}')
         dmg *= self.x.x3
         dmg *= self.x.x4
         dmg *= self.x.x5

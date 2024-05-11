@@ -62,7 +62,7 @@ class X:
         return 1.0
 
     @property
-    def x2_mean(self) -> float:
+    def x2_average(self) -> float:
         x = 1.0
         # backpack
         # chest
@@ -121,7 +121,7 @@ class X:
         return 1.0
 
     @property
-    def x6_mean(self) -> float:
+    def x6_average(self) -> float:
         x = 1.0
         # weight by critical hit chance
         x += self._stats.critical_hit_chance*self._stats.critical_hit_damage
@@ -158,7 +158,7 @@ class X:
         return x
 
     @property
-    def x7_mean(self) -> float:
+    def x7_average(self) -> float:
         # assuming equal chance for armor and health damage
         x = 1.0
         x += 0.5*self._stats.damage_to_armor + 0.5*self._stats.damage_to_health
@@ -211,12 +211,12 @@ class X:
     @property
     def average(self) -> X_Value:
         return {'x1': self.x1,
-                'x2': self.x2_mean,
+                'x2': self.x2_average,
                 'x3': self.x3,
                 'x4': self.x4,
                 'x5': self.x5,
-                'x6': self.x6_mean,
-                'x7': self.x7_mean,
+                'x6': self.x6_average,
+                'x7': self.x7_average,
                 'x8': self.x8}
 
     @property
