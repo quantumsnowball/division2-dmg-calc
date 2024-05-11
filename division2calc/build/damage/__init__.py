@@ -74,10 +74,9 @@ class Damage:
                      headshot: bool = False,
                      armor: bool = False):
         # base
-        dmg = self._weapon.base_damage
-        dmg *= self.x.x1
+        dmg = self.basic
         if profile == 'basic':
-            dmg *= self.x.x2
+            return dmg
         elif profile == 'average':
             dmg *= self.x.x2_mean
         else:
