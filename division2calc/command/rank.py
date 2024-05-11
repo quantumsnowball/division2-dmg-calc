@@ -27,8 +27,8 @@ def rank(file: Path,
     df = load_builds_metric(file, metric, profile)
     # sorting
     if sort_by:
-        by, order = sort_by
-        by = tuple(by.split(',')) if df.columns.nlevels > 1 else by
+        by_, order = sort_by
+        by = tuple(by_.split(',')) if df.columns.nlevels > 1 else by_
         df.sort_values(by, ascending=order == 'asc', inplace=True)
     # format
     match metric:
@@ -42,4 +42,5 @@ def rank(file: Path,
         case _:
             pass
     # result
+    click.secho(f'\n{metric} - profile `{profile}` sorted by `{by_}` `{order}`:', fg='yellow')
     print(df)
