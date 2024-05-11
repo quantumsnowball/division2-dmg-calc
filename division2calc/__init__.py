@@ -129,6 +129,16 @@ def rank(file: Path,
         by, order = sort_by
         by = tuple(by.split(',')) if df.columns.nlevels > 1 else by
         df.sort_values(by, ascending=order == 'asc', inplace=True)
+    # format
+    match metric:
+        case 'stats':
+            df.iloc[:, :1] = df.iloc[:, :1].map(lambda v: f'{v:,.0f}')
+            df.iloc[:, 1:] = df.iloc[:, 1:].map(lambda v: f'{v:.1%}')
+        case 'damage':
+            df = df.map(lambda v: f'{v:,.0f}')
+        case 'x' | 'dydx':
+            df = df.map(lambda v: f'{v:.3f}')
+        case _:
+            pass
     # result
-    format = ',.0f' if metric == 'damage' else '.4f'
-    print(df.map(lambda v: f'{v:{format}}'))
+    print(df)
