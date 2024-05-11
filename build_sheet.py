@@ -7,7 +7,7 @@ base = Build(
     # specialization
     specialization=Gunner(),
     # weapons
-    weapon=StElmosEngine(expertise_level=15),
+    weapon=AR.StElmosEngine(expertise_level=15),
     # gears
     mask=Striker.Mask(attr1=gearattrs.CHC(0.06),
                       mod=gearmods.CHD(0.12)),

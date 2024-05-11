@@ -5,6 +5,7 @@ import division2calc.gear.brandsets.Lengmo as Lengmo
 import division2calc.gear.brandsets.OverlordArmaments as Overlord
 import division2calc.gear.gearsets.StrikersBattlegear as Striker
 import division2calc.gear.mods as gearmods
+import division2calc.weapon.AR as AR
 from division2calc.build import Build
 from division2calc.build.specialization import Gunner
 from division2calc.command.compare import compare
@@ -14,12 +15,11 @@ from division2calc.command.rank import rank
 from division2calc.command.stats import stats
 from division2calc.command.summary import summary
 from division2calc.command.x import x
-from division2calc.weapon.StElmosEngine import StElmosEngine
 
 __all__ = [
     'Build',
     'Gunner',
-    'StElmosEngine',
+    'AR',
     'Striker',
     'Lengmo',
     'Overlord',
