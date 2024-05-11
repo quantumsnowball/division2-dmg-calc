@@ -1,5 +1,7 @@
 from dataclasses import dataclass
+from typing import get_args
 
+from division2calc.build.common import Profile
 from division2calc.build.damage import Damage
 from division2calc.build.stats import Stats
 
@@ -11,18 +13,17 @@ class Summary:
     _stats: Stats
     _damage: Damage
 
+    @property
     def stats(self) -> pd.DataFrame:
-        # data
-        data = {
-            'WeaponDamage': f'{self._damage.basic:,.0f}',
-            'CriticalHitChance': f'{self._stats.critical_hit_chance:.1%}',
-            'CriticalHitDamage': f'{self._stats.critical_hit_damage:.1%}',
-            'HeadshotDamage': f'{self._stats.headshot_damage:.1%}',
-            'ArmorDamage': f'{self._stats.damage_to_armor:.1%}',
-            'HealthDamage': f'{self._stats.damage_to_health:.1%}',
-        }
-        df = pd.DataFrame(data, index=['%'])
-
+        data = dict(basic={
+            'WeaponDamage': self._damage.basic,
+            'CriticalHitChance': self._stats.critical_hit_chance,
+            'CriticalHitDamage': self._stats.critical_hit_damage,
+            'HeadshotDamage': self._stats.headshot_damage,
+            'ArmorDamage': self._stats.damage_to_armor,
+            'HealthDamage': self._stats.damage_to_health,
+        })
+        df = pd.DataFrame.from_dict(data, orient='index')
         # result
         return df
 
@@ -32,7 +33,10 @@ class Summary:
                     min=self._damage.x.min,
                     average=self._damage.x.average,
                     max=self._damage.x.max)
-        return pd.DataFrame(data).T
+        df = pd.DataFrame.from_dict(data, orient='index')
+        df.index.names = ('profile',)
+        df.columns.names = ('x',)
+        return df
 
     @property
     def dydx(self) -> pd.DataFrame:
@@ -40,25 +44,28 @@ class Summary:
                     min=self._damage.dydx.min,
                     average=self._damage.dydx.average,
                     max=self._damage.dydx.max)
-        return pd.DataFrame(data).T
+        df = pd.DataFrame.from_dict(data, orient='index')
+        df.index.names = ('profile',)
+        df.columns.names = ('dydx',)
+        return df
 
+    @property
     def damage(self) -> pd.DataFrame:
         # columns
-        x6_columns = {'Normal': (False, False), 'Critical': (True, False),
-                      'Headshot': (False, True), 'CritHead': (True, True)}
+        x6_columns = {'Normal': (False, False, False), 'Critical': (True, False, False),
+                      'ExpCrit': (True, False, True),
+                      'Headshot': (False, True, False), 'CritHead': (True, True, False)}
         x7_columns = {'Health': False, 'Armor': True}
         columns = pd.MultiIndex.from_product([x7_columns.keys(), x6_columns.keys()])
+        columns.names = ('health/armor', 'critical/headshot')
         # index
-        scenario_index = {'Basic': False}
-        talent_index = {'Base': False}
-        index = pd.MultiIndex.from_product([scenario_index.keys(), talent_index.keys()])
+        profile_index: tuple[Profile, ...] = get_args(Profile)
+        index = pd.Index(profile_index, name='profile')
         # data
-        data = [[self._damage.total_damage(critical=crit, headshot=hs, armor=arm)
+        data = [[self._damage.total_damage(profile, critical=crit, headshot=hs, expcrit=expcrit, armor=arm)
                  for arm in x7_columns.values()
-                 for crit, hs in x6_columns.values()]
-                for _ in scenario_index.values()
-                for _ in talent_index.values()]
+                 for crit, hs, expcrit in x6_columns.values()]
+                for profile in profile_index]
         df = pd.DataFrame(data, index=index, columns=columns)
-
         # result
         return df
