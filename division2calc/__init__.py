@@ -101,5 +101,8 @@ def rank(file: Path,
          metric: Literal['damage', 'x', 'dydx'],
          profile: Literal['basic', 'min', 'average', 'max']) -> None:
     builds = load_builds_file(file)
-    print(metric)
-    print(profile)
+    data = {b.name: getattr(b.summary, metric).loc[profile]
+            for b in builds}
+    df = pd.DataFrame.from_dict(data, orient='index')
+    df.index.names = ['build']
+    print(df)
