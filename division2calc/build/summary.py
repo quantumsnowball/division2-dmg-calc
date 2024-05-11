@@ -15,17 +15,15 @@ class Summary:
 
     @property
     def stats(self) -> pd.DataFrame:
-        # data
-        data = {
-            'WeaponDamage': f'{self._damage.basic:,.0f}',
-            'CriticalHitChance': f'{self._stats.critical_hit_chance:.1%}',
-            'CriticalHitDamage': f'{self._stats.critical_hit_damage:.1%}',
-            'HeadshotDamage': f'{self._stats.headshot_damage:.1%}',
-            'ArmorDamage': f'{self._stats.damage_to_armor:.1%}',
-            'HealthDamage': f'{self._stats.damage_to_health:.1%}',
-        }
-        df = pd.DataFrame(data, index=['%'])
-
+        data = dict(basic={
+            'WeaponDamage': self._damage.basic,
+            'CriticalHitChance': self._stats.critical_hit_chance,
+            'CriticalHitDamage': self._stats.critical_hit_damage,
+            'HeadshotDamage': self._stats.headshot_damage,
+            'ArmorDamage': self._stats.damage_to_armor,
+            'HealthDamage': self._stats.damage_to_health,
+        })
+        df = pd.DataFrame.from_dict(data, orient='index')
         # result
         return df
 
