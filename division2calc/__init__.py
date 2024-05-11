@@ -90,3 +90,8 @@ def compare(file: Path,
         click.secho(f'\ndiff(dydx): Build({build2.name}) net Build({build1.name})', fg='yellow')
         diff: pd.DataFrame = build2.summary.dydx - build1.summary.dydx
         print(diff.round(4))
+
+
+@division2calc.command()
+def rank() -> None:
+    pass
