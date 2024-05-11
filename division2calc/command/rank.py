@@ -1,14 +1,14 @@
 from pathlib import Path
-from typing import get_args
 
 import click
 
-from division2calc.build.common import Metric, Profile, SortBy, SortOrder
+from division2calc.build.common import (METRICS, PROFILES, SORT_ORDERS, Metric,
+                                        Profile, SortBy)
 from division2calc.command.utils import load_builds_metric
 
-ClickMetric = click.Choice(get_args(Metric))
-ClickProfile = click.Choice(get_args(Profile))
-ClickSortOrder = click.Choice(get_args(SortOrder))
+ClickMetric = click.Choice(METRICS)
+ClickProfile = click.Choice(PROFILES)
+ClickSortOrder = click.Choice(SORT_ORDERS)
 ClickSortBy = click.Tuple([str, ClickSortOrder])
 
 

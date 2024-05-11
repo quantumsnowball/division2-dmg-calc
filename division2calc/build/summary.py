@@ -1,7 +1,6 @@
 from dataclasses import dataclass
-from typing import get_args
 
-from division2calc.build.common import Profile
+from division2calc.build.common import PROFILES, Profiles
 from division2calc.build.damage import Damage
 from division2calc.build.stats import Stats
 
@@ -59,7 +58,7 @@ class Summary:
         columns = pd.MultiIndex.from_product([x7_columns.keys(), x6_columns.keys()])
         columns.names = ('health/armor', 'critical/headshot')
         # index
-        profile_index: tuple[Profile, ...] = get_args(Profile)
+        profile_index: Profiles = PROFILES
         index = pd.Index(profile_index, name='profile')
         # data
         data = [[self._damage.total_damage(profile, critical=crit, headshot=hs, expcrit=expcrit, armor=arm)
