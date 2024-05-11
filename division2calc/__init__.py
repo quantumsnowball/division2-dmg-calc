@@ -8,6 +8,7 @@ import division2calc.gear.mods as gearmods
 from division2calc.build import Build
 from division2calc.build.specialization import Gunner
 from division2calc.command.compare import compare
+from division2calc.command.damage import damage
 from division2calc.command.rank import rank
 from division2calc.command.stats import stats
 from division2calc.command.summary import summary
@@ -31,6 +32,7 @@ def division2calc() -> None:
 
 
 division2calc.add_command(stats)
+division2calc.add_command(damage)
 division2calc.add_command(summary)
 division2calc.add_command(compare)
 division2calc.add_command(rank)
