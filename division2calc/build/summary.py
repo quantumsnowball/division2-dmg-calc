@@ -1,15 +1,11 @@
 from dataclasses import dataclass
-from typing import Literal
+from typing import get_args
 
+from division2calc.build.common import Profile
 from division2calc.build.damage import Damage
 from division2calc.build.stats import Stats
 
 import pandas as pd
-
-Metric = Literal['damage', 'x', 'dydx']
-Profile = Literal['basic', 'min', 'average', 'max']
-SortOrder = Literal['asc', 'desc']
-SortBy = tuple[str, SortOrder]
 
 
 @dataclass
@@ -63,13 +59,13 @@ class Summary:
         columns = pd.MultiIndex.from_product([x7_columns.keys(), x6_columns.keys()])
         columns.names = ('health/armor', 'critical/headshot')
         # index
-        profile_index = ('basic', )
+        profile_index: tuple[Profile, ...] = get_args(Profile)
         index = pd.Index(profile_index, name='profile')
         # data
-        data = [[self._damage.total_damage(critical=crit, headshot=hs, armor=arm)
+        data = [[self._damage.total_damage(profile, critical=crit, headshot=hs, armor=arm)
                  for arm in x7_columns.values()
                  for crit, hs in x6_columns.values()]
-                for _ in profile_index]
+                for profile in profile_index]
         df = pd.DataFrame(data, index=index, columns=columns)
         # result
         return df

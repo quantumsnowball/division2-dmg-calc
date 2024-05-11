@@ -11,8 +11,8 @@ import division2calc.gear.brandsets.OverlordArmaments as Overlord
 import division2calc.gear.gearsets.StrikersBattlegear as Striker
 import division2calc.gear.mods as gearmods
 from division2calc.build import Build
+from division2calc.build.common import Metric, Profile, SortBy, SortOrder
 from division2calc.build.specialization import Gunner
-from division2calc.build.summary import Metric, Profile, SortBy, SortOrder
 from division2calc.utils import load_builds_file, pformat_dataclass
 from division2calc.weapon.StElmosEngine import StElmosEngine
 
@@ -48,7 +48,7 @@ def summary(file: Path,
     all = not any((x, damage, dydx))
     if all or damage:
         click.secho(f'\ndamage: Build({build.name})', fg='yellow')
-        print(build.summary.damage().round(2))
+        print(build.summary.damage.round(2))
     if all or x:
         click.secho(f'\nx: Build({build.name})', fg='yellow')
         print(build.summary.x.round(4))
@@ -78,10 +78,10 @@ def compare(file: Path,
     all = not any((x, damage, dydx))
     if all or damage:
         click.secho(f'\ndiff(damage): Build({build2.name}) net Build({build1.name})', fg='yellow')
-        diff: pd.DataFrame = build2.summary.damage() - build1.summary.damage()
+        diff: pd.DataFrame = build2.summary.damage - build1.summary.damage
         print(diff.round(2))
         click.secho(f'\ndiff%(damage): Build({build2.name}) net Build({build1.name})', fg='yellow')
-        diffpct: pd.DataFrame = (build2.summary.damage() / build1.summary.damage() - 1)*100
+        diffpct: pd.DataFrame = (build2.summary.damage / build1.summary.damage - 1)*100
         print(diffpct.round(4))
     if all or x:
         click.secho(f'\ndiff(x): Build({build2.name}) net Build({build1.name})', fg='yellow')
@@ -109,13 +109,19 @@ def rank(file: Path,
          metric: Metric,
          profile: Profile,
          sort_by: SortBy) -> None:
+    # load builds
     builds = load_builds_file(file)
+    # data
     data = {b.name: getattr(b.summary, metric).loc[profile]
             for b in builds}
     df = pd.DataFrame.from_dict(data, orient='index')
+    # index names
     df.index.names = ('build name',)
-    df.columns.names = (f'[{profile}] {metric}',)
+    df.columns.names = [f'[{profile}] {metric}', ] + ['']*(df.columns.nlevels-1)
+    # sorting
     if sort_by:
         by, order = sort_by
+        by = tuple(by.split(',')) if df.columns.nlevels > 1 else by
         df.sort_values(by, ascending=order == 'asc', inplace=True)
+    # result
     print(df)

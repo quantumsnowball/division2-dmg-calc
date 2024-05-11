@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from division2calc.build.common import Profile
 from division2calc.build.stats import Stats
 from division2calc.gear import Gears
 from division2calc.weapon import Weapon
@@ -31,6 +32,9 @@ class Damage:
     def min(self) -> float:
         dmg = self.basic
         dmg *= self.x.x2_min
+        dmg *= self.x.x3
+        dmg *= self.x.x4
+        dmg *= self.x.x5
         dmg *= self.x.x6_min
         dmg *= self.x.x7_min
         dmg *= self.x.x8
@@ -41,6 +45,9 @@ class Damage:
     def average(self) -> float:
         dmg = self.basic
         dmg *= self.x.x2_mean
+        dmg *= self.x.x3
+        dmg *= self.x.x4
+        dmg *= self.x.x5
         dmg *= self.x.x6_mean
         dmg *= self.x.x7_mean
         dmg *= self.x.x8
@@ -51,6 +58,9 @@ class Damage:
     def max(self) -> float:
         dmg = self.basic
         dmg *= self.x.x2_max
+        dmg *= self.x.x3
+        dmg *= self.x.x4
+        dmg *= self.x.x5
         dmg *= self.x.x6_max
         dmg *= self.x.x7_max
         dmg *= self.x.x8
@@ -58,6 +68,7 @@ class Damage:
         return dmg
 
     def total_damage(self,
+                     profile: Profile,
                      *,
                      critical: bool = False,
                      headshot: bool = False,
@@ -65,7 +76,15 @@ class Damage:
         # base
         dmg = self._weapon.base_damage
         dmg *= self.x.x1
-        dmg *= self.x.x2
+        if profile == 'basic':
+            dmg *= self.x.x2
+        elif profile == 'average':
+            dmg *= self.x.x2_mean
+        else:
+            dmg *= getattr(self.x, f'x2_{profile}')
+        dmg *= self.x.x3
+        dmg *= self.x.x4
+        dmg *= self.x.x5
         dmg *= self.x.x6(critical, headshot)
         dmg *= self.x.x7(armor)
         dmg *= self.x.x8
