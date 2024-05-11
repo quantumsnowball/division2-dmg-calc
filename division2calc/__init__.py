@@ -94,8 +94,8 @@ def compare(file: Path,
 
 
 @division2calc.command()
-@click.option('--metric', default='damage', type=click.Choice(['damage', 'x', 'dydx']))
-@click.option('--profile', default='basic', type=click.Choice(['basic', 'min', 'average', 'max']))
+@click.option('-m', '--metric', default='damage', type=click.Choice(['damage', 'x', 'dydx']))
+@click.option('-p', '--profile', default='basic', type=click.Choice(['basic', 'min', 'average', 'max']))
 def rank(metric: Literal['damage', 'x', 'dydx'],
          profile: Literal['basic', 'min', 'average', 'max']) -> None:
     print(metric)
