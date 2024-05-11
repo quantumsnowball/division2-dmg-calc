@@ -13,6 +13,7 @@ class Summary:
     _stats: Stats
     _damage: Damage
 
+    @property
     def stats(self) -> pd.DataFrame:
         # data
         data = {
