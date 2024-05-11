@@ -53,8 +53,9 @@ class Summary:
     @property
     def damage(self) -> pd.DataFrame:
         # columns
-        x6_columns = {'Normal': (False, False), 'Critical': (True, False),
-                      'Headshot': (False, True), 'CritHead': (True, True)}
+        x6_columns = {'Normal': (False, False, False), 'Critical': (True, False, False),
+                      'ExpCrit': (True, False, True),
+                      'Headshot': (False, True, False), 'CritHead': (True, True, False)}
         x7_columns = {'Health': False, 'Armor': True}
         columns = pd.MultiIndex.from_product([x7_columns.keys(), x6_columns.keys()])
         columns.names = ('health/armor', 'critical/headshot')
@@ -62,9 +63,9 @@ class Summary:
         profile_index: tuple[Profile, ...] = get_args(Profile)
         index = pd.Index(profile_index, name='profile')
         # data
-        data = [[self._damage.total_damage(profile, critical=crit, headshot=hs, armor=arm)
+        data = [[self._damage.total_damage(profile, critical=crit, headshot=hs, expcrit=expcrit, armor=arm)
                  for arm in x7_columns.values()
-                 for crit, hs in x6_columns.values()]
+                 for crit, hs, expcrit in x6_columns.values()]
                 for profile in profile_index]
         df = pd.DataFrame(data, index=index, columns=columns)
         # result

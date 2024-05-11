@@ -107,10 +107,13 @@ class X:
     # x6
     #
 
-    def x6(self, critical: bool, headshot: bool) -> float:
+    def x6(self, critical: bool, headshot: bool, expcrit: bool) -> float:
         x = 1
         if critical:
-            x += self._stats.critical_hit_damage
+            chd = self._stats.critical_hit_damage
+            if expcrit:
+                chd *= self._stats.critical_hit_chance
+            x += chd
         if headshot:
             x += self._stats.headshot_damage
         # result

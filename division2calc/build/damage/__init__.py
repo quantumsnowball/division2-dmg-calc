@@ -72,6 +72,7 @@ class Damage:
                      *,
                      critical: bool = False,
                      headshot: bool = False,
+                     expcrit: bool = False,
                      armor: bool = False):
         # base
         dmg = self.basic
@@ -81,7 +82,7 @@ class Damage:
         dmg *= self.x.x3
         dmg *= self.x.x4
         dmg *= self.x.x5
-        dmg *= self.x.x6(critical, headshot)
+        dmg *= self.x.x6(critical, headshot, expcrit)
         dmg *= self.x.x7(armor)
         dmg *= self.x.x8
         # result
