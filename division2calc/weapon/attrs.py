@@ -4,6 +4,7 @@ from dataclasses import dataclass
 #
 # Core Attribute
 #
+@dataclass
 class CoreAttribute:
     pass
 
@@ -21,6 +22,7 @@ class HealthDamage(CoreAttribute):
 #
 # Minor Attribute
 #
+@dataclass
 class MinorAttribute:
     pass
 
@@ -38,6 +40,7 @@ class RateOfFire(MinorAttribute):
 #
 # Empty
 #
+@dataclass
 class NoAttr(MinorAttribute):
     def __repr__(self) -> str:
         return 'N/A'

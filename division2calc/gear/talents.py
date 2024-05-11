@@ -1,6 +1,7 @@
 from dataclasses import dataclass, replace
 
 
+@dataclass
 class Talent:
     pass
 
@@ -47,6 +48,7 @@ class Obliterate(ChestTalent):
 #
 
 
+@dataclass
 class NoTalent(BackpackTalent, ChestTalent):
     def __repr__(self) -> str:
         return 'N/A'

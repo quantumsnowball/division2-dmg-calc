@@ -3,17 +3,23 @@ from dataclasses import dataclass, field
 from division2calc.weapon import WeaponType
 
 
+@dataclass
+class WeaponTypeBonus:
+    AR: int = 3
+    SMG: int = 3
+    LMG: int = 3
+    Rifle: int = 0
+    MMR: int = 0
+    Shotgun: int = 0
+
+
 @dataclass(kw_only=True)
 class Specialization:
     name: str
-    weapon_type_damage_scores: dict[WeaponType, int] = field(
-        default_factory=lambda: {
-            'AR': 3, 'SMG': 3, 'LMG': 3,
-            'Rifle': 0, 'MMR': 0, 'Shotgun': 0,
-        })
+    weapon_type_damage_scores: WeaponTypeBonus = field(default_factory=WeaponTypeBonus)
 
     def weapon_type_damage(self, type: WeaponType) -> float:
-        return self.weapon_type_damage_scores.get(type, 0) * 0.05
+        return getattr(self.weapon_type_damage_scores, type) * 0.05
 
 
 @dataclass(kw_only=True)

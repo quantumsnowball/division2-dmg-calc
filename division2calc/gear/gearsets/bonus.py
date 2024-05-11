@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 
+@dataclass
 class Bonus:
     pass
 
@@ -15,10 +16,12 @@ class RateOfFire(Bonus):
     pct: float = 0.15
 
 
+@dataclass
 class Talent:
     pass
 
 
+@dataclass
 class BonusTalent(Bonus, Talent):
     pass
 
@@ -51,6 +54,7 @@ class StrikersGamble(BonusTalent):
 #
 
 
+@dataclass
 class NoBonus(Bonus):
     def __repr__(self) -> str:
         return 'N/A'

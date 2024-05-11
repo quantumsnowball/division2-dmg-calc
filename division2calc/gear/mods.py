@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 
+@dataclass
 class Mod:
     pass
 
@@ -28,6 +29,7 @@ HS = HeadshotDamage
 #
 # Empty
 #
+@dataclass
 class NoMod(Mod):
     def __repr__(self) -> str:
         return 'N/A'

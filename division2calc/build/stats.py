@@ -46,6 +46,8 @@ class Stats:
             pct += gear.critical_hit_chance
         # keener's watch
         pct += self._watch.critical_hit_chance
+        # hard cap to 60%
+        pct = min(0.6, pct)
         # result
         return pct
 

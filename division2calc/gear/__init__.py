@@ -13,7 +13,7 @@ from division2calc.gear.brandsets import Brandsets
 class Gear:
     core: attrs.CoreAttribute
     attr1: attrs.MinorAttribute
-    # refer to other gears
+    # refer to other gears, warning: circular reference!
     _gears: Gears = field(init=False, repr=False)
 
     def __post_init__(self) -> None:

@@ -5,6 +5,7 @@ from dataclasses import dataclass
 #
 
 
+@dataclass
 class CoreAttribute:
     pass
 
@@ -28,11 +29,13 @@ class SkillCore(CoreAttribute):
 # Minor Attributes
 #
 
+@dataclass
 class MinorAttribute:
     pass
 
 
 # offensive
+@dataclass
 class OffensiveMinorAttribute(MinorAttribute):
     pass
 
@@ -68,6 +71,7 @@ class DamageToTargetOutOfCover(OffensiveMinorAttribute):
 
 
 # defensive
+@dataclass
 class DefensiveMinorAttribute(MinorAttribute):
     pass
 
@@ -80,6 +84,7 @@ class ExplosiveResistence(DefensiveMinorAttribute):
 #
 # Empty
 #
+@dataclass
 class NoAttr(MinorAttribute):
     def __repr__(self) -> str:
         return 'N/A'
