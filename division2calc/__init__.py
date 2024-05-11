@@ -97,12 +97,19 @@ def compare(file: Path,
 @click.argument('file', required=True, type=click.Path())
 @click.option('-m', '--metric', default='damage', type=click.Choice(['damage', 'x', 'dydx']))
 @click.option('-p', '--profile', default='basic', type=click.Choice(['basic', 'min', 'average', 'max']))
+@click.option('-by', '--sort-by', default=None, type=click.Tuple([str, click.Choice(['asc', 'desc'])]),
+              help='sort dataframe by field with order, e.g. -by x6 desc')
 def rank(file: Path,
          metric: Literal['damage', 'x', 'dydx'],
-         profile: Literal['basic', 'min', 'average', 'max']) -> None:
+         profile: Literal['basic', 'min', 'average', 'max'],
+         sort_by: tuple[str, Literal['asc', 'desc']]) -> None:
     builds = load_builds_file(file)
     data = {b.name: getattr(b.summary, metric).loc[profile]
             for b in builds}
     df = pd.DataFrame.from_dict(data, orient='index')
-    df.index.names = ['build']
+    df.index.names = ('build name',)
+    df.columns.names = (metric,)
+    if sort_by:
+        by, order = sort_by
+        df.sort_values(by, ascending=order == 'asc', inplace=True)
     print(df)
