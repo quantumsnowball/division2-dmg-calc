@@ -1,9 +1,15 @@
 from dataclasses import dataclass
+from typing import Literal
 
 from division2calc.build.damage import Damage
 from division2calc.build.stats import Stats
 
 import pandas as pd
+
+Metric = Literal['damage', 'x', 'dydx']
+Profile = Literal['basic', 'min', 'average', 'max']
+SortOrder = Literal['asc', 'desc']
+SortBy = tuple[str, SortOrder]
 
 
 @dataclass
@@ -32,7 +38,10 @@ class Summary:
                     min=self._damage.x.min,
                     average=self._damage.x.average,
                     max=self._damage.x.max)
-        return pd.DataFrame(data).T
+        df = pd.DataFrame.from_dict(data, orient='index')
+        df.index.names = ('profile',)
+        df.columns.names = ('x',)
+        return df
 
     @property
     def dydx(self) -> pd.DataFrame:
@@ -40,7 +49,10 @@ class Summary:
                     min=self._damage.dydx.min,
                     average=self._damage.dydx.average,
                     max=self._damage.dydx.max)
-        return pd.DataFrame(data).T
+        df = pd.DataFrame.from_dict(data, orient='index')
+        df.index.names = ('profile',)
+        df.columns.names = ('dydx',)
+        return df
 
     def damage(self) -> pd.DataFrame:
         # columns
@@ -48,17 +60,15 @@ class Summary:
                       'Headshot': (False, True), 'CritHead': (True, True)}
         x7_columns = {'Health': False, 'Armor': True}
         columns = pd.MultiIndex.from_product([x7_columns.keys(), x6_columns.keys()])
+        columns.names = ('health/armor', 'critical/headshot')
         # index
-        scenario_index = {'Basic': False}
-        talent_index = {'Base': False}
-        index = pd.MultiIndex.from_product([scenario_index.keys(), talent_index.keys()])
+        profile_index = ('basic', )
+        index = pd.Index(profile_index, name='profile')
         # data
         data = [[self._damage.total_damage(critical=crit, headshot=hs, armor=arm)
                  for arm in x7_columns.values()
                  for crit, hs in x6_columns.values()]
-                for _ in scenario_index.values()
-                for _ in talent_index.values()]
+                for _ in profile_index]
         df = pd.DataFrame(data, index=index, columns=columns)
-
         # result
         return df

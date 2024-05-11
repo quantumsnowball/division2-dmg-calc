@@ -1,6 +1,6 @@
 import pprint
 from pathlib import Path
-from typing import Literal, get_args
+from typing import get_args
 
 import click
 import pandas as pd
@@ -12,6 +12,7 @@ import division2calc.gear.gearsets.StrikersBattlegear as Striker
 import division2calc.gear.mods as gearmods
 from division2calc.build import Build
 from division2calc.build.specialization import Gunner
+from division2calc.build.summary import Metric, Profile, SortBy, SortOrder
 from division2calc.utils import load_builds_file, pformat_dataclass
 from division2calc.weapon.StElmosEngine import StElmosEngine
 
@@ -92,10 +93,6 @@ def compare(file: Path,
         print(diff.round(4))
 
 
-Metric = Literal['damage', 'x', 'dydx']
-Profile = Literal['basic', 'min', 'average', 'max']
-SortOrder = Literal['asc', 'desc']
-SortBy = tuple[str, SortOrder]
 ClickMetric = click.Choice(get_args(Metric))
 ClickProfile = click.Choice(get_args(Profile))
 ClickSortOrder = click.Choice(get_args(SortOrder))
@@ -117,7 +114,7 @@ def rank(file: Path,
             for b in builds}
     df = pd.DataFrame.from_dict(data, orient='index')
     df.index.names = ('build name',)
-    df.columns.names = (metric,)
+    df.columns.names = (f'[{profile}] {metric}',)
     if sort_by:
         by, order = sort_by
         df.sort_values(by, ascending=order == 'asc', inplace=True)
