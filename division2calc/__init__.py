@@ -124,4 +124,5 @@ def rank(file: Path,
         by = tuple(by.split(',')) if df.columns.nlevels > 1 else by
         df.sort_values(by, ascending=order == 'asc', inplace=True)
     # result
-    print(df)
+    format = ',.0f' if metric == 'damage' else '.4f'
+    print(df.map(lambda v: f'{v:{format}}'))
