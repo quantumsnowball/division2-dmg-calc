@@ -11,6 +11,12 @@ class ActumEst(Talent):
     pass
 
 
+@dataclass
+class PerfectOptimist(Talent):
+    # TODO
+    pass
+
+
 #
 # Empty
 #

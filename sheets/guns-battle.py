@@ -3,11 +3,11 @@ from dataclasses import replace
 from division2calc import *
 
 base = Build(
-    name='base',
+    name='StElmosEngine',
     # specialization
     specialization=Gunner(),
     # weapons
-    weapon=StElmosEngine(expertise_level=15),
+    weapon=AR.StElmosEngine(expertise_level=15),
     # gears
     mask=Striker.Mask(attr1=gearattrs.CHC(0.06),
                       mod=gearmods.CHD(0.12)),
@@ -21,17 +21,6 @@ base = Build(
 builds = [base, ]
 builds.append(replace(
     builds[-1],
-    name='+1CHC',
-    mask=Striker.Mask(attr1=gearattrs.CHC(0.06),
-                      mod=gearmods.CHC(0.06)),
-))
-builds.append(replace(
-    builds[-1],
-    name='+2CHC',
-    backpack=Striker.Backpack(mod=gearmods.CHC(0.06)),
-))
-builds.append(replace(
-    builds[-1],
-    name='+3CHC',
-    chest=Lengmo.Chest(mod=gearmods.CHC(0.06)),
+    name='ShieldSplinterer',
+    weapon=AR.ShieldSplinterer(expertise_level=12),
 ))
