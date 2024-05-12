@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import fields, is_dataclass
 from typing import Any, Self, Sequence
 
@@ -25,6 +27,13 @@ class Float(float):
         # only list[str] could be set to this property
         assert all(isinstance(v, str) for v in val)
         self._src = val
+
+    def __add__(self, other: float | Float) -> Float:
+        ''' preserve the src when add to another float|Float '''
+        result = super().__add__(other)
+        if isinstance(other, Float):
+            self.src += other.src
+        return Float(result, self.src)
 
 
 def dataclass_asdict(dc: Any) -> dict[str, Any]:
