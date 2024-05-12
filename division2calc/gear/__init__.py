@@ -7,6 +7,7 @@ import division2calc.gear.attrs as attrs
 import division2calc.gear.mods as mods
 import division2calc.gear.talents as talents
 from division2calc.gear.brandsets import Brandsets
+from division2calc.utils import Float
 
 
 @dataclass(kw_only=True)
@@ -22,13 +23,13 @@ class Gear:
             self.attrs.append(self.attr2)
 
     @property
-    def weapon_damage(self) -> float:
+    def weapon_damage(self) -> Float:
         if isinstance(self.core, attrs.RedCore):
-            return self.core.damage
-        return 0.0
+            return Float(self.core.damage)
+        return Float(0.0)
 
     @property
-    def critical_hit_chance(self) -> float:
+    def critical_hit_chance(self) -> Float:
         pct = 0
         # bonus
         # TODO
@@ -41,10 +42,10 @@ class Gear:
             if isinstance(self.mod, mods.CriticalHitChance):
                 pct += self.mod.pct
         # result
-        return pct
+        return Float(pct)
 
     @property
-    def critical_hit_damage(self) -> float:
+    def critical_hit_damage(self) -> Float:
         pct = 0
         # bonus
         # TODO
@@ -57,10 +58,10 @@ class Gear:
             if isinstance(self.mod, mods.CriticalHitDamage):
                 pct += self.mod.pct
         # result
-        return pct
+        return Float(pct)
 
     @property
-    def headshot_damage(self) -> float:
+    def headshot_damage(self) -> Float:
         pct = 0
         # bonus
         # TODO
@@ -73,10 +74,10 @@ class Gear:
             if isinstance(self.mod, mods.HeadshotDamage):
                 pct += self.mod.pct
         # result
-        return pct
+        return Float(pct)
 
     @property
-    def damage_to_health(self) -> float:
+    def damage_to_health(self) -> Float:
         pct = 0
         # bonus
         # TODO
@@ -85,17 +86,17 @@ class Gear:
             if isinstance(attr, attrs.DamageToHealth):
                 pct += attr.pct
         # result
-        return pct
+        return Float(pct)
 
     @property
-    def damage_to_target_out_of_cover(self) -> float:
+    def damage_to_target_out_of_cover(self) -> Float:
         pct = 0
         # attrs
         for attr in self.attrs:
             if isinstance(attr, attrs.DamageToTargetOutOfCover):
                 pct += attr.pct
         # result
-        return pct
+        return Float(pct)
 
 
 @dataclass(kw_only=True)
