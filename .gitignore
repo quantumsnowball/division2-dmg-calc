@@ -8,7 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
+# build/
 develop-eggs/
 dist/
 downloads/
@@ -162,5 +162,4 @@ cython_debug/
 
 # custom
 *.svg
-!division2calc/build/
 
