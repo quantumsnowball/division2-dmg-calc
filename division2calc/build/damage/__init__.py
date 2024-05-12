@@ -30,41 +30,23 @@ class Damage:
 
     @property
     def min(self) -> float:
-        dmg = self.basic
-        dmg *= self.x[2].min
-        dmg *= self.x[3].min
-        dmg *= self.x[4].min
-        dmg *= self.x[5].min
-        dmg *= self.x[6].min
-        dmg *= self.x[7].min
-        dmg *= self.x[8].min
-        # result
+        dmg = self._weapon.base_damage
+        for i in range(1, 9):
+            dmg *= self.x[i].min
         return dmg
 
     @property
     def average(self) -> float:
-        dmg = self.basic
-        dmg *= self.x[2].average
-        dmg *= self.x[3].average
-        dmg *= self.x[4].average
-        dmg *= self.x[5].average
-        dmg *= self.x[6].average
-        dmg *= self.x[7].average
-        dmg *= self.x[8].average
-        # result
+        dmg = self._weapon.base_damage
+        for i in range(1, 9):
+            dmg *= self.x[i].average
         return dmg
 
     @property
     def max(self) -> float:
-        dmg = self.basic
-        dmg *= self.x[2].max
-        dmg *= self.x[3].max
-        dmg *= self.x[4].max
-        dmg *= self.x[5].max
-        dmg *= self.x[6].max
-        dmg *= self.x[7].max
-        dmg *= self.x[8].max
-        # result
+        dmg = self._weapon.base_damage
+        for i in range(1, 9):
+            dmg *= self.x[i].max
         return dmg
 
     def total_damage(self,
