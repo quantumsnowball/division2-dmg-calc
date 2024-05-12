@@ -35,7 +35,7 @@ class Damage:
         dmg *= self.x.x3.min
         dmg *= self.x.x4.min
         dmg *= self.x.x5.min
-        dmg *= self.x.x6_min
+        dmg *= self.x.x6.min
         dmg *= self.x.x7_min
         dmg *= self.x.x8
         # result
@@ -48,7 +48,7 @@ class Damage:
         dmg *= self.x.x3.average
         dmg *= self.x.x4.average
         dmg *= self.x.x5.average
-        dmg *= self.x.x6_average
+        dmg *= self.x.x6.average
         dmg *= self.x.x7_average
         dmg *= self.x.x8
         # result
@@ -61,7 +61,7 @@ class Damage:
         dmg *= self.x.x3.max
         dmg *= self.x.x4.max
         dmg *= self.x.x5.max
-        dmg *= self.x.x6_max
+        dmg *= self.x.x6.max
         dmg *= self.x.x7_max
         dmg *= self.x.x8
         # result

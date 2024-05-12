@@ -6,6 +6,7 @@ from division2calc.build.damage.X.X2 import X2
 from division2calc.build.damage.X.X3 import X3
 from division2calc.build.damage.X.X4 import X4
 from division2calc.build.damage.X.X5 import X5
+from division2calc.build.damage.X.X6 import X6
 from division2calc.build.damage.common import Profile
 from division2calc.build.stats import Stats
 from division2calc.gear import Gears
@@ -41,59 +42,7 @@ class X(Profile[X_Value]):
         self.x3 = X3()
         self.x4 = X4()
         self.x5 = X5()
-
-    #
-    # x4
-    #
-
-    # @property
-    # def x4(self) -> float:
-    #     # TODO
-    #     return 1.0
-    #
-    # x5
-    #
-
-    # @property
-    # def x5(self) -> float:
-    #     # TODO
-    #     return 1.0
-    #
-    # x6
-    #
-
-    def x6(self, critical: bool, headshot: bool, expcrit: bool) -> float:
-        x = 1
-        if critical:
-            chd = self._stats.critical_hit_damage
-            if expcrit:
-                chd *= self._stats.critical_hit_chance
-            x += chd
-        if headshot:
-            x += self._stats.headshot_damage
-        # result
-        return x
-
-    @property
-    def x6_min(self) -> float:
-        return 1.0
-
-    @property
-    def x6_average(self) -> float:
-        x = 1.0
-        # weight by critical hit chance
-        x += self._stats.critical_hit_chance*self._stats.critical_hit_damage
-        # result
-        return x
-
-    @property
-    def x6_max(self) -> float:
-        x = 1.0
-        # assuming critical headshot
-        x += self._stats.critical_hit_damage
-        x += self._stats.headshot_damage
-        # result
-        return x
+        self.x6 = X6(self._stats)
 
     #
     # x7
@@ -151,7 +100,7 @@ class X(Profile[X_Value]):
                 'x3': self.x3.basic,
                 'x4': self.x4.basic,
                 'x5': self.x5.basic,
-                'x6': 1.0,
+                'x5': self.x6.basic,
                 'x7': 1.0,
                 'x8': self.x8}
 
@@ -162,7 +111,7 @@ class X(Profile[X_Value]):
                 'x3': self.x3.min,
                 'x4': self.x4.min,
                 'x5': self.x5.min,
-                'x6': self.x6_min,
+                'x6': self.x6.min,
                 'x7': self.x7_min,
                 'x8': self.x8}
 
@@ -173,7 +122,7 @@ class X(Profile[X_Value]):
                 'x3': self.x3.average,
                 'x4': self.x4.average,
                 'x5': self.x5.average,
-                'x6': self.x6_average,
+                'x6': self.x6.average,
                 'x7': self.x7_average,
                 'x8': self.x8}
 
@@ -184,6 +133,6 @@ class X(Profile[X_Value]):
                 'x3': self.x3.max,
                 'x4': self.x4.max,
                 'x5': self.x5.max,
-                'x6': self.x6_max,
+                'x6': self.x6.max,
                 'x7': self.x7_max,
                 'x8': self.x8}
