@@ -1,21 +1,23 @@
 from dataclasses import dataclass
+
 from division2calc.build.damage.common import Profile
+from division2calc.utils import Float
 
 
 @dataclass
-class X4(Profile[float]):
+class X4(Profile[Float]):
     @property
-    def basic(self) -> float:
-        return 1.0
+    def basic(self) -> Float:
+        return Float(1.0)
 
     @property
-    def min(self) -> float:
+    def min(self) -> Float:
         return self.basic
 
     @property
-    def average(self) -> float:
+    def average(self) -> Float:
         return self.basic
 
     @property
-    def max(self) -> float:
+    def max(self) -> Float:
         return self.basic
