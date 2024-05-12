@@ -2,13 +2,11 @@ from dataclasses import dataclass
 from typing import Literal
 
 from division2calc.build.damage.X.X1 import X1
+from division2calc.build.damage.X.X2 import X2
 from division2calc.build.damage.common import Profile
 from division2calc.build.stats import Stats
 from division2calc.gear import Gears
 from division2calc.weapon import Weapon
-import division2calc.gear.talents as talents
-import division2calc.gear.gearsets as gearsets
-import division2calc.gear.gearsets.bonus as gearsets_bonus
 
 
 Name = Literal['x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8']
@@ -36,52 +34,12 @@ class X(Profile[X_Value]):
 
     def __post_init__(self) -> None:
         self.x1 = X1(self._stats)
-
-    #
-    # x2
-    #
-
-    @property
-    def x2(self) -> float:
-        x = 1.0
-        # backpack
-        # chest
-        if isinstance(self._gears.chest.talent, talents.Obliterate):
-            x += self._gears.chest.talent.max
-        # gearset
-        for gear in self._gears:
-            if isinstance(gear, gearsets.Gearsets):
-                if isinstance(gear.gearset_bonus, gearsets_bonus.StrikersGamble):
-                    x += gear.gearset_bonus.max
-        # result
-        return x
-
-    @property
-    def x2_min(self) -> float:
-        return 1.0
-
-    @property
-    def x2_average(self) -> float:
-        x = 1.0
-        # backpack
-        # chest
-        if isinstance(self._gears.chest.talent, talents.Obliterate):
-            x += self._gears.chest.talent.average
-        # gearset
-        for gear in self._gears:
-            if isinstance(gear, gearsets.Gearsets):
-                if isinstance(gear.gearset_bonus, gearsets_bonus.StrikersGamble):
-                    x += gear.gearset_bonus.average
-        # result
-        return x
-
-    @property
-    def x2_max(self) -> float:
-        return self.x2
+        self.x2 = X2(self._gears)
 
     #
     # x3
     #
+
     @property
     def x3(self) -> float:
         # TODO
@@ -191,7 +149,7 @@ class X(Profile[X_Value]):
     @property
     def basic(self) -> X_Value:
         return {'x1': self.x1.basic,
-                'x2': 1.0,
+                'x2': self.x2.basic,
                 'x3': 1.0,
                 'x4': 1.0,
                 'x5': 1.0,
@@ -202,7 +160,7 @@ class X(Profile[X_Value]):
     @property
     def min(self) -> X_Value:
         return {'x1': self.x1.min,
-                'x2': self.x2_min,
+                'x2': self.x2.min,
                 'x3': self.x3,
                 'x4': self.x4,
                 'x5': self.x5,
@@ -213,7 +171,7 @@ class X(Profile[X_Value]):
     @property
     def average(self) -> X_Value:
         return {'x1': self.x1.average,
-                'x2': self.x2_average,
+                'x2': self.x2.average,
                 'x3': self.x3,
                 'x4': self.x4,
                 'x5': self.x5,
@@ -224,7 +182,7 @@ class X(Profile[X_Value]):
     @property
     def max(self) -> X_Value:
         return {'x1': self.x1.max,
-                'x2': self.x2_max,
+                'x2': self.x2.max,
                 'x3': self.x3,
                 'x4': self.x4,
                 'x5': self.x5,

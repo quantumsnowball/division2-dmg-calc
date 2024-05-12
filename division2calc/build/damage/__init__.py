@@ -31,7 +31,7 @@ class Damage:
     @property
     def min(self) -> float:
         dmg = self.basic
-        dmg *= self.x.x2_min
+        dmg *= self.x.x2.min
         dmg *= self.x.x3
         dmg *= self.x.x4
         dmg *= self.x.x5
@@ -44,7 +44,7 @@ class Damage:
     @property
     def average(self) -> float:
         dmg = self.basic
-        dmg *= self.x.x2_average
+        dmg *= self.x.x2.average
         dmg *= self.x.x3
         dmg *= self.x.x4
         dmg *= self.x.x5
@@ -57,7 +57,7 @@ class Damage:
     @property
     def max(self) -> float:
         dmg = self.basic
-        dmg *= self.x.x2_max
+        dmg *= self.x.x2.max
         dmg *= self.x.x3
         dmg *= self.x.x4
         dmg *= self.x.x5
@@ -78,7 +78,7 @@ class Damage:
         dmg = self.basic
         if profile == 'basic':
             return dmg
-        dmg *= getattr(self.x, f'x2_{profile}')
+        dmg *= getattr(self.x.x2, profile)
         dmg *= self.x.x3
         dmg *= self.x.x4
         dmg *= self.x.x5
