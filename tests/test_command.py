@@ -14,11 +14,15 @@ def test_(script_runner: ScriptRunner):
 
 
 def test_stats(script_runner: ScriptRunner):
+    r = script_runner.run([CMD, 'stats', ])
+    assert r.returncode != 0
     r = script_runner.run([CMD, 'stats', FILE])
     assert r.returncode == 0
 
 
 def test_summary(script_runner: ScriptRunner):
+    r = script_runner.run([CMD, 'summary', ])
+    assert r.returncode != 0
     r = script_runner.run([CMD, 'summary', FILE])
     assert r.returncode == 0
     for i in range(0, 3):
@@ -27,3 +31,7 @@ def test_summary(script_runner: ScriptRunner):
     for i in ['999', '-999', 'a', ]:
         r = script_runner.run([CMD, 'summary', '-i', str(i), FILE])
         assert r.returncode != 0
+
+
+def test_compare(script_runner: ScriptRunner):
+    r = script_runner.run([CMD, 'summary', FILE])
