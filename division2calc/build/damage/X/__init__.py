@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Literal
 
+from division2calc.build.damage.common import Profile
 from division2calc.build.damage.X.X1 import X1
 from division2calc.build.damage.X.X2 import X2
 from division2calc.build.damage.X.X3 import X3
@@ -9,14 +10,13 @@ from division2calc.build.damage.X.X5 import X5
 from division2calc.build.damage.X.X6 import X6
 from division2calc.build.damage.X.X7 import X7
 from division2calc.build.damage.X.X8 import X8
-from division2calc.build.damage.common import Profile
 from division2calc.build.stats import Stats
 from division2calc.gear import Gears
+from division2calc.utils import Float
 from division2calc.weapon import Weapon
 
-
 Name = str
-X_Value = dict[Name, float]
+X_Value = dict[Name, Float]
 
 
 @dataclass
@@ -59,7 +59,7 @@ class X(Profile[X_Value]):
         self.x7 = X7(self._stats)
         self.x8 = X8(self._stats)
 
-    def __getitem__(self, i: int) -> Profile[float]:
+    def __getitem__(self, i: int) -> Profile[Float]:
         if 1 <= i <= 8:
             return getattr(self, f'x{i}')
         else:
