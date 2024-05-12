@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import click
+import pandas as pd
 
 from division2calc.build.common import (METRICS, PROFILES, SORT_ORDERS, Metric,
                                         Profile, SortBy)
@@ -33,8 +34,10 @@ def rank(file: Path,
     # format
     match metric:
         case 'stats':
-            df.iloc[:, :1] = df.iloc[:, :1].map(lambda v: f'{v:,.0f}')
-            df.iloc[:, 1:] = df.iloc[:, 1:].map(lambda v: f'{v:.1%}')
+            df = pd.concat([
+                df.iloc[:, :1].map(lambda v: f'{v:,.0f}'),
+                df.iloc[:, 1:].map(lambda v: f'{v:.1%}'),
+            ], axis='columns')
         case 'damage':
             df = df.map(lambda v: f'{v:,.0f}')
         case 'x' | 'dydx':
