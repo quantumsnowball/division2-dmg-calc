@@ -15,7 +15,7 @@ from division2calc.gear import Gears
 from division2calc.weapon import Weapon
 
 
-Name = Literal['x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8']
+Name = str
 X_Value = dict[Name, float]
 
 
@@ -59,44 +59,28 @@ class X(Profile[X_Value]):
 
     @property
     def basic(self) -> X_Value:
-        return {'x1': self[1].basic,
-                'x2': self[2].basic,
-                'x3': self[3].basic,
-                'x4': self[4].basic,
-                'x5': self[5].basic,
-                'x5': self[6].basic,
-                'x7': self[7].basic,
-                'x8': self[8].basic}
+        return {
+            f'x{i}': self[i].basic
+            for i in range(1, 9)
+        }
 
     @property
     def min(self) -> X_Value:
-        return {'x1': self[1].min,
-                'x2': self[2].min,
-                'x3': self[3].min,
-                'x4': self[4].min,
-                'x5': self[5].min,
-                'x6': self[6].min,
-                'x7': self[7].min,
-                'x8': self[8].min}
+        return {
+            f'x{i}': self[i].min
+            for i in range(1, 9)
+        }
 
     @property
     def average(self) -> X_Value:
-        return {'x1': self[1].average,
-                'x2': self[2].average,
-                'x3': self[3].average,
-                'x4': self[4].average,
-                'x5': self[5].average,
-                'x6': self[6].average,
-                'x7': self[7].average,
-                'x8': self[8].average}
+        return {
+            f'x{i}': self[i].average
+            for i in range(1, 9)
+        }
 
     @property
     def max(self) -> X_Value:
-        return {'x1': self[1].max,
-                'x2': self[2].max,
-                'x3': self[3].max,
-                'x4': self[4].max,
-                'x5': self[5].max,
-                'x6': self[6].max,
-                'x7': self[7].max,
-                'x8': self[8].max}
+        return {
+            f'x{i}': self[i].max
+            for i in range(1, 9)
+        }
