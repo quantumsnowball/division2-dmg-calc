@@ -34,6 +34,18 @@ def test_stats():
     pass
 
 
+def test_damage():
+    pass
+
+
+def test_x():
+    pass
+
+
+def test_dydx():
+    pass
+
+
 @pytest.mark.parametrize('i', [
     *[v
       for v in map(str, range(0, 3))],
@@ -73,6 +85,7 @@ def test_compare(i1: int, i2: int, flag: str | None, script_runner: ScriptRunner
 ])
 def test_rank(metric: str,
               profile: str,
+              # TODO: sort_by
               script_runner: ScriptRunner):
     parts = [CMD, 'rank', '-m', metric, '-p', profile, FILE]
     r = script_runner.run([str(v) for v in parts if v is not None])
