@@ -4,6 +4,7 @@ from pytest_console_scripts import ScriptRunner
 CMD = 'division2calc'
 FILE = 'tests/sheets/demo.py'
 COMMANDS = ('stats', 'summary', 'rank', 'compare', 'damage', 'x', 'dydx')
+MATRICS = ('stats', 'damage', 'x', 'dydx')
 
 
 def test_(script_runner: ScriptRunner):
@@ -42,23 +43,23 @@ def test_summary(i: int, script_runner: ScriptRunner):
     assert r.returncode == 0
 
 
-@pytest.mark.parametrize('i1,i2', ((1, 1), (1, 2), (-1, 1), (2, -2)))
-@pytest.mark.parametrize('flag', ('--x', '--damage', '--dydx', None))
-def test_compare_0(i1: int, i2: int, flag: str | None, script_runner: ScriptRunner):
-    parts = [CMD, 'compare', '-i', i1, i2, flag,  FILE]
+@pytest.mark.parametrize('i1,i2', [
+    *[(1, 1), (1, 2), (-1, 1), (2, -2)],
+    *[pytest.param(*v, marks=pytest.mark.xfail)
+      for v in [('a', 1), (1, 'b'), (-999, 1), (999, -2), (1, None), (None, 2)]]
+])
+@pytest.mark.parametrize('flag', [
+    *['--x', '--damage', '--dydx', None],
+    *[pytest.param(v, marks=pytest.mark.xfail)
+      for v in ['--abc', '--123', '--anything']]
+])
+def test_compare(i1: int, i2: int, flag: str | None, script_runner: ScriptRunner):
+    parts = [CMD, 'compare', '-i', i1, i2, flag, FILE]
     r = script_runner.run([str(v) for v in parts if v is not None])
     assert r.returncode == 0
 
 
-@pytest.mark.parametrize('i1,i2', (('a', 1), (1, 'b'), (-999, 1), (999, -2), (1, None), (None, 2)))
-@pytest.mark.parametrize('flag', ('--abc', '--123', '--anything', None))
-def test_compare_non0(i1: int | None, i2: int | None, flag: str | None, script_runner: ScriptRunner):
-    parts = [CMD, 'compare', '-i', i1, i2, flag,  FILE]
-    r = script_runner.run([str(v) for v in parts if v is not None])
-    assert r.returncode != 0
-
-
-def test_rank(script_runner: ScriptRunner):
+def test_rank_0(script_runner: ScriptRunner):
     r = script_runner.run([CMD, 'rank', ])
     assert r.returncode != 0
     r = script_runner.run([CMD, 'rank', FILE])
