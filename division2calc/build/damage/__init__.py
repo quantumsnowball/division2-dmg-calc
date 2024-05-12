@@ -24,7 +24,7 @@ class Damage:
         # base
         dmg = self._weapon.base_damage
         # basic weapon damage
-        dmg *= self.x.x1
+        dmg *= self.x.x1.basic
         # result
         return dmg
 

@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Literal
 
+from division2calc.build.damage.X.X1 import X1
 from division2calc.build.damage.common import Profile
 from division2calc.build.stats import Stats
 from division2calc.gear import Gears
@@ -33,16 +34,13 @@ class X(Profile[X_Value]):
     x8|    *(1+Damage out of Cover)
     '''
 
-    #
-    # x1
-    #
-    @property
-    def x1(self) -> float:
-        return 1+self._stats.weapon_damage+self._stats.weapon_type_damage
+    def __post_init__(self) -> None:
+        self.x1 = X1(self._stats)
 
     #
     # x2
     #
+
     @property
     def x2(self) -> float:
         x = 1.0
@@ -192,7 +190,7 @@ class X(Profile[X_Value]):
     #
     @property
     def basic(self) -> X_Value:
-        return {'x1': self.x1,
+        return {'x1': self.x1.basic,
                 'x2': 1.0,
                 'x3': 1.0,
                 'x4': 1.0,
@@ -203,7 +201,7 @@ class X(Profile[X_Value]):
 
     @property
     def min(self) -> X_Value:
-        return {'x1': self.x1,
+        return {'x1': self.x1.min,
                 'x2': self.x2_min,
                 'x3': self.x3,
                 'x4': self.x4,
@@ -214,7 +212,7 @@ class X(Profile[X_Value]):
 
     @property
     def average(self) -> X_Value:
-        return {'x1': self.x1,
+        return {'x1': self.x1.average,
                 'x2': self.x2_average,
                 'x3': self.x3,
                 'x4': self.x4,
@@ -225,7 +223,7 @@ class X(Profile[X_Value]):
 
     @property
     def max(self) -> X_Value:
-        return {'x1': self.x1,
+        return {'x1': self.x1.max,
                 'x2': self.x2_max,
                 'x3': self.x3,
                 'x4': self.x4,
