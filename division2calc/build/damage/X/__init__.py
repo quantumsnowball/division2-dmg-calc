@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Literal
 
+from division2calc.build.damage.common import Profile
 from division2calc.build.stats import Stats
 from division2calc.gear import Gears
 from division2calc.weapon import Weapon
@@ -14,7 +15,7 @@ X_Value = dict[Name, float]
 
 
 @dataclass
-class X:
+class X(Profile[X_Value]):
     _weapon: Weapon
     _gears: Gears
     _stats: Stats
