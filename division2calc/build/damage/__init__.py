@@ -33,7 +33,7 @@ class Damage:
         dmg = self.basic
         dmg *= self.x.x2.min
         dmg *= self.x.x3.min
-        dmg *= self.x.x4
+        dmg *= self.x.x4.min
         dmg *= self.x.x5
         dmg *= self.x.x6_min
         dmg *= self.x.x7_min
@@ -46,7 +46,7 @@ class Damage:
         dmg = self.basic
         dmg *= self.x.x2.average
         dmg *= self.x.x3.average
-        dmg *= self.x.x4
+        dmg *= self.x.x4.average
         dmg *= self.x.x5
         dmg *= self.x.x6_average
         dmg *= self.x.x7_average
@@ -59,7 +59,7 @@ class Damage:
         dmg = self.basic
         dmg *= self.x.x2.max
         dmg *= self.x.x3.max
-        dmg *= self.x.x4
+        dmg *= self.x.x4.max
         dmg *= self.x.x5
         dmg *= self.x.x6_max
         dmg *= self.x.x7_max
@@ -80,7 +80,7 @@ class Damage:
             return dmg
         dmg *= getattr(self.x.x2, profile)
         dmg *= getattr(self.x.x3, profile)
-        dmg *= self.x.x4
+        dmg *= getattr(self.x.x4, profile)
         dmg *= self.x.x5
         dmg *= self.x.x6(critical, headshot, expcrit)
         dmg *= self.x.x7(armor)
