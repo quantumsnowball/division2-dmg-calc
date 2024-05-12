@@ -18,6 +18,6 @@ class ShieldSplinterer(Weapon):
     minor: attrs.MinorAttribute = field(default_factory=lambda: attrs.DamageToTargetOutOfCover(0.09))
     optics: mods.Mod = field(default_factory=lambda: mods.CriticalHitChance(0.05))
     magazine: mods.Mod = field(default_factory=mods.NoMod)
-    muzzle: mods.Mod = field(default_factory=mods.NoMod)
+    muzzle: mods.Mod = field(default_factory=lambda: mods.CriticalHitChance(0.05))
     underbarrel: mods.Mod = field(default_factory=mods.NoMod)
-    talent: talents.Talent = field(default_factory=talents.ActumEst)
+    talent: talents.Talent = field(default_factory=talents.PerfectOptimist)
