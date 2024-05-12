@@ -32,12 +32,12 @@ def test_stats():
     pass
 
 
-@pytest.mark.parametrize('i', (
-    [v
-     for v in map(str, range(0, 3))] +
-    [pytest.param(v, marks=pytest.mark.xfail)
-     for v in ('999', '-999', 'a', )]
-))
+@pytest.mark.parametrize('i', [
+    *[v
+      for v in map(str, range(0, 3))],
+    *[pytest.param(v, marks=pytest.mark.xfail)
+      for v in ('999', '-999', 'a', )]
+])
 def test_summary(i: int, script_runner: ScriptRunner):
     r = script_runner.run([CMD, 'summary', '-i', str(i), FILE])
     assert r.returncode == 0
