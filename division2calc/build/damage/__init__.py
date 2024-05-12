@@ -4,13 +4,14 @@ from division2calc.build.common import Profile
 from division2calc.build.stats import Stats
 from division2calc.gear import Gears
 from division2calc.weapon import Weapon
+import division2calc.build.damage.common as common
 
 from division2calc.build.damage.X import X
 from division2calc.build.damage.Dydx import Dydx
 
 
 @dataclass
-class Damage:
+class Damage(common.Profile[float]):
     _weapon: Weapon
     _gears: Gears
     _stats: Stats
