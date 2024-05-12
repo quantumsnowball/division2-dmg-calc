@@ -2,7 +2,8 @@ from pathlib import Path
 
 import click
 
-from division2calc.utils import load_builds_file, pformat_dataclass
+from division2calc.command.utils import load_builds_file
+from division2calc.utils import pformat_dataclass
 
 
 @click.command()

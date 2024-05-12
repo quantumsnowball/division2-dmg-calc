@@ -3,7 +3,7 @@ from pathlib import Path
 import click
 import pandas as pd
 
-from division2calc.utils import load_builds_file
+from division2calc.command.utils import load_builds_file
 
 
 @click.command()
