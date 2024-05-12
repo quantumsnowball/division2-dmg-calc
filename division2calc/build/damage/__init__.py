@@ -32,7 +32,7 @@ class Damage:
     def min(self) -> float:
         dmg = self.basic
         dmg *= self.x.x2.min
-        dmg *= self.x.x3
+        dmg *= self.x.x3.min
         dmg *= self.x.x4
         dmg *= self.x.x5
         dmg *= self.x.x6_min
@@ -45,7 +45,7 @@ class Damage:
     def average(self) -> float:
         dmg = self.basic
         dmg *= self.x.x2.average
-        dmg *= self.x.x3
+        dmg *= self.x.x3.average
         dmg *= self.x.x4
         dmg *= self.x.x5
         dmg *= self.x.x6_average
@@ -58,7 +58,7 @@ class Damage:
     def max(self) -> float:
         dmg = self.basic
         dmg *= self.x.x2.max
-        dmg *= self.x.x3
+        dmg *= self.x.x3.max
         dmg *= self.x.x4
         dmg *= self.x.x5
         dmg *= self.x.x6_max
@@ -79,7 +79,7 @@ class Damage:
         if profile == 'basic':
             return dmg
         dmg *= getattr(self.x.x2, profile)
-        dmg *= self.x.x3
+        dmg *= getattr(self.x.x3, profile)
         dmg *= self.x.x4
         dmg *= self.x.x5
         dmg *= self.x.x6(critical, headshot, expcrit)
