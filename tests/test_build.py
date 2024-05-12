@@ -2,6 +2,8 @@ import pytest
 
 from division2calc import *
 from division2calc.build.common import PROFILES, Profile
+from division2calc.build.damage.Dydx import X_Derivatives
+from division2calc.build.damage.X import X_Value
 
 build = Build(
     name='base',
@@ -22,4 +24,20 @@ build = Build(
 
 @pytest.mark.parametrize('profile', PROFILES)
 def test_build_damage(profile: Profile):
-    assert isinstance(getattr(build.damage, profile), float)
+    assert isinstance(build.damage.__getattribute__(profile), float)
+
+
+@pytest.mark.parametrize('profile', PROFILES)
+def test_build_damage_x(profile: Profile):
+    x_value: X_Value = build.damage.x.__getattribute__(profile)
+    for k, v in x_value.items():
+        assert isinstance(k, str)
+        assert isinstance(v, float)
+
+
+@pytest.mark.parametrize('profile', PROFILES)
+def test_build_damage_dydx(profile: Profile):
+    x_der: X_Derivatives = build.damage.dydx.__getattribute__(profile)
+    for k, v in x_der.items():
+        assert isinstance(k, str)
+        assert isinstance(v, float)
