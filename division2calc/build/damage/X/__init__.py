@@ -8,6 +8,7 @@ from division2calc.build.damage.X.X4 import X4
 from division2calc.build.damage.X.X5 import X5
 from division2calc.build.damage.X.X6 import X6
 from division2calc.build.damage.X.X7 import X7
+from division2calc.build.damage.X.X8 import X8
 from division2calc.build.damage.common import Profile
 from division2calc.build.stats import Stats
 from division2calc.gear import Gears
@@ -45,16 +46,7 @@ class X(Profile[X_Value]):
         self.x5 = X5()
         self.x6 = X6(self._stats)
         self.x7 = X7(self._stats)
-
-    #
-    # x8
-    #
-    @property
-    def x8(self) -> float:
-        x = 1.0
-        x += self._stats.damage_to_target_out_of_cover
-        # result
-        return x
+        self.x8 = X8(self._stats)
 
     #
     # use cases
@@ -68,7 +60,7 @@ class X(Profile[X_Value]):
                 'x5': self.x5.basic,
                 'x5': self.x6.basic,
                 'x7': self.x7.basic,
-                'x8': self.x8}
+                'x8': self.x8.basic}
 
     @property
     def min(self) -> X_Value:
@@ -79,7 +71,7 @@ class X(Profile[X_Value]):
                 'x5': self.x5.min,
                 'x6': self.x6.min,
                 'x7': self.x7.min,
-                'x8': self.x8}
+                'x8': self.x8.min}
 
     @property
     def average(self) -> X_Value:
@@ -90,7 +82,7 @@ class X(Profile[X_Value]):
                 'x5': self.x5.average,
                 'x6': self.x6.average,
                 'x7': self.x7.average,
-                'x8': self.x8}
+                'x8': self.x8.average}
 
     @property
     def max(self) -> X_Value:
@@ -101,4 +93,4 @@ class X(Profile[X_Value]):
                 'x5': self.x5.max,
                 'x6': self.x6.max,
                 'x7': self.x7.max,
-                'x8': self.x8}
+                'x8': self.x8.max}
