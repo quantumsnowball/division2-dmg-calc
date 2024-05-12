@@ -1,26 +1,28 @@
 from dataclasses import dataclass
-from division2calc.build.damage.common import Profile
-from division2calc.gear import Gears
-import division2calc.gear.talents as talents
+
 import division2calc.gear.gearsets as gearsets
 import division2calc.gear.gearsets.bonus as gearsets_bonus
+import division2calc.gear.talents as talents
+from division2calc.build.damage.common import Profile
+from division2calc.gear import Gears
+from division2calc.utils import Float
 
 
 @dataclass
-class X2(Profile[float]):
+class X2(Profile[Float]):
     _gears: Gears
 
     @property
-    def basic(self) -> float:
-        return 1.0
+    def basic(self) -> Float:
+        return Float(1.0)
 
     @property
-    def min(self) -> float:
-        return 1.0
+    def min(self) -> Float:
+        return Float(1.0)
 
     @property
-    def average(self) -> float:
-        x = 1.0
+    def average(self) -> Float:
+        x = Float(1.0)
         # backpack
         # chest
         if isinstance(self._gears.chest.talent, talents.Obliterate):
@@ -34,8 +36,8 @@ class X2(Profile[float]):
         return x
 
     @property
-    def max(self) -> float:
-        x = 1.0
+    def max(self) -> Float:
+        x = Float(1.0)
         # backpack
         # chest
         if isinstance(self._gears.chest.talent, talents.Obliterate):
