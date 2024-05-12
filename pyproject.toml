@@ -1,2 +1,5 @@
 [tool.isort]
 src_paths = ["division2calc", "tests"]
+
+[tool.pytest.ini_options]
+filterwarnings = "ignore::DeprecationWarning"
