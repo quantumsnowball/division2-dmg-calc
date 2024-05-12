@@ -7,6 +7,7 @@ from division2calc.build.damage.X.X3 import X3
 from division2calc.build.damage.X.X4 import X4
 from division2calc.build.damage.X.X5 import X5
 from division2calc.build.damage.X.X6 import X6
+from division2calc.build.damage.X.X7 import X7
 from division2calc.build.damage.common import Profile
 from division2calc.build.stats import Stats
 from division2calc.gear import Gears
@@ -43,42 +44,7 @@ class X(Profile[X_Value]):
         self.x4 = X4()
         self.x5 = X5()
         self.x6 = X6(self._stats)
-
-    #
-    # x7
-    #
-    def x7(self, armor: bool) -> float:
-        x = 1.0
-        if armor:
-            x += self._stats.damage_to_armor
-        else:
-            x += self._stats.damage_to_health
-        # result
-        return x
-
-    @property
-    def x7_min(self) -> float:
-        x = 1.0
-        # assume whoever being the lowest
-        x += min(self._stats.damage_to_armor, self._stats.damage_to_health)
-        # result
-        return x
-
-    @property
-    def x7_average(self) -> float:
-        # assuming equal chance for armor and health damage
-        x = 1.0
-        x += 0.5*self._stats.damage_to_armor + 0.5*self._stats.damage_to_health
-        # result
-        return x
-
-    @property
-    def x7_max(self) -> float:
-        x = 1.0
-        # assume whoever being the highest
-        x += max(self._stats.damage_to_armor, self._stats.damage_to_health)
-        # result
-        return x
+        self.x7 = X7(self._stats)
 
     #
     # x8
@@ -101,7 +67,7 @@ class X(Profile[X_Value]):
                 'x4': self.x4.basic,
                 'x5': self.x5.basic,
                 'x5': self.x6.basic,
-                'x7': 1.0,
+                'x7': self.x7.basic,
                 'x8': self.x8}
 
     @property
@@ -112,7 +78,7 @@ class X(Profile[X_Value]):
                 'x4': self.x4.min,
                 'x5': self.x5.min,
                 'x6': self.x6.min,
-                'x7': self.x7_min,
+                'x7': self.x7.min,
                 'x8': self.x8}
 
     @property
@@ -123,7 +89,7 @@ class X(Profile[X_Value]):
                 'x4': self.x4.average,
                 'x5': self.x5.average,
                 'x6': self.x6.average,
-                'x7': self.x7_average,
+                'x7': self.x7.average,
                 'x8': self.x8}
 
     @property
@@ -134,5 +100,5 @@ class X(Profile[X_Value]):
                 'x4': self.x4.max,
                 'x5': self.x5.max,
                 'x6': self.x6.max,
-                'x7': self.x7_max,
+                'x7': self.x7.max,
                 'x8': self.x8}
