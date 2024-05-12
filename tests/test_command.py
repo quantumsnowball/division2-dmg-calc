@@ -76,20 +76,20 @@ def test_compare(i1: int, i2: int, flag: str | None, script_runner: ScriptRunner
 @pytest.mark.parametrize('metric', [
     *METRICS,
     *[pytest.param(v, marks=pytest.mark.xfail)
-      for v in ('any', 'thing', 'else')]
+      for v in ('anything', 'else')]
 ])
 @pytest.mark.parametrize('profile', [
     *PROFILES,
     *[pytest.param(v, marks=pytest.mark.xfail)
-      for v in ('any', 'thing', 'else')]
+      for v in ('anything', 'else')]
 ])
 def test_rank(metric: str,
               profile: str,
               # TODO: sort_by
               script_runner: ScriptRunner):
-    parts = [CMD, 'rank', '-m', metric, '-p', profile, FILE]
-    r = script_runner.run([str(v) for v in parts if v is not None])
     # stats only have basic profile
     if metric == 'stats' and profile != 'basic':
         pytest.skip('not supported')
+    parts = [CMD, 'rank', '-m', metric, '-p', profile, FILE]
+    r = script_runner.run([str(v) for v in parts if v is not None])
     assert r.returncode == 0
