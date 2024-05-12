@@ -1,6 +1,8 @@
 import pytest
 from pytest_console_scripts import ScriptRunner
 
+from division2calc.build.common import METRICS, PROFILES
+
 CMD = 'division2calc'
 FILE = 'tests/sheets/demo.py'
 COMMANDS = ('stats', 'summary', 'rank', 'compare', 'damage', 'x', 'dydx')
@@ -59,8 +61,22 @@ def test_compare(i1: int, i2: int, flag: str | None, script_runner: ScriptRunner
     assert r.returncode == 0
 
 
-def test_rank_0(script_runner: ScriptRunner):
-    r = script_runner.run([CMD, 'rank', ])
-    assert r.returncode != 0
-    r = script_runner.run([CMD, 'rank', FILE])
+@pytest.mark.parametrize('metric', [
+    *METRICS,
+    *[pytest.param(v, marks=pytest.mark.xfail)
+      for v in ('any', 'thing', 'else')]
+])
+@pytest.mark.parametrize('profile', [
+    *PROFILES,
+    *[pytest.param(v, marks=pytest.mark.xfail)
+      for v in ('any', 'thing', 'else')]
+])
+def test_rank(metric: str,
+              profile: str,
+              script_runner: ScriptRunner):
+    parts = [CMD, 'rank', '-m', metric, '-p', profile, FILE]
+    r = script_runner.run([str(v) for v in parts if v is not None])
+    # stats only have basic profile
+    if metric == 'stats' and profile != 'basic':
+        pytest.skip('not supported')
     assert r.returncode == 0
