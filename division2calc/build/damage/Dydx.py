@@ -2,12 +2,13 @@ from dataclasses import dataclass
 
 import math
 from division2calc.build.damage.X import X, Name, X_Value
+from division2calc.build.damage.common import Profile
 
 X_Derivatives = dict[Name, float]
 
 
 @dataclass
-class Dydx:
+class Dydx(Profile[X_Derivatives]):
     _x: X
 
     def dydx(self, x: X_Value) -> X_Derivatives:

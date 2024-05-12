@@ -4,13 +4,14 @@ from division2calc.build.common import Profile
 from division2calc.build.stats import Stats
 from division2calc.gear import Gears
 from division2calc.weapon import Weapon
+import division2calc.build.damage.common as common
 
 from division2calc.build.damage.X import X
 from division2calc.build.damage.Dydx import Dydx
 
 
 @dataclass
-class Damage:
+class Damage(common.Profile[float]):
     _weapon: Weapon
     _gears: Gears
     _stats: Stats
@@ -24,47 +25,29 @@ class Damage:
         # base
         dmg = self._weapon.base_damage
         # basic weapon damage
-        dmg *= self.x.x1
+        dmg *= self.x[1].basic
         # result
         return dmg
 
     @property
     def min(self) -> float:
-        dmg = self.basic
-        dmg *= self.x.x2_min
-        dmg *= self.x.x3
-        dmg *= self.x.x4
-        dmg *= self.x.x5
-        dmg *= self.x.x6_min
-        dmg *= self.x.x7_min
-        dmg *= self.x.x8
-        # result
+        dmg = self._weapon.base_damage
+        for i in range(1, 9):
+            dmg *= self.x[i].min
         return dmg
 
     @property
     def average(self) -> float:
-        dmg = self.basic
-        dmg *= self.x.x2_average
-        dmg *= self.x.x3
-        dmg *= self.x.x4
-        dmg *= self.x.x5
-        dmg *= self.x.x6_average
-        dmg *= self.x.x7_average
-        dmg *= self.x.x8
-        # result
+        dmg = self._weapon.base_damage
+        for i in range(1, 9):
+            dmg *= self.x[i].average
         return dmg
 
     @property
     def max(self) -> float:
-        dmg = self.basic
-        dmg *= self.x.x2_max
-        dmg *= self.x.x3
-        dmg *= self.x.x4
-        dmg *= self.x.x5
-        dmg *= self.x.x6_max
-        dmg *= self.x.x7_max
-        dmg *= self.x.x8
-        # result
+        dmg = self._weapon.base_damage
+        for i in range(1, 9):
+            dmg *= self.x[i].max
         return dmg
 
     def total_damage(self,
@@ -78,12 +61,12 @@ class Damage:
         dmg = self.basic
         if profile == 'basic':
             return dmg
-        dmg *= getattr(self.x, f'x2_{profile}')
-        dmg *= self.x.x3
-        dmg *= self.x.x4
-        dmg *= self.x.x5
+        dmg *= getattr(self.x[2], profile)
+        dmg *= getattr(self.x[3], profile)
+        dmg *= getattr(self.x[4], profile)
+        dmg *= getattr(self.x[5], profile)
         dmg *= self.x.x6(critical, headshot, expcrit)
         dmg *= self.x.x7(armor)
-        dmg *= self.x.x8
+        dmg *= getattr(self.x[8], profile)
         # result
         return dmg
