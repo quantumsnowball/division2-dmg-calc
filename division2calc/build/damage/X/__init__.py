@@ -26,8 +26,8 @@ class X(Profile[X_Value]):
     _stats: Stats
 
     '''
-    Total Damage =
-    Base weapon Damage
+    [Exact]
+    DMG = Base weapon Damage
     x1|    *(1+Weapon Damage+Weapon Type Damage+Weapon Damage Talents)
     x2|    *(1+Total Weapon Damage Talents) [Vigilance]
     x3|    *(1+Amplfied Talent 1)
@@ -36,6 +36,17 @@ class X(Profile[X_Value]):
     x6|    *(1+Critical Hit Damage+Headshot Damage)
     x7|    *(1+Damage to Armor+Damage to Health)
     x8|    *(1+Damage out of Cover)
+
+    [Expected] 
+    DMG = Base weapon damage
+    x1|    * (1 + WD + weapon type damage + sum of ("weapon damage" talents * talent uptime))
+    x2|    * (1 + sum of ("total weapon damage" talents * talent uptime))
+    x3|    * (1 + "amplify" talent1 * uptime)
+    x4|    * (1 + "amplify" talent2 * uptime)
+    x5|    * (1 + "amplify" talent3 * uptime)
+    x6|    * (1 + CHC * CHD + HsD * headshot chance)
+    x7|    * (1 + DtA * %Armor + DtH * (1 - %Armor))
+    x8|    * (1 + OoCD * %OutOfCover)  
     '''
 
     def __post_init__(self) -> None:
