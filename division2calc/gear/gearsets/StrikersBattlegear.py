@@ -27,6 +27,9 @@ class StrikersBattlegear(Gearsets):
         # RiskManagement exists in backpack
         if isinstance(self._gears.backpack.talent, talents.RiskManagement):
             self.gearset_bonus.unit = self._gears.backpack.talent.unit
+        # Press the Advantage exists in chest
+        if isinstance(self._gears.chest.talent, talents.PressTheAdvantage):
+            self.gearset_bonus.max_stack = self._gears.chest.talent.max_stack
 
 
 @dataclass(kw_only=True)
@@ -46,6 +49,7 @@ class Backpack(gear.Backpack, StrikersBattlegear):
 class Chest(gear.Chest, StrikersBattlegear):
     core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
     attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
+    talent: talents.ChestTalent = field(default_factory=talents.PressTheAdvantage)
 
 
 @dataclass(kw_only=True)

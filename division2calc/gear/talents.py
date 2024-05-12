@@ -22,6 +22,11 @@ class ChestTalent(Talent):
 
 
 @dataclass
+class PressTheAdvantage(ChestTalent):
+    max_stack: int = 200
+
+
+@dataclass
 class Obliterate(ChestTalent):
     unit: float = 0.01
     max_stack: int = 25
