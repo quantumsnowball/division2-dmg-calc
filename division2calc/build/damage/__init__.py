@@ -24,46 +24,46 @@ class Damage:
         # base
         dmg = self._weapon.base_damage
         # basic weapon damage
-        dmg *= self.x.x1.basic
+        dmg *= self.x[1].basic
         # result
         return dmg
 
     @property
     def min(self) -> float:
         dmg = self.basic
-        dmg *= self.x.x2.min
-        dmg *= self.x.x3.min
-        dmg *= self.x.x4.min
-        dmg *= self.x.x5.min
-        dmg *= self.x.x6.min
-        dmg *= self.x.x7.min
-        dmg *= self.x.x8.min
+        dmg *= self.x[2].min
+        dmg *= self.x[3].min
+        dmg *= self.x[4].min
+        dmg *= self.x[5].min
+        dmg *= self.x[6].min
+        dmg *= self.x[7].min
+        dmg *= self.x[8].min
         # result
         return dmg
 
     @property
     def average(self) -> float:
         dmg = self.basic
-        dmg *= self.x.x2.average
-        dmg *= self.x.x3.average
-        dmg *= self.x.x4.average
-        dmg *= self.x.x5.average
-        dmg *= self.x.x6.average
-        dmg *= self.x.x7.average
-        dmg *= self.x.x8.average
+        dmg *= self.x[2].average
+        dmg *= self.x[3].average
+        dmg *= self.x[4].average
+        dmg *= self.x[5].average
+        dmg *= self.x[6].average
+        dmg *= self.x[7].average
+        dmg *= self.x[8].average
         # result
         return dmg
 
     @property
     def max(self) -> float:
         dmg = self.basic
-        dmg *= self.x.x2.max
-        dmg *= self.x.x3.max
-        dmg *= self.x.x4.max
-        dmg *= self.x.x5.max
-        dmg *= self.x.x6.max
-        dmg *= self.x.x7.max
-        dmg *= self.x.x8.max
+        dmg *= self.x[2].max
+        dmg *= self.x[3].max
+        dmg *= self.x[4].max
+        dmg *= self.x[5].max
+        dmg *= self.x[6].max
+        dmg *= self.x[7].max
+        dmg *= self.x[8].max
         # result
         return dmg
 
@@ -78,12 +78,12 @@ class Damage:
         dmg = self.basic
         if profile == 'basic':
             return dmg
-        dmg *= getattr(self.x.x2, profile)
-        dmg *= getattr(self.x.x3, profile)
-        dmg *= getattr(self.x.x4, profile)
-        dmg *= getattr(self.x.x5, profile)
+        dmg *= getattr(self.x[2], profile)
+        dmg *= getattr(self.x[3], profile)
+        dmg *= getattr(self.x[4], profile)
+        dmg *= getattr(self.x[5], profile)
         dmg *= self.x.x6(critical, headshot, expcrit)
         dmg *= self.x.x7(armor)
-        dmg *= getattr(self.x.x8, profile)
+        dmg *= getattr(self.x[8], profile)
         # result
         return dmg
