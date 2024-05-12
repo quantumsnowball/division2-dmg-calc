@@ -34,4 +34,21 @@ def test_summary(script_runner: ScriptRunner):
 
 
 def test_compare(script_runner: ScriptRunner):
-    r = script_runner.run([CMD, 'summary', FILE])
+    r = script_runner.run([CMD, 'compare', ])
+    assert r.returncode != 0
+    r = script_runner.run([CMD, 'compare', FILE])
+    assert r.returncode == 0
+    r = script_runner.run([CMD, 'compare', '-i', '0', FILE])
+    assert r.returncode != 0
+    for i1, i2 in [(1, 1), (1, 2), (-1, 1), (2, -2)]:
+        r = script_runner.run([CMD, 'compare', '-i', str(i1), str(i2),  FILE])
+        assert r.returncode == 0
+    for i1, i2 in [('a', 1), (1, 'b'), (-999, 1), (999, -2)]:
+        r = script_runner.run([CMD, 'compare', '-i', str(i1), str(i2),  FILE])
+        assert r.returncode != 0
+    for flag in ['x', 'damage', 'dydx']:
+        r = script_runner.run([CMD, 'compare', '-i', '1', '2', f'--{flag}',  FILE])
+        assert r.returncode == 0
+    for flag in ['abc', '123', 'anything']:
+        r = script_runner.run([CMD, 'compare', '-i', '1', '2', f'--{flag}',  FILE])
+        assert r.returncode != 0
