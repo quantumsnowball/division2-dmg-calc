@@ -32,20 +32,18 @@ def test_stats():
 
 
 @pytest.mark.parametrize('i', map(str, range(0, 3)))
-def test_summary(i: int, script_runner: ScriptRunner):
-    for i in range(0, 3):
-        r = script_runner.run([CMD, 'summary', '-i', str(i), FILE])
-        assert r.returncode == 0
-    for i in ['999', '-999', 'a', ]:
-        r = script_runner.run([CMD, 'summary', '-i', str(i), FILE])
-        assert r.returncode != 0
+def test_summary_0(i: int, script_runner: ScriptRunner):
+    r = script_runner.run([CMD, 'summary', '-i', str(i), FILE])
+    assert r.returncode == 0
+
+
+@pytest.mark.parametrize('i_', ('999', '-999', 'a', ))
+def test_summary_non0(i_: int, script_runner: ScriptRunner):
+    r = script_runner.run([CMD, 'summary', '-i', str(i_), FILE])
+    assert r.returncode != 0
 
 
 def test_compare(script_runner: ScriptRunner):
-    r = script_runner.run([CMD, 'compare', ])
-    assert r.returncode != 0
-    r = script_runner.run([CMD, 'compare', FILE])
-    assert r.returncode == 0
     r = script_runner.run([CMD, 'compare', '-i', '0', FILE])
     assert r.returncode != 0
     for i1, i2 in [(1, 1), (1, 2), (-1, 1), (2, -2)]:
@@ -60,3 +58,10 @@ def test_compare(script_runner: ScriptRunner):
     for flag in ['abc', '123', 'anything']:
         r = script_runner.run([CMD, 'compare', '-i', '1', '2', f'--{flag}',  FILE])
         assert r.returncode != 0
+
+
+def test_rank(script_runner: ScriptRunner):
+    r = script_runner.run([CMD, 'rank', ])
+    assert r.returncode != 0
+    r = script_runner.run([CMD, 'rank', FILE])
+    assert r.returncode == 0
