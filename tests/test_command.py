@@ -51,15 +51,12 @@ def test_compare_0(i1: int, i2: int, flag: str | None, script_runner: ScriptRunn
     assert r.returncode == 0
 
 
-def test_compare_non0(script_runner: ScriptRunner):
-    r = script_runner.run([CMD, 'compare', '-i', '0', FILE])
+@pytest.mark.parametrize('i1,i2', (('a', 1), (1, 'b'), (-999, 1), (999, -2), (1, None), (None, 2)))
+@pytest.mark.parametrize('flag', ('--abc', '--123', '--anything', None))
+def test_compare_non0(i1: int | None, i2: int | None, flag: str | None, script_runner: ScriptRunner):
+    parts = [CMD, 'compare', '-i', i1, i2, flag,  FILE]
+    r = script_runner.run([str(v) for v in parts if v is not None])
     assert r.returncode != 0
-    for i1, i2 in [('a', 1), (1, 'b'), (-999, 1), (999, -2)]:
-        r = script_runner.run([CMD, 'compare', '-i', str(i1), str(i2),  FILE])
-        assert r.returncode != 0
-    for flag in ['abc', '123', 'anything']:
-        r = script_runner.run([CMD, 'compare', '-i', '1', '2', f'--{flag}',  FILE])
-        assert r.returncode != 0
 
 
 def test_rank(script_runner: ScriptRunner):
