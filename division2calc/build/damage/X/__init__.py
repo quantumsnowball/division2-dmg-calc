@@ -5,6 +5,7 @@ from division2calc.build.damage.X.X1 import X1
 from division2calc.build.damage.X.X2 import X2
 from division2calc.build.damage.X.X3 import X3
 from division2calc.build.damage.X.X4 import X4
+from division2calc.build.damage.X.X5 import X5
 from division2calc.build.damage.common import Profile
 from division2calc.build.stats import Stats
 from division2calc.gear import Gears
@@ -39,6 +40,7 @@ class X(Profile[X_Value]):
         self.x2 = X2(self._gears)
         self.x3 = X3()
         self.x4 = X4()
+        self.x5 = X5()
 
     #
     # x4
@@ -52,10 +54,10 @@ class X(Profile[X_Value]):
     # x5
     #
 
-    @property
-    def x5(self) -> float:
-        # TODO
-        return 1.0
+    # @property
+    # def x5(self) -> float:
+    #     # TODO
+    #     return 1.0
     #
     # x6
     #
@@ -148,7 +150,7 @@ class X(Profile[X_Value]):
                 'x2': self.x2.basic,
                 'x3': self.x3.basic,
                 'x4': self.x4.basic,
-                'x5': 1.0,
+                'x5': self.x5.basic,
                 'x6': 1.0,
                 'x7': 1.0,
                 'x8': self.x8}
@@ -159,7 +161,7 @@ class X(Profile[X_Value]):
                 'x2': self.x2.min,
                 'x3': self.x3.min,
                 'x4': self.x4.min,
-                'x5': self.x5,
+                'x5': self.x5.min,
                 'x6': self.x6_min,
                 'x7': self.x7_min,
                 'x8': self.x8}
@@ -170,7 +172,7 @@ class X(Profile[X_Value]):
                 'x2': self.x2.average,
                 'x3': self.x3.average,
                 'x4': self.x4.average,
-                'x5': self.x5,
+                'x5': self.x5.average,
                 'x6': self.x6_average,
                 'x7': self.x7_average,
                 'x8': self.x8}
@@ -181,7 +183,7 @@ class X(Profile[X_Value]):
                 'x2': self.x2.max,
                 'x3': self.x3.max,
                 'x4': self.x4.max,
-                'x5': self.x5,
+                'x5': self.x5.max,
                 'x6': self.x6_max,
                 'x7': self.x7_max,
                 'x8': self.x8}
