@@ -1,13 +1,12 @@
 from dataclasses import dataclass
 
-from division2calc.build.common import Profile
-from division2calc.build.stats import Stats
+import division2calc.agent.damage.common as common
+from division2calc.agent.common import Profile
+from division2calc.agent.damage.Dydx import Dydx
+from division2calc.agent.damage.X import X
+from division2calc.agent.stats import Stats
 from division2calc.gear import Gears
 from division2calc.weapon import Weapon
-import division2calc.build.damage.common as common
-
-from division2calc.build.damage.X import X
-from division2calc.build.damage.Dydx import Dydx
 
 
 @dataclass

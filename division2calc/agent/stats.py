@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from division2calc.build.specialization import Specialization
-from division2calc.build.watch import Watch
+from division2calc.agent.specialization import Specialization
+from division2calc.agent.watch import Watch
 from division2calc.gear import Gears
 from division2calc.utils import Float
 from division2calc.weapon import Weapon

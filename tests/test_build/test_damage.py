@@ -1,9 +1,9 @@
 import pytest
 
-from division2calc.build import Build
-from division2calc.build.common import PROFILES, Profile
-from division2calc.build.damage.Dydx import X_Derivatives
-from division2calc.build.damage.X import X_Value
+from division2calc.agent import Build
+from division2calc.agent.common import PROFILES, Profile
+from division2calc.agent.damage.Dydx import X_Derivatives
+from division2calc.agent.damage.X import X_Value
 
 
 @pytest.mark.parametrize('profile', PROFILES)

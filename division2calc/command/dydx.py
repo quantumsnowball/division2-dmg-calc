@@ -2,7 +2,7 @@ from pathlib import Path
 
 import click
 
-from division2calc.build.common import PROFILES
+from division2calc.agent.common import PROFILES
 from division2calc.command.utils import load_builds_metric
 
 

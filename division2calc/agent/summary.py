@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 
-from division2calc.build.common import PROFILES, Profiles
-from division2calc.build.damage import Damage
-from division2calc.build.stats import Stats
-
 import pandas as pd
+
+from division2calc.agent.common import PROFILES, Profiles
+from division2calc.agent.damage import Damage
+from division2calc.agent.stats import Stats
 
 
 @dataclass

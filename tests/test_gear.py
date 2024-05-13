@@ -1,4 +1,4 @@
-from division2calc.build import Build
+from division2calc.agent import Build
 from division2calc.gear import Gear
 
 

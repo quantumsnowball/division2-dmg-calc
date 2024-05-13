@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from division2calc.build.damage.common import Profile
+
+from division2calc.agent.damage.common import Profile
 
 
 @dataclass

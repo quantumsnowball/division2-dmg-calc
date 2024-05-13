@@ -6,8 +6,8 @@ import division2calc.gear.brandsets.OverlordArmaments as Overlord
 import division2calc.gear.gearsets.StrikersBattlegear as Striker
 import division2calc.gear.mods as gearmods
 import division2calc.weapon.AR as AR
-from division2calc.build import Build
-from division2calc.build.specialization import Gunner
+from division2calc.agent import Build
+from division2calc.agent.specialization import Gunner
 from division2calc.command.breakdown import breakdown
 from division2calc.command.compare import compare
 from division2calc.command.damage import damage

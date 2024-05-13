@@ -1,19 +1,18 @@
 from dataclasses import dataclass
 from typing import Literal
 
-from division2calc.build.damage.X.X1 import X1
-from division2calc.build.damage.X.X2 import X2
-from division2calc.build.damage.X.X3 import X3
-from division2calc.build.damage.X.X4 import X4
-from division2calc.build.damage.X.X5 import X5
-from division2calc.build.damage.X.X6 import X6
-from division2calc.build.damage.X.X7 import X7
-from division2calc.build.damage.X.X8 import X8
-from division2calc.build.damage.common import Profile
-from division2calc.build.stats import Stats
+from division2calc.agent.damage.common import Profile
+from division2calc.agent.damage.X.X1 import X1
+from division2calc.agent.damage.X.X2 import X2
+from division2calc.agent.damage.X.X3 import X3
+from division2calc.agent.damage.X.X4 import X4
+from division2calc.agent.damage.X.X5 import X5
+from division2calc.agent.damage.X.X6 import X6
+from division2calc.agent.damage.X.X7 import X7
+from division2calc.agent.damage.X.X8 import X8
+from division2calc.agent.stats import Stats
 from division2calc.gear import Gears
 from division2calc.weapon import Weapon
-
 
 Name = str
 X_Value = dict[Name, float]

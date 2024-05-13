@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 
-from division2calc.build.damage import Damage
-from division2calc.build.stats import Stats
-from division2calc.build.summary import Summary
-from division2calc.build.specialization import Specialization
-from division2calc.build.watch import Watch
-from division2calc.gear import Mask, Backpack, Chest, Gloves, Holster, Kneepads
-from division2calc.gear import Gears
 import division2calc.gear.utils as utils
+from division2calc.agent.damage import Damage
+from division2calc.agent.specialization import Specialization
+from division2calc.agent.stats import Stats
+from division2calc.agent.summary import Summary
+from division2calc.agent.watch import Watch
+from division2calc.gear import (Backpack, Chest, Gears, Gloves, Holster,
+                                Kneepads, Mask)
 from division2calc.weapon import Weapon
 
 

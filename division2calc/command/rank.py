@@ -3,7 +3,7 @@ from pathlib import Path
 import click
 import pandas as pd
 
-from division2calc.build.common import (METRICS, PROFILES, SORT_ORDERS, Metric,
+from division2calc.agent.common import (METRICS, PROFILES, SORT_ORDERS, Metric,
                                         Profile, SortBy)
 from division2calc.command.utils import load_builds_metric
 

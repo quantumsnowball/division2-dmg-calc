@@ -1,8 +1,8 @@
+import math
 from dataclasses import dataclass
 
-import math
-from division2calc.build.damage.X import X, Name, X_Value
-from division2calc.build.damage.common import Profile
+from division2calc.agent.damage.common import Profile
+from division2calc.agent.damage.X import Name, X, X_Value
 
 X_Derivatives = dict[Name, float]
 
