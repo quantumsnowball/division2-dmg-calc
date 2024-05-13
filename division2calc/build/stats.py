@@ -1,7 +1,9 @@
 from dataclasses import dataclass
+
 from division2calc.build.specialization import Specialization
 from division2calc.build.watch import Watch
 from division2calc.gear import Gears
+from division2calc.utils import Float
 from division2calc.weapon import Weapon
 
 
@@ -13,8 +15,8 @@ class Stats:
     _specialization: Specialization
 
     @property
-    def weapon_damage(self) -> float:
-        pct = 0
+    def weapon_damage(self) -> Float:
+        pct = Float(0)
         # gear core attributes
         for gear in self._gears:
             pct += gear.weapon_damage
@@ -26,8 +28,8 @@ class Stats:
         return pct
 
     @property
-    def weapon_type_damage(self) -> float:
-        pct = 0
+    def weapon_type_damage(self) -> Float:
+        pct = Float(0)
         # weapon attributes
         pct += self._weapon.weapon_type_damage
         # specialization bonus
@@ -36,9 +38,9 @@ class Stats:
         return pct
 
     @property
-    def critical_hit_chance(self) -> float:
+    def critical_hit_chance(self) -> Float:
         # base CHC
-        pct = 0.0
+        pct = Float(0.0)
         # weapon
         pct += self._weapon.critical_hit_chance
         # gear
@@ -47,14 +49,14 @@ class Stats:
         # keener's watch
         pct += self._watch.critical_hit_chance
         # hard cap to 60%
-        pct = min(0.6, pct)
+        pct = Float(min(0.6, pct), pct.src)
         # result
         return pct
 
     @property
-    def critical_hit_damage(self) -> float:
+    def critical_hit_damage(self) -> Float:
         # base CHD
-        pct = 0.25
+        pct = Float(0.25)
         # weapon
         pct += self._weapon.critical_hit_damage
         # gear
@@ -66,9 +68,9 @@ class Stats:
         return pct
 
     @property
-    def headshot_damage(self) -> float:
+    def headshot_damage(self) -> Float:
         # base HS
-        pct = 0.55
+        pct = Float(0.55)
         # weapon
         pct += self._weapon.headshot_damage
         # gear
@@ -80,8 +82,8 @@ class Stats:
         return pct
 
     @property
-    def damage_to_armor(self) -> float:
-        pct = 0
+    def damage_to_armor(self) -> Float:
+        pct = Float(0)
         # weapon
         # TODO
         # gear
@@ -90,8 +92,8 @@ class Stats:
         return pct
 
     @property
-    def damage_to_health(self) -> float:
-        pct = 0
+    def damage_to_health(self) -> Float:
+        pct = Float(0)
         # weapon
         pct += self._weapon.damage_to_health
         # gear
@@ -101,8 +103,8 @@ class Stats:
         return pct
 
     @property
-    def damage_to_target_out_of_cover(self) -> float:
-        pct = 0
+    def damage_to_target_out_of_cover(self) -> Float:
+        pct = Float(0)
         # weapon
         pct += self._weapon.damage_to_target_out_of_cover
         # gear

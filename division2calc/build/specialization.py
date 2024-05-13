@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 
+from division2calc.utils import Float
 from division2calc.weapon import WeaponType
 
 
@@ -18,8 +19,8 @@ class Specialization:
     name: str
     weapon_type_damage_scores: WeaponTypeBonus = field(default_factory=WeaponTypeBonus)
 
-    def weapon_type_damage(self, type: WeaponType) -> float:
-        return getattr(self.weapon_type_damage_scores, type) * 0.05
+    def weapon_type_damage(self, type: WeaponType) -> Float:
+        return Float(getattr(self.weapon_type_damage_scores, type) * 0.05)
 
 
 @dataclass(kw_only=True)

@@ -1,26 +1,39 @@
+from __future__ import annotations
+
 from dataclasses import fields, is_dataclass
-from importlib.util import module_from_spec, spec_from_file_location
-from pathlib import Path
-from typing import Any, Sequence
+from typing import Any, Self, Sequence
 
 import yaml
 
-from division2calc.build import Build
 
+class Float(float):
+    def __new__(cls,
+                x: float,
+                src: Sequence[str] | None = None) -> Self:
+        # it is a normal float
+        self = super().__new__(cls, x)
+        # add meta data
+        self._src = src if src is not None else []
+        # return self
+        return self
 
-def load_builds_file(file: Path,
-                     name: str = 'builds') -> Sequence[Build]:
-    # spec
-    spec = spec_from_file_location(name, Path(file))
-    assert spec and spec.loader, f'Failed to load module: {file=} {name=}'
-    # module
-    module = module_from_spec(spec)
-    # load the module
-    spec.loader.exec_module(module)
-    # should be a build var
-    builds: Sequence[Build] = module.builds
-    # result
-    return builds
+    @property
+    def src(self) -> list[str]:
+        ''' list of str meta data, suppose to record stats source '''
+        return self._src
+
+    @src.setter
+    def src(self, val: list[str]) -> None:
+        # only list[str] could be set to this property
+        assert all(isinstance(v, str) for v in val)
+        self._src = val
+
+    def __add__(self, other: float | Float) -> Float:
+        ''' preserve the src when add to another float|Float '''
+        result = super().__add__(other)
+        if isinstance(other, Float):
+            self.src += other.src
+        return Float(result, self.src)
 
 
 def dataclass_asdict(dc: Any) -> dict[str, Any]:
@@ -52,7 +65,7 @@ def dataclass_asdict(dc: Any) -> dict[str, Any]:
     return package
 
 
-def build_as_yaml(build: Build) -> str:
+def build_as_yaml(build: Any) -> str:
     dc_dict = dataclass_asdict(build)
     yaml_str = yaml.dump(dc_dict, sort_keys=False)
     return yaml_str

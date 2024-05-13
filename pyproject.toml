@@ -1,5 +1,27 @@
 [tool.isort]
 src_paths = ["division2calc", "tests"]
+skip = [
+     ".eggs",
+     ".pytype",
+     ".direnv",
+     # "build",
+     ".hg",
+     ".bzr",
+     ".venv",
+     ".mypy_cache",
+     "buck-out",
+     ".tox",
+     ".svn",
+     "__pypackages__",
+     ".git",
+     "node_modules",
+     "venv",
+     ".pants.d",
+     "dist",
+     ".nox",
+     "_build",
+ ]
+
 
 [tool.pytest.ini_options]
 filterwarnings = "ignore::DeprecationWarning"
