@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import copy
 from dataclasses import dataclass, field, replace
 from typing import Any
@@ -44,9 +46,9 @@ class Build:
         self.damage = Damage(self.weapon, self.gears, self.stats)
         self.summary = Summary(self.stats, self.damage)
 
-    def replace(self, **changes: Any):
+    def replace(self, **changes: Any) -> Build:
         # generate a deep copy of the same build
-        copied: 'Build' = copy.deepcopy(self)
+        copied: Build = copy.deepcopy(self)
         # replace the fiels as supply by user
         replaced = replace(copied, **changes)
         #

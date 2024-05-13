@@ -19,19 +19,16 @@ base = Build(
 )
 
 builds = [base, ]
-builds.append(replace(
-    builds[-1],
+builds.append(builds[-1].replace(
     name='+1CHC',
     mask=Striker.Mask(attr1=gearattrs.CHC(0.06),
                       mod=gearmods.CHC(0.06)),
 ))
-builds.append(replace(
-    builds[-1],
+builds.append(builds[-1].replace(
     name='+2CHC',
     backpack=Striker.Backpack(mod=gearmods.CHC(0.06)),
 ))
-builds.append(replace(
-    builds[-1],
+builds.append(builds[-1].replace(
     name='+3CHC',
     chest=Lengmo.Chest(mod=gearmods.CHC(0.06)),
 ))

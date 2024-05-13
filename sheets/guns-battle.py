@@ -18,19 +18,18 @@ base = Build(
     kneepads=Overlord.FoxsPrayer(attr2=gearattrs.CHC(.06)),
 )
 
-builds = [base, ]
-builds.append(replace(
-    builds[-1],
-    name='ShieldSplinterer',
-    weapon=AR.ShieldSplinterer(expertise_level=12),
-))
-builds.append(replace(
-    builds[-1],
-    name='BulletKing',
-    weapon=LMG.BulletKing(expertise_level=18),
-))
-builds.append(replace(
-    builds[-1],
-    name='GR9',
-    weapon=LMG.GR9(expertise_level=0),
-))
+builds = [
+    base,
+    base.replace(
+        name='ShieldSplinterer',
+        weapon=AR.ShieldSplinterer(expertise_level=12),
+    ),
+    base.replace(
+        name='BulletKing',
+        weapon=LMG.BulletKing(expertise_level=18),
+    ),
+    base.replace(
+        name='GR9',
+        weapon=LMG.GR9(expertise_level=0),
+    ),
+]
