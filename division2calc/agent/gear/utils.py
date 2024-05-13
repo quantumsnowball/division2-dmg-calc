@@ -1,3 +1,5 @@
+import copy
+
 import division2calc.agent.gear.brandsets as brandsets
 import division2calc.agent.gear.gearsets as gearsets
 from division2calc.agent.gear import Gears
@@ -23,7 +25,8 @@ def enable_brandset_bonus(gears: Gears) -> None:
             except KeyError:
                 counter[id] = 0
             try:
-                gear.brandset_bonus = pools[id][counter[id]]
+                # ensure new copy of bonus object
+                gear.brandset_bonus = copy.deepcopy(pools[id][counter[id]])
             except IndexError:
                 pass
 
@@ -45,7 +48,8 @@ def enable_gearset_bonus(gears: Gears) -> None:
             except KeyError:
                 counter[id] = 0
             try:
-                gear.gearset_bonus = pools[id][counter[id]]
+                # ensure new copy of bonus object
+                gear.gearset_bonus = copy.deepcopy(pools[id][counter[id]])
 
                 # any gearsets self modification
                 gear.upgrade_bonus_talent()
