@@ -1,11 +1,11 @@
 import click
 
+import division2calc.agent.weapon.AR as AR
 import division2calc.gear.attrs as gearattrs
 import division2calc.gear.brandsets.Lengmo as Lengmo
 import division2calc.gear.brandsets.OverlordArmaments as Overlord
 import division2calc.gear.gearsets.StrikersBattlegear as Striker
 import division2calc.gear.mods as gearmods
-import division2calc.weapon.AR as AR
 from division2calc.agent import Build
 from division2calc.agent.specialization import Gunner
 from division2calc.command.breakdown import breakdown

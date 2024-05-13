@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
 
-import division2calc.weapon.attrs as attrs
-import division2calc.weapon.mods as mods
-import division2calc.weapon.talents as talents
-from division2calc.weapon import Weapon, WeaponType
+import division2calc.agent.weapon.attrs as attrs
+import division2calc.agent.weapon.mods as mods
+import division2calc.agent.weapon.talents as talents
+from division2calc.agent.weapon import Weapon, WeaponType
 
 
 @dataclass(kw_only=True)

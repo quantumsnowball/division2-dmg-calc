@@ -6,9 +6,9 @@ from division2calc.agent.specialization import Specialization
 from division2calc.agent.stats import Stats
 from division2calc.agent.summary import Summary
 from division2calc.agent.watch import Watch
+from division2calc.agent.weapon import Weapon
 from division2calc.gear import (Backpack, Chest, Gears, Gloves, Holster,
                                 Kneepads, Mask)
-from division2calc.weapon import Weapon
 
 
 @dataclass(kw_only=True)

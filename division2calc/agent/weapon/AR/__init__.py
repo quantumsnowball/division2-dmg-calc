@@ -1,5 +1,5 @@
-from division2calc.weapon.AR.ShieldSplinterer import ShieldSplinterer
-from division2calc.weapon.AR.StElmosEngine import StElmosEngine
+from division2calc.agent.weapon.AR.ShieldSplinterer import ShieldSplinterer
+from division2calc.agent.weapon.AR.StElmosEngine import StElmosEngine
 
 __all__ = [
     'StElmosEngine',

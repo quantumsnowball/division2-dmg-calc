@@ -1,5 +1,5 @@
 from division2calc.agent import Build
-from division2calc.weapon import Weapon
+from division2calc.agent.weapon import Weapon
 
 
 def test_build_weapon(build: Build):

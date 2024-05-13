@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from typing import Literal
 
-import division2calc.weapon.attrs as attrs
-import division2calc.weapon.mods as mods
-import division2calc.weapon.talents as talents
+import division2calc.agent.weapon.attrs as attrs
+import division2calc.agent.weapon.mods as mods
+import division2calc.agent.weapon.talents as talents
 from division2calc.utils import Float
 
 WeaponType = Literal['AR', 'SMG', 'LMG', 'Rifle', 'MMR', 'Shotgun']

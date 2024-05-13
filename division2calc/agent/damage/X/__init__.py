@@ -11,8 +11,8 @@ from division2calc.agent.damage.X.X6 import X6
 from division2calc.agent.damage.X.X7 import X7
 from division2calc.agent.damage.X.X8 import X8
 from division2calc.agent.stats import Stats
+from division2calc.agent.weapon import Weapon
 from division2calc.gear import Gears
-from division2calc.weapon import Weapon
 
 Name = str
 X_Value = dict[Name, float]

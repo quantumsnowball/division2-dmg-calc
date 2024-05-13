@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 
+from division2calc.agent.weapon import WeaponType
 from division2calc.utils import Float
-from division2calc.weapon import WeaponType
 
 
 @dataclass
