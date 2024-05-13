@@ -20,7 +20,10 @@ class Specialization:
     weapon_type_damage_scores: WeaponTypeBonus = field(default_factory=WeaponTypeBonus)
 
     def weapon_type_damage(self, type: WeaponType) -> Float:
-        return Float(getattr(self.weapon_type_damage_scores, type) * 0.05)
+        unit = 0.05
+        pct = getattr(self.weapon_type_damage_scores, type) * unit
+        src = [f'{self.name}.{type}({pct:.2f})', ]
+        return Float(pct, src)
 
 
 @dataclass(kw_only=True)

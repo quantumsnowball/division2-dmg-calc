@@ -12,16 +12,28 @@ class Watch:
 
     @property
     def weapon_damage(self) -> Float:
-        return Float(self.weapon_damage_score * 0.002)
+        unit = 0.002
+        pct = self.weapon_damage_score * unit
+        src = [f'{self.__class__.__name__}.WD({pct})', ]
+        return Float(pct, src)
 
     @property
     def critical_hit_chance(self) -> Float:
-        return Float(self.critical_hit_chance_score * 0.002)
+        unit = 0.002
+        pct = self.critical_hit_chance_score * unit
+        src = [f'{self.__class__.__name__}.CHC({pct})', ]
+        return Float(pct, src)
 
     @property
     def critical_hit_damage(self) -> Float:
-        return Float(self.critical_hit_damage_score * 0.004)
+        unit = 0.004
+        pct = self.critical_hit_damage_score * unit
+        src = [f'{self.__class__.__name__}.CHD({pct})', ]
+        return Float(pct, src)
 
     @property
     def headshot_damage(self) -> Float:
-        return Float(self.headshot_damage_score * 0.004)
+        unit = 0.004
+        pct = self.headshot_damage_score * unit
+        src = [f'{self.__class__.__name__}.HS({pct})', ]
+        return Float(pct, src)

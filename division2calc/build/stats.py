@@ -56,7 +56,8 @@ class Stats:
     @property
     def critical_hit_damage(self) -> Float:
         # base CHD
-        pct = Float(0.25)
+        base = 0.25
+        pct = Float(base, [f'Default({base})', ])
         # weapon
         pct += self._weapon.critical_hit_damage
         # gear
@@ -70,7 +71,8 @@ class Stats:
     @property
     def headshot_damage(self) -> Float:
         # base HS
-        pct = Float(0.55)
+        base = 0.55
+        pct = Float(base, [f'Default({base})', ])
         # weapon
         pct += self._weapon.headshot_damage
         # gear

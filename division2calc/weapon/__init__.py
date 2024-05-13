@@ -33,65 +33,84 @@ class Weapon:
         self.mods = (self.optics, self.magazine, self.muzzle, self.underbarrel)
 
     @property
+    def clsn(self) -> str:
+        return self.__class__.__name__
+
+    @property
     def weapon_damage(self) -> Float:
-        return Float(self.expertise_level * 0.01)
+        unit = 0.01
+        pct = self.expertise_level * unit
+        src = [f'{self.clsn}.exp{self.expertise_level}({pct})', ]
+        return Float(pct, src)
 
     @property
     def weapon_type_damage(self) -> Float:
         pct = 0
+        src = []
         # cores
         for core in self.cores:
             if self.type == 'AR' and isinstance(core, attrs.AssultRifleDamage):
                 pct += core.pct
+                src += [f'{self.clsn}.AR({core.pct})']
         # result
-        return Float(pct)
+        return Float(pct, src)
 
     @property
     def critical_hit_chance(self) -> Float:
         pct = 0
+        src = []
         # mods
         for mod in self.mods:
             if isinstance(mod, mods.CriticalHitChance):
                 pct += mod.pct
+                src += [f'{self.clsn}.mod.CHC({mod.pct})']
         # result
-        return Float(pct)
+        return Float(pct, src)
 
     @property
     def critical_hit_damage(self) -> Float:
         pct = 0
+        src = []
         # mods
         for mod in self.mods:
             if isinstance(mod, mods.CriticalHitDamage):
                 pct += mod.pct
+                src += [f'{self.clsn}.mod.CHD({mod.pct})']
         # result
-        return Float(pct)
+        return Float(pct, src)
 
     @property
     def headshot_damage(self) -> Float:
         pct = 0
+        src = []
         # mods
         for mod in self.mods:
             if isinstance(mod, mods.HeadshotDamage):
                 pct += mod.pct
+                src += [f'{self.clsn}.mod.HS({mod.pct})']
         # result
-        return Float(pct)
+        return Float(pct, src)
 
     @property
     def damage_to_health(self) -> Float:
         pct = 0
+        src = []
         # attr
         for attr in self.attrs:
             if isinstance(attr, attrs.HealthDamage):
                 pct += attr.pct
+                src += [f'{self.clsn}.attr.DtH({attr.pct})']
         # result
-        return Float(pct)
+        return Float(pct, src)
 
     @property
     def damage_to_target_out_of_cover(self) -> Float:
         pct = 0
+        src = []
         # attr
         for attr in self.attrs:
             if isinstance(attr, attrs.DamageToTargetOutOfCover):
                 pct += attr.pct
+                src += [f'{self.clsn}.attr.DtooC({attr.pct})']
         # result
-        return Float(pct)
+        return Float(pct, src)
