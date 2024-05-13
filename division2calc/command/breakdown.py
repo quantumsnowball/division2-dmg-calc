@@ -25,12 +25,14 @@ def breakdown(file: Path) -> None:
             DtH=st.damage_to_health,
             DtooC=st.damage_to_target_out_of_cover,
         )
-        srcs = {k: '\n'.join(v.src) for k, v in totals.items()}
+        srcs = {k: v.src for k, v in totals.items()}
         # package
         df_totals = pd.DataFrame.from_dict({'total': totals}, orient='index')
-        df_srcs = pd.DataFrame.from_dict({'>>>': srcs}, orient='index')
+        df_srcs = pd.DataFrame.from_dict(srcs, orient='index').T
         # format
         df_totals = df_totals.map(lambda v: f'{v:.1%}')
+        df_srcs = df_srcs.fillna('-')
+        df_srcs.index = ['>>>']+['']*(len(df_srcs)-1)
         df = pd.concat([df_totals, df_srcs], axis='index')
         # result
         click.secho(f'\nbreakdown - Build({build.name}):', fg='yellow')

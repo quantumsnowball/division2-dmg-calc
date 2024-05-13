@@ -12,7 +12,10 @@ class Watch:
 
     @property
     def weapon_damage(self) -> Float:
-        return Float(self.weapon_damage_score * 0.002)
+        unit = 0.002
+        pct = self.weapon_damage_score * unit
+        src = [f'{self.__class__.__name__}({pct})', ]
+        return Float(pct, src)
 
     @property
     def critical_hit_chance(self) -> Float:
