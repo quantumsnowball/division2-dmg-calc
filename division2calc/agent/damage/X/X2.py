@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 
-import division2calc.gear.gearsets as gearsets
-import division2calc.gear.gearsets.bonus as gearsets_bonus
-import division2calc.gear.talents as talents
+import division2calc.agent.gear.gearsets as gearsets
+import division2calc.agent.gear.gearsets.bonus as gearsets_bonus
+import division2calc.agent.gear.talents as talents
 from division2calc.agent.damage.common import Profile
-from division2calc.gear import Gears
+from division2calc.agent.gear import Gears
 
 
 @dataclass

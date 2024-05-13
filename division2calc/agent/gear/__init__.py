@@ -3,10 +3,10 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import NamedTuple
 
-import division2calc.gear.attrs as attrs
-import division2calc.gear.mods as mods
-import division2calc.gear.talents as talents
-from division2calc.gear.brandsets import Brandsets
+import division2calc.agent.gear.attrs as attrs
+import division2calc.agent.gear.mods as mods
+import division2calc.agent.gear.talents as talents
+from division2calc.agent.gear.brandsets import Brandsets
 from division2calc.utils import Float
 
 

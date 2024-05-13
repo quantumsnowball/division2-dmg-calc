@@ -1,6 +1,6 @@
-import division2calc.gear.brandsets as brandsets
-import division2calc.gear.gearsets as gearsets
-from division2calc.gear import Gears
+import division2calc.agent.gear.brandsets as brandsets
+import division2calc.agent.gear.gearsets as gearsets
+from division2calc.agent.gear import Gears
 
 
 #

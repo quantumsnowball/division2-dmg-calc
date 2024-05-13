@@ -4,9 +4,9 @@ import division2calc.agent.damage.common as common
 from division2calc.agent.common import Profile
 from division2calc.agent.damage.Dydx import Dydx
 from division2calc.agent.damage.X import X
+from division2calc.agent.gear import Gears
 from division2calc.agent.stats import Stats
 from division2calc.agent.weapon import Weapon
-from division2calc.gear import Gears
 
 
 @dataclass
