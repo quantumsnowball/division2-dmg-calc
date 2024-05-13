@@ -52,6 +52,10 @@ class Weapon:
             if self.type == 'AR' and isinstance(core, attrs.AssultRifleDamage):
                 pct += core.pct
                 src += [f'{self.clsn}.AR({core.pct})']
+        for core in self.cores:
+            if self.type == 'LMG' and isinstance(core, attrs.LMGDamage):
+                pct += core.pct
+                src += [f'{self.clsn}.LMG({core.pct})']
         # result
         return Float(pct, src)
 
