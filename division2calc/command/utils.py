@@ -4,8 +4,8 @@ from typing import Sequence
 
 import pandas as pd
 
-from division2calc.build import Build
-from division2calc.build.common import Metric, Profile
+from division2calc.agent import Build
+from division2calc.agent.common import Metric, Profile
 
 
 def load_builds_file(file: Path,

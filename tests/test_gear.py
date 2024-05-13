@@ -1,5 +1,5 @@
-from division2calc.build import Build
-from division2calc.gear import Gear
+from division2calc.agent import Build
+from division2calc.agent.gear import Gear
 
 
 def test_build_gears(build: Build):

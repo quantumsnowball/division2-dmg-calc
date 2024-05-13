@@ -1,7 +1,7 @@
 import pytest
 from pytest_console_scripts import ScriptRunner
 
-from division2calc.build.common import METRICS, PROFILES
+from division2calc.agent.common import METRICS, PROFILES
 
 CMD = 'division2calc'
 FILE = 'tests/sheets/demo.py'
