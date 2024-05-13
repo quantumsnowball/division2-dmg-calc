@@ -13,8 +13,12 @@ class ActumEst(Talent):
 
 @dataclass
 class PerfectOptimist(Talent):
-    # TODO
-    pass
+    '''
+    Perfect Optimist 
+    Weapon damage is increased by 4% for every 10% ammo missing from the magazine.	
+    '''
+    prob: float = 0.5
+    max_buff: float = 0.4
 
 
 #
