@@ -16,6 +16,6 @@ class OverlordArmaments(Brandsets):
 
 @ dataclass(kw_only=True)
 class FoxsPrayer(gear.Kneepads, OverlordArmaments):
-    core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
-    attr1: attrs.MinorAttribute = field(default_factory=attrs.DamageToTargetOutOfCover)
-    attr2: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
+    core: attrs.CoreAttribute = field(default_factory=lambda: attrs.RedCore(.15))
+    attr1: attrs.MinorAttribute = field(default_factory=lambda: attrs.DamageToTargetOutOfCover(.08))
+    attr2: attrs.MinorAttribute = field(default_factory=lambda: attrs.CriticalHitDamage(.12))

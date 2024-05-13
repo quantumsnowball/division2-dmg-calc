@@ -34,37 +34,37 @@ class StrikersBattlegear(gear.Gear, Gearsets):
 
 @dataclass(kw_only=True)
 class Mask(gear.Mask, StrikersBattlegear):
-    core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
-    attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
+    core: attrs.CoreAttribute = field(default_factory=lambda: attrs.RedCore(.15))
+    attr1: attrs.MinorAttribute = field(default_factory=lambda: attrs.CriticalHitDamage(.12))
 
 
 @dataclass(kw_only=True)
 class Backpack(gear.Backpack, StrikersBattlegear):
-    core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
-    attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
+    core: attrs.CoreAttribute = field(default_factory=lambda: attrs.RedCore(.15))
+    attr1: attrs.MinorAttribute = field(default_factory=lambda: attrs.CriticalHitDamage(.12))
     talent: talents.BackpackTalent = field(default_factory=talents.RiskManagement)
 
 
 @dataclass(kw_only=True)
 class Chest(gear.Chest, StrikersBattlegear):
-    core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
-    attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
+    core: attrs.CoreAttribute = field(default_factory=lambda: attrs.RedCore(.15))
+    attr1: attrs.MinorAttribute = field(default_factory=lambda: attrs.CriticalHitDamage(.12))
     talent: talents.ChestTalent = field(default_factory=talents.PressTheAdvantage)
 
 
 @dataclass(kw_only=True)
 class Gloves(gear.Gloves, StrikersBattlegear):
-    core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
-    attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
+    core: attrs.CoreAttribute = field(default_factory=lambda: attrs.RedCore(.15))
+    attr1: attrs.MinorAttribute = field(default_factory=lambda: attrs.CriticalHitDamage(.12))
 
 
 @dataclass(kw_only=True)
 class Holster(gear.Holster, StrikersBattlegear):
-    core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
-    attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
+    core: attrs.CoreAttribute = field(default_factory=lambda: attrs.RedCore(.15))
+    attr1: attrs.MinorAttribute = field(default_factory=lambda: attrs.CriticalHitDamage(.12))
 
 
 @dataclass(kw_only=True)
 class Kneepads(gear.Kneepads, StrikersBattlegear):
-    core: attrs.CoreAttribute = field(default_factory=attrs.RedCore)
-    attr1: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitDamage)
+    core: attrs.CoreAttribute = field(default_factory=lambda: attrs.RedCore(.15))
+    attr1: attrs.MinorAttribute = field(default_factory=lambda: attrs.CriticalHitDamage(.12))

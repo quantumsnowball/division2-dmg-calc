@@ -21,6 +21,26 @@ class HeadshotDamage(Mod):
     pct: float
 
 
+@dataclass
+class Stability(Mod):
+    pct: float
+
+
+@dataclass
+class WeaponHandling(Mod):
+    pct: float
+
+
+@dataclass
+class Rounds(Mod):
+    unit: int
+
+
+@dataclass
+class RateOfFire(Mod):
+    pct: float
+
+
 CHC = CriticalHitChance
 CHD = CriticalHitDamage
 HS = HeadshotDamage

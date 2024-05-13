@@ -17,14 +17,14 @@ class Lengmo(Brandsets):
 
 @dataclass(kw_only=True)
 class Mask(gear.Mask, Lengmo):
-    core: attrs.CoreAttribute = field(default_factory=attrs.BlueCore)
-    attr1: attrs.MinorAttribute = field(default_factory=attrs.ExplosiveResistence)
-    attr2: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitChance)
+    core: attrs.CoreAttribute = field(default_factory=lambda: attrs.BlueCore(170_000))
+    attr1: attrs.MinorAttribute = field(default_factory=lambda: attrs.ExplosiveResistence(.10))
+    attr2: attrs.MinorAttribute = field(default_factory=lambda: attrs.CriticalHitChance(.06))
 
 
 @dataclass(kw_only=True)
 class Chest(gear.Chest, Lengmo):
-    core: attrs.CoreAttribute = field(default_factory=attrs.BlueCore)
-    attr1: attrs.MinorAttribute = field(default_factory=attrs.ExplosiveResistence)
-    attr2: attrs.MinorAttribute = field(default_factory=attrs.CriticalHitChance)
-    talent: talents.ChestTalent = field(default_factory=talents.Obliterate)
+    core: attrs.CoreAttribute = field(default_factory=lambda: attrs.BlueCore(170_000))
+    attr1: attrs.MinorAttribute = field(default_factory=lambda: attrs.ExplosiveResistence(.10))
+    attr2: attrs.MinorAttribute = field(default_factory=lambda: attrs.CriticalHitChance(.06))
+    talent: talents.ChestTalent = field(default_factory=lambda: talents.Obliterate())

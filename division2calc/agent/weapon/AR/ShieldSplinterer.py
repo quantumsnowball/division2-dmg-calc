@@ -13,11 +13,11 @@ class ShieldSplinterer(Weapon):
     name: str = "Shield Splinterer"
     type: WeaponType = 'AR'
     base_damage: int = 45132
-    core1: attrs.CoreAttribute = field(default_factory=attrs.AssultRifleDamage)
-    core2: attrs.CoreAttribute = field(default_factory=attrs.HealthDamage)
-    minor: attrs.MinorAttribute = field(default_factory=lambda: attrs.DamageToTargetOutOfCover(0.09))
-    optics: mods.Mod = field(default_factory=lambda: mods.CriticalHitChance(0.05))
+    core1: attrs.CoreAttribute = field(default_factory=lambda: attrs.AssultRifleDamage(.15))
+    core2: attrs.CoreAttribute = field(default_factory=lambda: attrs.HealthDamage(.21))
+    minor: attrs.MinorAttribute = field(default_factory=lambda: attrs.DamageToTargetOutOfCover(.09))
+    optics: mods.Mod = field(default_factory=lambda: mods.CriticalHitChance(.05))
     magazine: mods.Mod = field(default_factory=mods.NoMod)
-    muzzle: mods.Mod = field(default_factory=lambda: mods.CriticalHitChance(0.05))
+    muzzle: mods.Mod = field(default_factory=lambda: mods.CriticalHitChance(.05))
     underbarrel: mods.Mod = field(default_factory=mods.NoMod)
-    talent: talents.Talent = field(default_factory=talents.PerfectOptimist)
+    talent: talents.Talent = field(default_factory=lambda: talents.PerfectOptimist())

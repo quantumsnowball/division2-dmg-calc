@@ -49,9 +49,9 @@ class X(Profile[X_Value]):
     '''
 
     def __post_init__(self) -> None:
-        self.x1 = X1(self._stats)
+        self.x1 = X1(self._stats, self._weapon)
         self.x2 = X2(self._gears)
-        self.x3 = X3()
+        self.x3 = X3(self._weapon)
         self.x4 = X4()
         self.x5 = X5()
         self.x6 = X6(self._stats)
