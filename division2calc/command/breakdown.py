@@ -1,5 +1,5 @@
+import shutil
 from pathlib import Path
-from pprint import pp
 
 import click
 import pandas as pd
@@ -16,8 +16,14 @@ def breakdown(file: Path) -> None:
         # select fields
         st = build.stats
         totals = dict(
+            WD=st.weapon_damage,
+            WTD=st.weapon_type_damage,
             CHC=st.critical_hit_chance,
             CHD=st.critical_hit_damage,
+            HS=st.headshot_damage,
+            DtA=st.damage_to_armor,
+            DtH=st.damage_to_health,
+            DtooC=st.damage_to_target_out_of_cover,
         )
         srcs = {k: '\n'.join(v.src) for k, v in totals.items()}
         # package
@@ -28,4 +34,8 @@ def breakdown(file: Path) -> None:
         df = pd.concat([df_totals, df_srcs], axis='index')
         # result
         click.secho(f'\nbreakdown - Build({build.name}):', fg='yellow')
-        print(df)
+        with pd.option_context(
+            'display.max_columns', None,
+            'display.width', shutil.get_terminal_size().columns,
+        ):
+            print(df)
