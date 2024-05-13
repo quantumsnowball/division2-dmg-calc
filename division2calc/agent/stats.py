@@ -114,3 +114,11 @@ class Stats:
             pct += gear.damage_to_target_out_of_cover
         # result
         return pct
+
+    @property
+    def rate_of_fire(self) -> Float:
+        pct = Float(0)
+        # weapon
+        pct += self._weapon.rate_of_fire
+        # gear
+        return pct

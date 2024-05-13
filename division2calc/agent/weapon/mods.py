@@ -31,6 +31,11 @@ class Rounds(Mod):
     unit: int
 
 
+@dataclass
+class RateOfFire(Mod):
+    pct: float
+
+
 CHC = CriticalHitChance
 CHD = CriticalHitDamage
 HS = HeadshotDamage

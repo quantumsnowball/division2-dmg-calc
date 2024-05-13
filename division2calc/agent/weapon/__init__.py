@@ -114,3 +114,20 @@ class Weapon:
                 src += [f'{self.clsn}.attr.DtooC({attr.pct})']
         # result
         return Float(pct, src)
+
+    @property
+    def rate_of_fire(self) -> Float:
+        pct = 0
+        src = []
+        # attr
+        for attr in self.attrs:
+            if isinstance(attr, attrs.RateOfFire):
+                pct += attr.pct
+                src += [f'{self.clsn}.attr.RateOfFire({attr.pct})']
+        # mod
+        for mod in self.mods:
+            if isinstance(mod, mods.RateOfFire):
+                pct += mod.pct
+                src += [f'{self.clsn}.attr.RateOfFire({mod.pct})']
+        # result
+        return Float(pct, src)
