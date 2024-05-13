@@ -24,6 +24,7 @@ class ChestTalent(Talent):
 @dataclass
 class PressTheAdvantage(ChestTalent):
     max_stack: int = 200
+    prob: float = 0.2
 
 
 @dataclass
