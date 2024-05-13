@@ -24,6 +24,7 @@ def breakdown(file: Path) -> None:
             DtA=st.damage_to_armor,
             DtH=st.damage_to_health,
             DtooC=st.damage_to_target_out_of_cover,
+            RoF=st.rate_of_fire,
         )
         srcs = {k: v.src for k, v in totals.items()}
         # package
