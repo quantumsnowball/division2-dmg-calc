@@ -29,7 +29,7 @@ class Gear:
     @property
     def weapon_damage(self) -> Float:
         if isinstance(self.core, attrs.RedCore):
-            return Float(self.core.damage, [f'RedCore({self.core.damage})', ])
+            return Float(self.core.damage, [f'{self.clsn}.RedCore({self.core.damage})', ])
         return Float(0.0)
 
     @property
