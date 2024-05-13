@@ -21,6 +21,11 @@ class PerfectOptimist(Talent):
     max_buff: float = 0.4
 
 
+@dataclass
+class BulletHell(Talent):
+    pass
+
+
 #
 # Empty
 #

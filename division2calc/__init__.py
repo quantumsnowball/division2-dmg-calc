@@ -6,6 +6,7 @@ import division2calc.agent.gear.brandsets.OverlordArmaments as Overlord
 import division2calc.agent.gear.gearsets.StrikersBattlegear as Striker
 import division2calc.agent.gear.mods as gearmods
 import division2calc.agent.weapon.AR as AR
+import division2calc.agent.weapon.LMG as LMG
 from division2calc.agent import Build
 from division2calc.agent.specialization import Gunner
 from division2calc.command.breakdown import breakdown
@@ -21,6 +22,7 @@ __all__ = [
     'Build',
     'Gunner',
     'AR',
+    'LMG',
     'Striker',
     'Lengmo',
     'Overlord',

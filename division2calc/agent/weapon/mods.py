@@ -22,6 +22,11 @@ class HeadshotDamage(Mod):
 
 
 @dataclass
+class Stability(Mod):
+    pct: float
+
+
+@dataclass
 class WeaponHandling(Mod):
     pct: float
 

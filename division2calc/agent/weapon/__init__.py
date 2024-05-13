@@ -59,6 +59,11 @@ class Weapon:
     def critical_hit_chance(self) -> Float:
         pct = 0
         src = []
+        # attrs
+        for attr in self.attrs:
+            if isinstance(attr, attrs.CriticalHitChance):
+                pct += attr.pct
+                src += [f'{self.clsn}.attr.CHC({attr.pct})']
         # mods
         for mod in self.mods:
             if isinstance(mod, mods.CriticalHitChance):
@@ -71,6 +76,11 @@ class Weapon:
     def critical_hit_damage(self) -> Float:
         pct = 0
         src = []
+        # attrs
+        for attr in self.attrs:
+            if isinstance(attr, attrs.CriticalHitDamage):
+                pct += attr.pct
+                src += [f'{self.clsn}.attr.CHD({attr.pct})']
         # mods
         for mod in self.mods:
             if isinstance(mod, mods.CriticalHitDamage):
@@ -79,7 +89,7 @@ class Weapon:
         # result
         return Float(pct, src)
 
-    @property
+    @ property
     def headshot_damage(self) -> Float:
         pct = 0
         src = []
@@ -91,7 +101,7 @@ class Weapon:
         # result
         return Float(pct, src)
 
-    @property
+    @ property
     def damage_to_health(self) -> Float:
         pct = 0
         src = []
@@ -103,7 +113,7 @@ class Weapon:
         # result
         return Float(pct, src)
 
-    @property
+    @ property
     def damage_to_target_out_of_cover(self) -> Float:
         pct = 0
         src = []
@@ -115,7 +125,7 @@ class Weapon:
         # result
         return Float(pct, src)
 
-    @property
+    @ property
     def rate_of_fire(self) -> Float:
         pct = 0
         src = []
