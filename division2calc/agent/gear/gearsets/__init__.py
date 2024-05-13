@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 
 import division2calc.agent.gear.gearsets.bonus as bonus
-from division2calc.agent.gear import Gear
 
 BonusPool = tuple[bonus.NoBonus,
                   bonus.Bonus,
@@ -11,7 +10,7 @@ BonusPool = tuple[bonus.NoBonus,
 
 
 @dataclass(kw_only=True)
-class Gearsets(Gear, ABC):
+class Gearsets(ABC):
     gearset: str
     bonus_pool: BonusPool
     gearset_bonus: bonus.Bonus = field(default_factory=bonus.NoBonus)

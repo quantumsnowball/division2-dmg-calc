@@ -9,7 +9,7 @@ from division2calc.agent.gear.gearsets import BonusPool, Gearsets
 
 
 @dataclass(kw_only=True)
-class StrikersBattlegear(Gearsets):
+class StrikersBattlegear(gear.Gear, Gearsets):
     gearset: str = "Striker's Battlegear"
     bonus_pool: BonusPool = field(default=(bonus.NoBonus(),
                                            bonus.WeaponHandling(0.15),
