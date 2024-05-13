@@ -34,27 +34,33 @@ class Weapon:
 
     @property
     def weapon_damage(self) -> Float:
-        return Float(self.expertise_level * 0.01)
+        pct = self.expertise_level * 0.01
+        src = [f'{self.__class__.__name__}.expertise({pct})', ]
+        return Float(pct, src)
 
     @property
     def weapon_type_damage(self) -> Float:
         pct = 0
+        src = []
         # cores
         for core in self.cores:
             if self.type == 'AR' and isinstance(core, attrs.AssultRifleDamage):
                 pct += core.pct
+                src += [f'{self.__class__.__name__}.{attrs.AssultRifleDamage.__name__}({core.pct})']
         # result
-        return Float(pct)
+        return Float(pct, src)
 
     @property
     def critical_hit_chance(self) -> Float:
         pct = 0
+        src = []
         # mods
         for mod in self.mods:
             if isinstance(mod, mods.CriticalHitChance):
                 pct += mod.pct
+                src += [f'{self.__class__.__name__}.{mods.CriticalHitChance.__name__}({mod.pct})']
         # result
-        return Float(pct)
+        return Float(pct, src)
 
     @property
     def critical_hit_damage(self) -> Float:
