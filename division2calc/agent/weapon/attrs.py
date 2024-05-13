@@ -11,17 +11,17 @@ class CoreAttribute:
 
 @dataclass
 class AssultRifleDamage(CoreAttribute):
-    pct: float = 0.15
+    pct: float
 
 
 @dataclass
 class LMGDamage(CoreAttribute):
-    pct: float = 0.15
+    pct: float
 
 
 @dataclass
 class HealthDamage(CoreAttribute):
-    pct: float = 0.21
+    pct: float
 
 
 #
@@ -39,17 +39,17 @@ class CriticalHitChance(MinorAttribute):
 
 @dataclass
 class CriticalHitDamage(MinorAttribute):
-    pct: float = 0.10
+    pct: float
 
 
 @dataclass
 class DamageToTargetOutOfCover(CoreAttribute, MinorAttribute):
-    pct: float = 0.10
+    pct: float
 
 
 @dataclass
 class RateOfFire(MinorAttribute):
-    pct: float = 0.05
+    pct: float
 
 
 #
