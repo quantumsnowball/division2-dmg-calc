@@ -12,17 +12,17 @@ class CoreAttribute:
 
 @dataclass
 class RedCore(CoreAttribute):
-    damage: float = 0.15
+    damage: float
 
 
 @dataclass
 class BlueCore(CoreAttribute):
-    armor: int = 170_000
+    armor: int
 
 
 @dataclass
 class SkillCore(CoreAttribute):
-    tier: int = 1
+    tier: int
 
 
 #
@@ -47,12 +47,12 @@ class CriticalHitChance(OffensiveMinorAttribute):
 
 @dataclass
 class CriticalHitDamage(OffensiveMinorAttribute):
-    pct: float = 0.12
+    pct: float
 
 
 @dataclass
 class HeadshotDamage(OffensiveMinorAttribute):
-    pct: float = 0.10
+    pct: float
 
 
 CHC = CriticalHitChance
@@ -62,12 +62,12 @@ HS = HeadshotDamage
 
 @dataclass
 class DamageToHealth(OffensiveMinorAttribute):
-    pct: float = 0.10
+    pct: float
 
 
 @dataclass
 class DamageToTargetOutOfCover(OffensiveMinorAttribute):
-    pct: float = 0.08
+    pct: float
 
 
 # defensive
@@ -78,7 +78,7 @@ class DefensiveMinorAttribute(MinorAttribute):
 
 @dataclass
 class ExplosiveResistence(DefensiveMinorAttribute):
-    pct: float = 0.10
+    pct: float
 
 
 #
