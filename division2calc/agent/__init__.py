@@ -1,4 +1,6 @@
-from dataclasses import dataclass, field
+import copy
+from dataclasses import dataclass, field, replace
+from typing import Any
 
 import division2calc.agent.gear.utils as utils
 from division2calc.agent.damage import Damage
@@ -41,3 +43,11 @@ class Build:
         self.stats = Stats(self.weapon, self.gears, self.watch, self.specialization)
         self.damage = Damage(self.weapon, self.gears, self.stats)
         self.summary = Summary(self.stats, self.damage)
+
+    def replace(self, **changes: Any):
+        # generate a deep copy of the same build
+        copied: 'Build' = copy.deepcopy(self)
+        # replace the fiels as supply by user
+        replaced = replace(copied, **changes)
+        #
+        return replaced
