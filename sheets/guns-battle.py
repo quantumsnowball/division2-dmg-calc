@@ -29,3 +29,8 @@ builds.append(replace(
     name='BulletKing',
     weapon=LMG.BulletKing(expertise_level=18),
 ))
+builds.append(replace(
+    builds[-1],
+    name='GR9',
+    weapon=LMG.GR9(expertise_level=0),
+))

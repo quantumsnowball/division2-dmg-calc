@@ -26,6 +26,17 @@ class BulletHell(Talent):
     pass
 
 
+@dataclass
+class Ranger(Talent):
+    '''
+    Amplifies weapon damage by 2% for every 5m (4m) you are away from your target.
+    '''
+    # assuming 25m / 5 * 2% = 10%
+    avg_buff: float = 0.15
+    # assuming 60m / 5 * 2% = 24%
+    max_buff: float = 0.24
+
+
 #
 # Empty
 #

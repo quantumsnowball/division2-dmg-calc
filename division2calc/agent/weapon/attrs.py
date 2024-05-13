@@ -48,6 +48,11 @@ class DamageToTargetOutOfCover(CoreAttribute, MinorAttribute):
 
 
 @dataclass
+class DamageToArmor(CoreAttribute, MinorAttribute):
+    pct: float
+
+
+@dataclass
 class RateOfFire(MinorAttribute):
     pct: float
 
