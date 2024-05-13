@@ -4,9 +4,11 @@ from dataclasses import dataclass, field
 from typing import NamedTuple
 
 import division2calc.agent.gear.attrs as attrs
+import division2calc.agent.gear.gearsets.bonus as gearsets_bonus
 import division2calc.agent.gear.mods as mods
 import division2calc.agent.gear.talents as talents
 from division2calc.agent.gear.brandsets import Brandsets
+from division2calc.agent.gear.gearsets import Gearsets
 from division2calc.utils import Float
 
 
@@ -112,6 +114,18 @@ class Gear:
             if isinstance(attr, attrs.DamageToTargetOutOfCover):
                 pct += attr.pct
                 src += [f'{self.clsn}.attr.DtooC({attr.pct})']
+        # result
+        return Float(pct, src)
+
+    @property
+    def rate_of_fire(self) -> Float:
+        pct = 0
+        src = []
+        # gearset bonus
+        if isinstance(self, Gearsets):
+            if isinstance(self.gearset_bonus, gearsets_bonus.RateOfFire):
+                pct += self.gearset_bonus.pct
+                src += [f'{self.gearset}.RateOfFire({self.gearset_bonus.pct})',]
         # result
         return Float(pct, src)
 

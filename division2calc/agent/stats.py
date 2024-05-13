@@ -121,4 +121,7 @@ class Stats:
         # weapon
         pct += self._weapon.rate_of_fire
         # gear
+        for gear in self._gears:
+            pct += gear.rate_of_fire
+        # watch
         return pct
