@@ -29,7 +29,12 @@ builds = [
         weapon=LMG.BulletKing(expertise_level=18),
     ),
     base.replace(
-        name='GR9',
-        weapon=LMG.GR9(expertise_level=0),
+        name='GR9 - Measured',
+        weapon=LMG.GR9(expertise_level=18),
+    ),
+    base.replace(
+        name='GR9 - Strained',
+        weapon=LMG.GR9(expertise_level=18,
+                       talent=weapontalents.Strained()),
     ),
 ]

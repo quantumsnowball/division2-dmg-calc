@@ -69,9 +69,30 @@ class Measured(Talent):
         return dmg / x1 / x2 * x1_ * x2_
 
 
+@dataclass
+class Strained(Talent):
+    '''
+    Gain 10% critical hit damage for every 0.5s you are firing.
+    Stacks up to 5 (8) times.
+    '''
+    unit: float = 0.1
+    max_stack: int = 5
+    prob: float = 0.7
+
+    @property
+    def max_buff(self) -> float:
+        return self.unit * self.max_stack
+
+    @property
+    def average_buff(self) -> float:
+        return self.max_buff * self.prob
+
+
 #
 # Empty
 #
+
+
 @dataclass
 class NoTalent(Talent):
     def __repr__(self) -> str:

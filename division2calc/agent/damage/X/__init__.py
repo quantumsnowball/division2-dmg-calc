@@ -54,7 +54,7 @@ class X(Profile[X_Value]):
         self.x3 = X3(self._weapon)
         self.x4 = X4()
         self.x5 = X5()
-        self.x6 = X6(self._stats)
+        self.x6 = X6(self._stats, self._weapon)
         self.x7 = X7(self._stats)
         self.x8 = X8(self._stats)
 
