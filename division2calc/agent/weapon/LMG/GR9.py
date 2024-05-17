@@ -15,6 +15,7 @@ class GR9(Weapon):
     base_damage: int = 47905
     rpm: int = 750
     reload_time: float = 4.67
+    magazine_size: int = 200
     core1: attrs.CoreAttribute = field(default_factory=lambda: attrs.LMGDamage(.15))
     core2: attrs.CoreAttribute = field(default_factory=lambda: attrs.DamageToTargetOutOfCover(.12))
     minor: attrs.MinorAttribute = field(default_factory=lambda: attrs.DamageToArmor(.06))

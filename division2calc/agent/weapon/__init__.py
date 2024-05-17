@@ -16,6 +16,7 @@ class Weapon:
     base_damage: int
     rpm: int
     reload_time: float
+    magazine_size: int
     expertise_level: int
     # attribute
     core1: attrs.CoreAttribute
