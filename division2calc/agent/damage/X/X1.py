@@ -24,6 +24,9 @@ class X1(Profile[float]):
     @property
     def min(self) -> float:
         x = self.basic
+        # weapon talent
+        if isinstance(self._weapon.talent, talents.Measured):
+            x += -self._weapon.talent.top_wd_dec
         # result
         return x
 
