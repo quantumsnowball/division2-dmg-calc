@@ -30,6 +30,7 @@ class StrikersBattlegear(gear.Gear, Gearsets):
         # Press the Advantage exists in chest
         if isinstance(self._gears.chest.talent, talents.PressTheAdvantage):
             self.gearset_bonus.max_stack = self._gears.chest.talent.max_stack
+            self.gearset_bonus.prob = self._gears.chest.talent.prob
 
 
 @dataclass(kw_only=True)

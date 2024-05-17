@@ -20,4 +20,4 @@ class GR9(Weapon):
     magazine: mods.Mod = field(default_factory=lambda: mods.RateOfFire(.05))
     muzzle: mods.Mod = field(default_factory=lambda: mods.CriticalHitChance(.05))
     underbarrel: mods.Mod = field(default_factory=lambda: mods.CriticalHitChance(.05))
-    talent: talents.Talent = field(default_factory=lambda: talents.Ranger())
+    talent: talents.Talent = field(default_factory=lambda: talents.Measured())
