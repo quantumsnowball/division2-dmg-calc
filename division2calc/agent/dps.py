@@ -18,8 +18,11 @@ class DPS(common.Profile[float]):
         rpm = self._weapon.rpm
         rof = self._stats.rate_of_fire
         dmg = self._damage.min
+        mag = self._weapon.magazine_size
+        rl = self._weapon.reload_time
         # dps
-        dps = rpm/60 * (1+rof) * dmg
+        # dps = rpm/60 * (1+rof) * dmg
+        dps = mag*dmg/(rl+mag/(rpm*(1+rof)/60))
         # result
         return dps
 
@@ -28,12 +31,15 @@ class DPS(common.Profile[float]):
         rpm = self._weapon.rpm
         rof = self._stats.rate_of_fire
         dmg = self._damage.min
+        mag = self._weapon.magazine_size
+        rl = self._weapon.reload_time
         # special cases
         if isinstance(self._weapon.talent, weapon_talents.Measured):
             dmg = self._weapon.talent.adjust_dmg(dmg, self._damage.x[1].min, self._damage.x[2].min, mode='min')
             rof += -self._weapon.talent.bottom_rof_dec
         # dps
-        dps = rpm/60 * (1+rof) * dmg
+        # dps = rpm/60 * (1+rof) * dmg
+        dps = mag*dmg/(rl+mag/(rpm*(1+rof)/60))
         # result
         return dps
 
@@ -42,11 +48,14 @@ class DPS(common.Profile[float]):
         rpm = self._weapon.rpm
         rof = self._stats.rate_of_fire
         dmg = self._damage.average
+        mag = self._weapon.magazine_size
+        rl = self._weapon.reload_time
         # special cases
         if isinstance(self._weapon.talent, weapon_talents.Measured):
             rof += self._weapon.talent.average_rof
         # dps
-        dps = rpm/60 * (1+rof) * dmg
+        # dps = rpm/60 * (1+rof) * dmg
+        dps = mag*dmg/(rl+mag/(rpm*(1+rof)/60))
         # result
         return dps
 
@@ -55,11 +64,14 @@ class DPS(common.Profile[float]):
         rpm = self._weapon.rpm
         rof = self._stats.rate_of_fire
         dmg = self._damage.max
+        mag = self._weapon.magazine_size
+        rl = self._weapon.reload_time
         # special cases
         if isinstance(self._weapon.talent, weapon_talents.Measured):
             dmg = self._weapon.talent.adjust_dmg(dmg, self._damage.x[1].max, self._damage.x[2].max, mode='max')
             rof += +self._weapon.talent.top_rof_inc
         # dps
-        dps = rpm/60 * (1+rof) * dmg
+        # dps = rpm/60 * (1+rof) * dmg
+        dps = mag*dmg/(rl+mag/(rpm*(1+rof)/60))
         # result
         return dps
