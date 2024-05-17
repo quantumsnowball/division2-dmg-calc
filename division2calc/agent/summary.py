@@ -4,6 +4,7 @@ import pandas as pd
 
 from division2calc.agent.common import PROFILES, Profiles
 from division2calc.agent.damage import Damage
+from division2calc.agent.dps import DPS
 from division2calc.agent.stats import Stats
 
 
@@ -11,6 +12,7 @@ from division2calc.agent.stats import Stats
 class Summary:
     _stats: Stats
     _damage: Damage
+    _dps: DPS
 
     @property
     def stats(self) -> pd.DataFrame:
@@ -66,5 +68,17 @@ class Summary:
                  for crit, hs, expcrit in x6_columns.values()]
                 for profile in profile_index]
         df = pd.DataFrame(data, index=index, columns=columns)
+        # result
+        return df
+
+    @property
+    def dps(self) -> pd.DataFrame:
+        data = dict(basic=self._dps.basic,
+                    min=self._dps.min,
+                    average=self._dps.average,
+                    max=self._dps.max)
+        df = pd.DataFrame.from_dict(data, orient='index')
+        df.index.names = ('profile',)
+        df.columns.names = ('dps',)
         # result
         return df

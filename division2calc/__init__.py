@@ -12,6 +12,7 @@ from division2calc.agent.specialization import Gunner
 from division2calc.command.breakdown import breakdown
 from division2calc.command.compare import compare
 from division2calc.command.damage import damage
+from division2calc.command.dps import dps
 from division2calc.command.dydx import dydx
 from division2calc.command.rank import rank
 from division2calc.command.stats import stats
@@ -42,5 +43,6 @@ division2calc.add_command(damage)
 division2calc.add_command(x)
 division2calc.add_command(dydx)
 division2calc.add_command(summary)
+division2calc.add_command(dps)
 division2calc.add_command(compare)
 division2calc.add_command(rank)

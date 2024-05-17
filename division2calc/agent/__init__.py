@@ -6,6 +6,7 @@ from typing import Any
 
 import division2calc.agent.gear.utils as utils
 from division2calc.agent.damage import Damage
+from division2calc.agent.dps import DPS
 from division2calc.agent.gear import (Backpack, Chest, Gears, Gloves, Holster,
                                       Kneepads, Mask)
 from division2calc.agent.specialization import Specialization
@@ -44,7 +45,8 @@ class Build:
         # helpers
         self.stats = Stats(self.weapon, self.gears, self.watch, self.specialization)
         self.damage = Damage(self.weapon, self.gears, self.stats)
-        self.summary = Summary(self.stats, self.damage)
+        self.dps = DPS(self.weapon, self.stats, self.damage)
+        self.summary = Summary(self.stats, self.damage, self.dps)
 
     def replace(self, **changes: Any) -> Build:
         # generate a deep copy of the same build

@@ -49,6 +49,10 @@ class Measured(Talent):
     bottom_rof_dec: float = .2
     prob: float = 0.7
 
+    @property
+    def average_rof(self) -> float:
+        return self.prob*self.top_rof_inc + (1-self.prob)*(-self.bottom_rof_dec)
+
 
 #
 # Empty

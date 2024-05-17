@@ -1,7 +1,6 @@
 from typing import Literal, get_args
 
-
-Metric = Literal['stats', 'damage', 'x', 'dydx']
+Metric = Literal['stats', 'damage', 'x', 'dydx', 'dps']
 Metrics = tuple[Metric, ...]
 Profile = Literal['basic', 'min', 'average', 'max']
 Profiles = tuple[Profile, ...]
