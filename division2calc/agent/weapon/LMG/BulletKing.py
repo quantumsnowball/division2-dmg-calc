@@ -13,6 +13,7 @@ class BulletKing(Weapon):
     name: str = "Bullet King"
     type: WeaponType = 'LMG'
     base_damage: int = 45084
+    rpm: int = 850
     core1: attrs.CoreAttribute = field(default_factory=lambda: attrs.LMGDamage(.15))
     core2: attrs.CoreAttribute = field(default_factory=lambda: attrs.DamageToTargetOutOfCover(.12))
     minor: attrs.MinorAttribute = field(default_factory=lambda: attrs.CriticalHitDamage(.1))

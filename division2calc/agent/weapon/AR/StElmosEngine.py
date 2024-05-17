@@ -13,6 +13,7 @@ class StElmosEngine(Weapon):
     name: str = "St Elmo's Engine"
     type: WeaponType = 'AR'
     base_damage: int = 44191
+    rpm: int = 850
     core1: attrs.CoreAttribute = field(default_factory=lambda: attrs.AssultRifleDamage(.15))
     core2: attrs.CoreAttribute = field(default_factory=lambda: attrs.HealthDamage(.21))
     minor: attrs.MinorAttribute = field(default_factory=lambda: attrs.RateOfFire(.05))
