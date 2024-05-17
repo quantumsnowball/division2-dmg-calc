@@ -37,6 +37,19 @@ class Ranger(Talent):
     max_buff: float = 0.24
 
 
+@dataclass
+class Measured(Talent):
+    '''
+    The top half of the magazine has 20% rate of fire and -30% (27%) weapon damage.
+    The bottom half of the magazine has -20% rate of fire and +30% (33%) total weapon damage.
+    '''
+    top_wd_dec: float = .3
+    top_rof_inc: float = .2
+    bottom_twd_inc: float = .3
+    bottom_rof_dec: float = .2
+    prob: float = 0.7
+
+
 #
 # Empty
 #

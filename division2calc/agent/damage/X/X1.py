@@ -33,6 +33,8 @@ class X1(Profile[float]):
         # weapon talent average
         if isinstance(self._weapon.talent, talents.PerfectOptimist):
             x += self._weapon.talent.max_buff * self._weapon.talent.prob
+        if isinstance(self._weapon.talent, talents.Measured):
+            x += -self._weapon.talent.top_wd_dec*self._weapon.talent.prob
         # result
         return x
 
