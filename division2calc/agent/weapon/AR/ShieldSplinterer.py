@@ -14,6 +14,7 @@ class ShieldSplinterer(Weapon):
     type: WeaponType = 'AR'
     base_damage: int = 45132
     rpm: int = 900
+    reload_time: float = 2.1
     core1: attrs.CoreAttribute = field(default_factory=lambda: attrs.AssultRifleDamage(.15))
     core2: attrs.CoreAttribute = field(default_factory=lambda: attrs.HealthDamage(.21))
     minor: attrs.MinorAttribute = field(default_factory=lambda: attrs.DamageToTargetOutOfCover(.09))

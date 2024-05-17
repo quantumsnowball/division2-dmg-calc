@@ -15,6 +15,7 @@ class Weapon:
     type: WeaponType
     base_damage: int
     rpm: int
+    reload_time: float
     expertise_level: int
     # attribute
     core1: attrs.CoreAttribute
