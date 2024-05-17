@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Literal
 
 
 @dataclass
@@ -53,14 +54,18 @@ class Measured(Talent):
     def average_rof(self) -> float:
         return self.prob*self.top_rof_inc + (1-self.prob)*(-self.bottom_rof_dec)
 
-    def adjust_dmg_min(self, dmg: float, x1: float, x2: float) -> float:
-        x1_ = x1 + self.top_wd_dec
-        x2_ = x2 + self.bottom_twd_inc
-        return dmg / x1 / x2 * x1_ * x2_
-
-    def adjust_dmg_max(self, dmg: float, x1: float, x2: float) -> float:
-        x1_ = x1 - self.top_wd_dec
-        x2_ = x2 - self.bottom_twd_inc
+    def adjust_dmg(self, dmg: float, x1: float, x2: float,
+                   *,
+                   mode: Literal['min', 'max']) -> float:
+        match mode:
+            case 'min':
+                x1_ = x1 + self.top_wd_dec
+                x2_ = x2 + self.bottom_twd_inc
+            case 'max':
+                x1_ = x1 - self.top_wd_dec
+                x2_ = x2 - self.bottom_twd_inc
+            case _:
+                x1_, x2_ = x1, x2
         return dmg / x1 / x2 * x1_ * x2_
 
 
