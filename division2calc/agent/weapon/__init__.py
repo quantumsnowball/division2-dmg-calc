@@ -14,6 +14,7 @@ class Weapon:
     name: str
     type: WeaponType
     base_damage: int
+    rpm: int
     expertise_level: int
     # attribute
     core1: attrs.CoreAttribute
