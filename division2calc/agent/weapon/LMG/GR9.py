@@ -14,7 +14,7 @@ class GR9(Weapon):
     type: WeaponType = 'LMG'
     base_damage: int = 47905
     rpm: int = 750
-    reload_time: float = 4.67
+    reload_time: float = 3.7  # 4.67
     magazine_size: int = 200
     core1: attrs.CoreAttribute = field(default_factory=lambda: attrs.LMGDamage(.15))
     core2: attrs.CoreAttribute = field(default_factory=lambda: attrs.DamageToTargetOutOfCover(.12))

@@ -125,3 +125,10 @@ class Stats:
             pct += gear.rate_of_fire
         # watch
         return pct
+
+    @property
+    def reload_time(self) -> Float:
+        pct = Float(0)
+        # TODO
+        # watch
+        return pct

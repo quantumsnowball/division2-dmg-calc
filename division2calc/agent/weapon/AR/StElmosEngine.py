@@ -14,7 +14,7 @@ class StElmosEngine(Weapon):
     type: WeaponType = 'AR'
     base_damage: int = 44191
     rpm: int = 850
-    reload_time: float = 2.4
+    reload_time: float = 1.7  # 2.4
     magazine_size: int = 70
     core1: attrs.CoreAttribute = field(default_factory=lambda: attrs.AssultRifleDamage(.15))
     core2: attrs.CoreAttribute = field(default_factory=lambda: attrs.HealthDamage(.21))
